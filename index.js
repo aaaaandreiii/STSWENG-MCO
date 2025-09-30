@@ -14,6 +14,25 @@ const MongoStore = require('connect-mongo');
 const app = express();
 
 
+// Middleware setup
+
+// Parse incoming requests with urlencoded payloads
+app.use(express.urlencoded({ extended: false }));
+// Parse incoming json payload
+app.use(express.json());
+// Set the file path containing the static assets
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Set the session middleware
+app.use(
+    session({
+        secret: 'Six Seven',
+        resave: false,
+        saveUninitialized: true,
+        store: MongoStore.create({mongoUrl: process.env.DB_URL}),
+    })
+);
+
 //check if current user has logged in
 app.use('/', (req, res, next) => {
     if (
