@@ -1,0 +1,208 @@
+<div class="{{#if hasAccess}}hasaccess{{else}}noaccess{{/if}}"> 
+{{!-- LIST --}}
+<div class="rounded-list-item shadow-sm rounded-lg d-flex justify-content-between p-4"
+    data-bs-toggle="modal" data-bs-target="#employee-{{_id}}">
+    <h1 class="mb-0 mt-1">
+        <span class="event-icon material-icons-two-tone md-36">face</span>
+        {{username}}
+    </h1>
+</div>
+<br>
+
+{{!-- VIEW DETAILS MODAL --}}
+<div class="modal fade" id="employee-{{_id}}" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><strong>View Employee</strong></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body px-4 py ui-front container">
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row container-fluid shadow-sm bg-light rounded-sm p-3 mb-3">
+                            <div class="d-flex flex-row">
+                                <h5 class="fw-bolder mt-1 text-black-50"><span
+                                        class="material-icons-two-tone mb-1 md-24">face</span>
+                                    Employee Details</h5>
+                            </div>
+                            <hr>
+                            <h6><strong>Employee Name: </strong> {{name}}</h6>
+                            <h6><strong>Employee Contact Number: </strong> {{contactNum}}</h6>
+                            {{#if emergencyContactName}}
+                            <h6><strong>Emergency Contact: </strong> {{emergencyContactName}}</h6>
+                            {{/if}}
+                            {{#if emergencyContactNum}}
+                            <h6><strong>Emergency Contact Number: </strong> {{emergencyContactNum}}</h6>
+                            {{/if}}
+                            <h6><strong>Date Registered: </strong> {{dateRegistered}}</h6>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="row container-fluid shadow-sm bg-light rounded-sm p-3 mb-3">
+                            <div class="d-flex flex-row">
+                                <h5 class="fw-bolder mt-1 text-black-50"><span
+                                        class="material-icons-two-tone mb-1 md-24">person_outline</span>
+                                    Account Details</h5>
+                            </div>
+                            <hr>
+                            <h6><strong>Username: </strong> {{username}}</h6>
+                            <h6><strong>Has System Access: </strong> {{#if hasAccess}} Yes {{else}} No {{/if}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="row container-fluid shadow-sm bg-light rounded-sm p-3 mb-3">
+                            <div class="d-flex flex-row">
+                                <h5 class="fw-bolder mt-1 text-black-50"><span
+                                        class="material-icons-two-tone mb-1 md-24">visibility</span>
+                                    Recent Activities</h5>
+                            </div>
+                            <hr>
+
+                            {{#if activities}}
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <th>Activity</th>
+                                        <th>Employee Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each activities}}
+                                    {{>activity}}
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                            {{else}}
+                            <h1 class="no-content text-center p-5">No Recent Activities</h1>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                {{#ifEquals hasAccess true}}
+                <button type="button" class="btn btn-danger me-auto" data-bs-target="#employee-{{_id}}-remove"
+                    data-bs-toggle="modal" data-bs-dismiss="modal">Remove Access</button>
+                {{/ifEquals}}
+                {{#ifEquals hasAccess false}}
+                <button type="button" class="btn btn-danger me-auto" data-bs-target="#employee-{{_id}}-give"
+                    data-bs-toggle="modal" data-bs-dismiss="modal">Give Access</button>
+                {{/ifEquals}}
+                <button type="button" class="btn btn-secondary" data-bs-target="#employee-{{_id}}-edit"
+                    data-bs-toggle="modal" data-bs-dismiss="modal">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- EDIT MODAL --}}
+<div class="modal fade" id="employee-{{_id}}-edit" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><strong>Edit Employee Info</strong></h5>
+            </div>
+            <div class="modal-body p-4 ui-front">
+                <form class="edit">
+                    <p class="id" hidden>{{_id}}</p>
+                    <p class="username" hidden>{{username}}</p>
+                    <div class="form-group my-3">
+                        <label for="employee-mobile-number-{{_id}}">Employee Mobile Number</label>
+                        <input type="tel" class="form-control w-100 employee-mobile-number" id="employee-mobile-number-{{_id}}" name="contactNum" value="{{contactNum}}">
+                        <div id="employee-mobile-number-help" class="form-text">Country code can be changed if needed.
+                        </div>
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="emergency-contact-name-{{_id}}">Emergency Contact Name</label>
+                        <input type="text" class="form-control emergency-contact-name" id="emergency-contact-name-{{_id}}" name="emergencyContactName" value="{{emergencyContactName}}">
+                        <div id="emergency-contact-name-help" class="form-text">Person to contact in case of emergency.</div>
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="emergency-contact-mobile-number-{{_id}}">Emergency Contact Mobile Number</label>
+                        <input type="tel" class="form-control w-100 emergency-contact-mobile-number" id="emergency-contact-mobile-number-{{_id}}" name="emergencyContactNum">
+                        <div id="emergency-contact-mobile-number-help" class="form-text">Country code can be changed if needed.
+                        </div>
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="new-password-{{_id}}">New Password</label>
+                        <input type="password" class="form-control new-password" id="new-password-{{_id}}" name="newPassword">
+                        <div id="new-password-help" class="form-text">Must be at least 8 characters long. A
+                            combination of letters, numbers, and at least one special character is recommended.
+                        </div>
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="reenter-password-{{_id}}">Confirm New Password</label>
+                        <input type="password" class="form-control reenter-password" id="reenter-password-{{_id}}" name="reenteredPassword"
+                            >
+                        <div id="reenter-password-help" class="form-text">Reenter the user's new password.
+                        </div>
+                    </div>
+
+                <strong>
+                    <div class="text-center text-danger error" id="missing-error-{{_id}}"></div>
+                    <div class="text-center text-danger error" id="employee-number-error-{{_id}}"></div>
+                    <div class="text-center text-danger error" id="ec-name-error-{{_id}}"></div>
+                    <div class="text-center text-danger error" id="ec-number-error-{{_id}}"></div>
+                    <div class="text-center text-danger error" id="username-error-{{_id}}"></div>
+                    <div class="text-center text-danger error" id="password-error-{{_id}}"></div>
+                </strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" id="edit-btn-{{_id}}">Edit Info</button>
+            </div></form>
+        </div>
+    </div>
+</div>
+
+{{!-- GIVE ACCESS MODAL --}}
+<div class="modal fade" id="employee-{{_id}}-give" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><strong>Give Access</strong></h5>
+            </div>
+            <div class="modal-body p-4">
+                <div class="fw-bold">Are you sure you give system access to {{name}} ({{username}})?</div> <br> They
+                would be able to
+                view, create, modify, and cancel events.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary me-auto" data-bs-toggle="modal"
+                    data-bs-target="#employee-{{_id}}" data-bs-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-danger " data-bs-dismiss="modal"
+                    onclick="giveAccess('{{username}}')">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- REMOVE ACCESS MODAL --}}
+<div class="modal fade" id="employee-{{_id}}-remove" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><strong>Remove Access</strong></h5>
+            </div>
+            <div class="modal-body p-4">
+                <div class="fw-bold">Are you sure you want to remove system access from {{name}} ({{username}})?</div>
+                <br> They
+                would not be able to log in to the system.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary me-auto" data-bs-toggle="modal"
+                    data-bs-target="#employee-{{_id}}" data-bs-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-danger " data-bs-dismiss="modal"
+                    onclick="removeAccess('{{username}}')">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
