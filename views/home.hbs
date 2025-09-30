@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/event-tracker.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone" rel="stylesheet">
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/event-tracker-home.js"></script>
+</head>
+
+<body class="d-flex flex-column">
+    {{>navbar}}
+    <div class="d-flex flex-row justify-content-center flex-fill">
+        <div class="col-11 d-flex flex-column py-5">
+            <div class="d-flex flex-row">
+                <div id="today-title" class="shadow-sm bg-light rounded-lg py-3 px-4 me-auto">
+                    <h1 class="mb-0 mt-1"><span class="material-icons-two-tone mb-1 md-48">home</span> HOME</h1>
+                </div>
+            </div>
+
+            <br>
+            {{!-- WITH EVENT --}}
+            {{#if events}}
+            <div id="today-main"
+                <div class="d-flex flex-row">
+                    Events for Today
+                </div>
+                <hr>
+                <div class="p-4">
+                    {{#each events}}
+                        {{>event}}
+                    {{/each}}
+                </div>
+            </div>
+
+            {{!-- NO EVENTS --}}
+            {{else}}
+            <div id="today-main">
+                Events for Today
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</body>
+
+</html>
