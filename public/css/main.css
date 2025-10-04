@@ -96,3 +96,42 @@ textarea {
 .table-xs > :not(caption) > * > * {
     padding: 0rem 0rem;
 }
+
+body {
+    font-size: 0.95rem;
+}
+.col-11 {
+    max-width: 900px;
+}
+#today-title, #today-main {
+    /* no change */
+    padding: 0.5rem;
+}
+#today-title h1 {
+    font-size: 1.5rem;
+}
+#today-main h4 {
+    font-size: 1.2rem;
+}
+#today-title .material-icons-two-tone,
+.material-icons-two-tone.md-48 {
+    font-size: 2rem !important;
+}
+.no-content {
+    font-size: 1.1rem;
+    padding: 2rem !important;
+}
+.p-4 {
+    /* events for today table content */
+    padding: 1rem !important;
+}
+.py-5 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+}
+.rounded-lg {
+    border-radius: 0.5rem !important;
+}
+.rounded-sm {
+    border-radius: 0.5rem !important;
+}
