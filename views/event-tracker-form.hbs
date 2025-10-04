@@ -784,12 +784,16 @@
                 </div>
 
                 <br>
-                {{!-- SUBMIT BUTTON --}}
+                {{!-- SUBMIT & CANCEL BUTTON --}}
                 <div class="d-flex flex-row">
                     <div id="submit-button" class="shadow-sm bg-light rounded-lg py-3 px-4 ms-auto">
+                        <a href="/event-tracker/home" data-bs-toggle="tooltip" data-placement="left" title="Cancel and go back to Home">
+                            <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                        </a>
                         <a data-bs-toggle="tooltip" data-placement="left" title="Tip: Double check the [required] fields">
                         <button type="button" data-bs-toggle="modal" data-bs-target="#confirm-submit-modal"
-                            class="btn btn-light" id="submit">Submit</button></a>
+                            class="btn btn-light" id="submit">Submit</button>
+                        </a>
                     </div>
                 </div>
 
