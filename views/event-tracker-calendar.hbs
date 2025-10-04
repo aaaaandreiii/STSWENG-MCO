@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/event-tracker.css">
+    <link rel="stylesheet" type="text/css" href="/css/event-tracker-calendar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone" rel="stylesheet">
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="/js/event-tracker-calendar.js"></script>
+</head>
+
+<body class="d-flex flex-column">
+    {{>navbar back='/'}}
+    <div class="d-flex flex-row flex-fill justify-content-center">
+        <div class="col-11 d-flex flex-column p-4">
+
+            {{!-- TITLES --}}
+            <div class="d-flex flex-column shadow-sm bg-light rounded-sm px-2">
+                <div class="rounded-sm d-flex flex-row justify-content-between align-self-center px-3 py-2">
+                    <span class="md-btn material-icons-two-tone mt-3 md-24"
+                        onclick="window.location.href='/event-tracker/calendar/{{getPrevMonth currMonthYear}}'">arrow_back_ios</span>
+                    <h2 class="calendar-monthyear my-2 mx-5">{{currMonthName}} {{currYear}}</h2>
+                    <span class="md-btn material-icons-two-tone mt-3 md-24"
+                        onclick="window.location.href='/event-tracker/calendar/{{getNextMonth currMonthYear}}'">arrow_forward_ios</span>
+                </div>
+                <div class="row px-2 py-0">
+                    <div class="col-sm">
+                        <h6 class="calendar-dayofweek mb-0 mt-1">SUN</h4>
+                    </div>
+                    <div class="col-sm">
+                        <h6 class="calendar-dayofweek mb-0 mt-1">MON</h4>
+                    </div>
+                    <div class="col-sm">
+                        <h6 class="calendar-dayofweek mb-0 mt-1">TUE</h4>
+                    </div>
+                    <div class="col-sm">
+                        <h6 class="calendar-dayofweek mb-0 mt-1">WED</h4>
+                    </div>
+                    <div class="col-sm">
+                        <h6 class="calendar-dayofweek mb-0 mt-1">THU</h4>
+                    </div>
+                    <div class="col-sm">
+                        <h6 class="calendar-dayofweek mb-0 mt-1">FRI</h4>
+                    </div>
+                    <div class="col-sm">
+                        <h6 class="calendar-dayofweek mb-0 mt-1">SAT</h4>
+                    </div>
+                </div>
+
+                {{!-- WITH EVENTS --}}
+                <div class="p-2" id="calendar">
+                    <div class="row my-2">
+                        {{#each eventArray.[0]}}
+                        {{>day}}
+                        {{/each}}
+                    </div>
+                    <div class="row my-2">
+                        {{#each eventArray.[1]}}
+                        {{>day}}
+                        {{/each}}
+                    </div>
+                    <div class="row my-2">
+                        {{#each eventArray.[2]}}
+                        {{>day}}
+                        {{/each}}
+                    </div>
+                    <div class="row my-2">
+                        {{#each eventArray.[3]}}
+                        {{>day}}
+                        {{/each}}
+                    </div>
+                    <div class="row my-2">
+                        {{#each eventArray.[4]}}
+                        {{>day}}
+                        {{/each}}
+                    </div>
+                    <div class="row my-2">
+                        {{#each eventArray.[5]}}
+                        {{>day}}
+                        {{/each}}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</body>
+
+</html>
