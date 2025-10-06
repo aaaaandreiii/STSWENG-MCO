@@ -3,21 +3,26 @@ const mongoose = require('mongoose');
 //change this to ENV variable later
 const url = "mongodb+srv://admin:admin@cluster0.0vhklxp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-const options = {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-};
+// const options = {
+//     useUnifiedTopology: true,
+//     useNewUrlParser: true,
+// };
 
 const database = {
-    connect: async function () {
-        await mongoose.connect(url, options);
+    connect: async function(){
+        await mongoose.connect(url);
         console.log('Connected!');
     },
-
-    disconnect: async function () {
+    disconnect: async function(){
         await mongoose.disconnect();
         console.log('Disconnected!');
     },
+    // TODO: Add other CRUD functions here:
+    // - insertOne / insertMany (Create)
+    // - findOne / findAll (Read)
+    // - updateOne / updateMany (Update)
+    // - deleteOne / deleteMany (Delete)
+    // - count
 };
 
 module.exports = database;

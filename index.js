@@ -6,7 +6,7 @@ const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
 var handlebars_helper; //in the future, require(`./views hbs helper.js`) or something
-var routes;            //same as abpve
+const routes = require('./routes/routes.js'); //same as abpve
 const mongoose = require('mongoose');
 const db = require('./models/db.js');
 const session = require('express-session');
