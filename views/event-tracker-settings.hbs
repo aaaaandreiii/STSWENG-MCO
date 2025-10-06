@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/intlTelInput.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin-form.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone" rel="stylesheet">
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/intlTelInput-jquery.min.js"></script>
+    <script type="text/javascript" src="/js/validator.min.js"></script>
+    <script type="text/javascript" src="/js/admin.js"></script>
+    <script type="text/javascript" src="/js/event-tracker-settings.js"></script>
+</head>
+
+<body class="d-flex flex-column">
+    {{>navbar}}
+    <div class="d-flex flex-row justify-content-center flex-fill">
+        <div class="col-11 d-flex flex-column py-5">
+
+            <div class="d-flex flex-row">
+                <div id="admin-title" class="shadow-sm bg-light rounded-lg py-3 px-4 me-auto">
+                    <h1 class="mb-0 mt-1"><span class="material-icons-two-tone mb-1 md-48">admin_panel_settings</span>
+                        EVENT TRACKER SETTINGS</h1>
+                </div>
+            </div>
+
+            <br>
+            {{!-- WITH DISCOUNTS --}}
+            {{#if discounts}}
+            <div id="admin-main"
+                class="container-fluid shadow-sm bg-light rounded-sm p-4 d-flex flex-column align-self-center">
+                <div class="d-flex flex-row">
+                    <h4 class="fw-bolder mt-1 ms-2 text-black-50">Discounts List</h4>
+                    <button class="ms-auto" data-bs-target="#discount-add" data-bs-toggle="modal"
+                        data-bs-dismiss="modal">
+                        <span class="material-icons-two-tone md-36">add</span>
+                    </button>
+                </div>
+                <hr>
+                <div class="p-4">
+                    {{#each discounts}}
+                    {{>discount}}
+                    {{/each}}
+                </div>
+            </div>
+
+            {{!-- NO DISCOUNTS --}}
+            {{else}}
+            <div id="admin-main"
+                class="container-fluid shadow-sm bg-light rounded-sm p-4 d-flex flex-column align-self-center">
+                <div class="d-flex flex-row">
+                    <h4 class="fw-bolder mt-1 ms-2 text-black-50">Discounts List</h4>
+
+                    <button class="ms-auto" data-bs-target="#discount-add" data-bs-toggle="modal"
+                        data-bs-dismiss="modal">
+                        <span class="material-icons-two-tone md-36">add</span>
+                    </button>
+                </div>
+                <hr>
+                <h1 class="no-content text-center p-5">No Discounts</h1>
+            </div>
+            {{/if}}
+
+            {{!-- EDIT MODAL --}}
+            <div class="modal fade" id="discount-add" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"><strong>Add Discount</strong></h5>
+                        </div>
+                        <form id="add-discount">
+                            <div class="modal-body p-4 ui-front">
+                                <div class="form-group my-3">
+                                    <label for="discount-name">Discount Name</label>
+                                    <input type="text" class="form-control w-100" id="discount-name">
+                                    <div id="discount-name-help" class="form-text">Short name or description.
+                                    </div>
+                                </div>
+                                <div class="form-group my-3">
+                                    <label for="pax">Number of Pax</label>
+                                    <input type="number" class="form-control w-100" id="pax">
+                                    <div id="pax-help" class="form-text">Minimum number of pax to apply discount.
+                                    </div>
+                                </div>
+                                <div class="form-group my-3">
+                                    <label for="percentage">Percentage of Discount</label>
+                                    <input type="number" class="form-control w-100" id="percentage" step="any">
+                                    <div id="percentage" class="form-text">Number should be in % (e.g. '30' for 30% discount)
+                                    </div>
+                                </div>
+                                <strong>
+                                    <div class="text-center text-danger error" id="missing-error"></div>
+                                    <div class="text-center text-danger error" id="discount-error"></div>
+                                    <div class="text-center text-danger error" id="pax-error"></div>
+                                    <div class="text-center text-danger error" id="percentage-error"></div>
+                                </strong>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success" id="discount-create-btn" disabled>Create
+                                    Discount</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
