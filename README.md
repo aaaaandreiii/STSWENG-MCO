@@ -15,8 +15,6 @@ http://localhost:3000/<page>
 
 TODO: 
 fix
-- dimensions, make smaller elements
-- add cancel to /create to return to home
+- cancel event -> back should back
+- receipt is broken
 implement
-- calendar
-- event lists
