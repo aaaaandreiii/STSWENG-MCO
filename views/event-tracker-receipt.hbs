@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/receipt.css">
+
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/event-tracker-receipt.js" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <div id="receipt-container" style="width: 100%; display: grid; place-items: center">
+            <div class="mt-5 p-3" id="receipt">
+                <!--RECEIPT HEADER-->
+                <div class='text-center'>
+                    <img src='/images/logo.png' width='80%' />
+                </div>
+                <h6 class="text-center mb-2 text-tertiary">
+                    35 Gloria Diaz Street corner Monina Yllana Street BF Resort Village Talon Dos Las Pinas
+                </h6>
+                <h6 class="text-secondary mb-1 text-center">================================</h6>
+                <h5 class="text-center fw-bold m-0">Receipt</h5>
+                <h6 class="text-secondary mb-1 text-center">================================</h6>
+                <!--RECEIPT INFO AND BREAKDOWN-->
+                {{#each event}}
+                <div>
+
+                    <h6 class="text-secondary mb-1">
+                        Event ID:
+                        <span id="id">{{_id}}</span>
+                    </h6>
+                    <h6 class="text-secondary mb-1">
+                        Client: <span>{{clientName}}</span>
+                    </h6>
+                    <h6 class="text-secondary mb-1">
+                        Event Date:
+                        <span>{{formatDate eventDate}}</span>
+                    </h6>
+                    <h6 class="text-secondary mb-1">
+                        Venue/s:
+                        <span>{{eventVenues}}</span>
+                    </h6>
+
+                    <h6 class="text-secondary mb-1 text-center">================================</h6>
+                    <div class="py-2">
+                        {{#each packageList}}
+                        <div class="d-flex">
+                            <h6 class="text-secondary fw-bold">{{packageName}}</h6>
+                            <h6 class="text-secondary ms-auto">{{formatMoney packagePrice}}</h6>
+                        </div>
+                        {{/each}}
+                        {{#ifEquals packageAdditionalPax true}}
+                        <div class="d-flex">
+                            <h6 class="text-secondary fw-bold">Additional 5 Pax</h6>
+                            <h6 class="text-secondary ms-auto">2,000.00</h6>
+                        </div>
+                        {{/ifEquals}}
+                        {{#if menuAdditional}}
+                        {{#each menuAdditional}}
+                        <div class="d-flex">
+                            <h6 class="text-secondary fw-bold">{{#with (lookup ../foodList @index)}}
+                                {{name}}
+                                {{/with}} (x{{foodQuantity}})</h6>
+                            <h6 class="text-secondary ms-auto">{{formatMoney foodCost}}</h6>
+                        </div>
+                        {{/each}}
+                        {{/if}}
+                        {{#if transactionCharges}}
+                        {{#each transactionCharges}}
+                        <div class="d-flex">
+                            <h6 class="text-secondary fw-bold">{{chargeName}} (x{{chargeQuantity}})</h6>
+                            <h6 class="text-secondary ms-auto">{{formatMoney chargePrice}}</h6>
+                        </div>
+                        {{/each}}
+                        {{/if}}
+
+                        {{#if transactionDiscounts}}
+                        {{#each transactionDiscounts}}
+                        <div class="d-flex">
+                            <h6 class="text-secondary fw-bold">{{discountName}}</h6>
+                            <h6 class="text-secondary ms-auto">{{formatMoney discountPrice}}</h6>
+                        </div>
+                        {{/each}}
+                        {{/if}}
+
+                    </div>
+                    <h6 class="text-secondary mb-1 text-center">================================</h6>
+
+                    <div class="d-flex">
+                        <h6 class="text-secondary fw-bold ms-auto fs-6">Total: {{formatMoney totalPrices.all}}</h6>
+                    </div>
+                </div>
+
+                {{/each}}
+            </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-evenly">
+            <!--PRINT BUTTON-->
+            <button type="button" class="mt-4 mx-1 btn menu-button rounded-pill" id="print-it">
+                print
+            </button>
+            <button type="button" class="mt-4 mx-1 btn menu-button rounded-pill" id="save-it">
+                save
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

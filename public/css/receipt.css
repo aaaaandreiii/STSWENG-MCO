@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap');
+
+html {
+  font-family: 'Anonymous Pro' !important;
+  background-color: #ffffff;
+}
+
+body {
+  font-family: 'Anonymous Pro' !important;
+  background-color: #ffffff;
+
+  display: grid !important;
+  place-items: center !important;
+  min-height: 100vh;
+}
+
+#receipt-message {
+  font-size: 0.7rem;
+}
+
+#receipt {
+  width: 76mm;
+  border: 1px solid black;
+}
+
+p,
+span {
+  font-size: 0.8rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.btn {
+  font-family: 'Anonymous Pro';
+  text-transform: uppercase;
+}
+
+.menu-button {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.menu-button:hover {
+  background-color: #000000;
+  color: #e1e1e1;
+}
+
+.text-value {
+  color: #007bff !important;
+}
+
+.text-secondary {
+  font-size: 0.9rem;
+}
+
+.text-tertiary {
+  font-size: 0.7rem;
+}
+
+@page {
+  margin: 7.5mm;
+}
+
+@media print {
+  #print-it,
+  #save-it {
+    display: none;
+  }
+}
