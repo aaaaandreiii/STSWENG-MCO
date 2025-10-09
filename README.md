@@ -14,7 +14,6 @@ http://localhost:3000/<page>
     - /event-tracker/create
 
 TODO: 
-fix
+backend
 - cancel event -> back should back
 - receipt is broken
-implement
