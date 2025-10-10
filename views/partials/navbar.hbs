@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-xl bg-dark sticky-top shadow-sm">
+    <div class="container-fluid">
+        <div class="me-auto">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item me-3">
+                    <a class="nav-link active" href="/event-tracker/home">Home</a>
+                </li>
+                <li class="nav-item me-3">
+                    <a class="nav-link active" href="/event-tracker/calendar/{{#getToday}}{{/getToday}}">Calendar</a>
+                </li>
+                <li class="nav-item dropdown me-3">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Event Lists
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/event-tracker/pencilbookings">Pencil Bookings</a></li>
+                        <li><a class="dropdown-item" href="/event-tracker/reservations">Reservations</a></li>
+                        <li><a class="dropdown-item" href="/event-tracker/pastevents">Past Events</a></li>
+                        <li><a class="dropdown-item" href="/event-tracker/cancelled">Cancelled Events</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <ul class="navbar-nav mb-2 mb-lg-0 text-nowrap">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown">
+                    {{username}}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    {{#ifEquals isAdmin true}}
+                    <li><a class="dropdown-item" href="/admin">Admin Menu</a></li>
+                    <li><a class="dropdown-item" href="/settings/event">Event Settings</a></li>
+                    {{/ifEquals}}
+                    <li><a class="dropdown-item" data-bs-toggle="modal"
+                    data-bs-target="#modal-help">Legend</a></li>
+                    <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="modal fade" id="modal-help" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><strong>Legend</strong></h5>
+            </div>
+            <div class="modal-body p-4">
+                <div class="rounded-list-item shadow-sm rounded-lg d-flex justify-content-between p-4 booked" data-bs-toggle="modal">
+                    <h1 class="mb-0 mt-1">
+                        Pencilbooking
+                    </h1>
+                </div>
+                <br>
+                <div class="rounded-list-item shadow-sm rounded-lg d-flex justify-content-between p-4 reserved" data-bs-toggle="modal">
+                    <h1 class="mb-0 mt-1">
+                        Reservation
+                    </h1>
+                </div>
+                <br>
+                <div class="rounded-list-item shadow-sm rounded-lg d-flex justify-content-between p-4" data-bs-toggle="modal">
+                    <h1 class="mb-0 mt-1">
+                        Cancelled/Past Event
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

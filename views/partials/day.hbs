@@ -1,0 +1,80 @@
+{{#if day}}
+<div class="col-sm calendar-day rounded-sm border mx-3 px-2 d-flex flex-column align-items-center" data-bs-toggle="modal" data-bs-target="#day{{day}}">
+    <h5 class="my-0">{{day}}</h5>
+    <table class="table table-borderless table-xs w-75 mb-2">
+        <thead>
+            <tr>
+                <th scope="col" class="w-25"></th>
+                <th scope="col" class="w-25">G</th>
+                <th scope="col" class="w-25">S</th>
+                <th scope="col" class="w-25">T</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row" class="border border-gray border-2">
+                    <span class="event-icon material-icons-two-tone md-18">light_mode</span>
+                </th>
+                <th class="border border-gray border-2">
+                    {{#if aftGar}}
+                    <span class="material-icons-two-tone done"></span>
+                    {{/if}}
+                </th>
+                <th class="border border-gray border-2">
+                    {{#if aftSun}}
+                    <span class="material-icons-two-tone done"></span>
+                    {{/if}}
+                </th>
+                <th class="border border-gray border-2">
+                    {{#if aftTer}}
+                    <span class="material-icons-two-tone done"></span>
+                    {{/if}}
+                </th>
+            </tr>
+            <tr>
+                <th scope="row" class="border border-gray border-2">
+                    <span class="event-icon material-icons-two-tone md-18">dark_mode</span>
+                </th>
+                <th class="border border-gray border-2">
+                    {{#if eveGar}}
+                    <span class="material-icons-two-tone done"></span>
+                    {{/if}}
+                </th>
+                <th class="border border-gray border-2">
+                    {{#if eveSun}}
+                    <span class="material-icons-two-tone done"></span>
+                    {{/if}}
+                </th>
+                <th class="border border-gray border-2">
+                    {{#if eveTer}}
+                    <span class="material-icons-two-tone done"></span>
+                    {{/if}}
+                </th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="day{{day}}" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><strong>Events for the Day</strong></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body px-4 py ui-front container">
+                <div class="p-4">
+                    {{#each event}}
+                    {{>event}}
+                    {{else}}
+                        <h1 class="no-content text-center p-5">No Events for the Day</h1>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{else}}
+<div class="col-sm mx-3 px-2"></div>
+{{/if}}
