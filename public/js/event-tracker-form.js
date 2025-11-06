@@ -802,8 +802,9 @@ function getDateToday() {
  */
 function getDateAMonthAgo() {
     var today = new Date();
+    today.setMonth(today.getMonth() - 1);
     var dd = today.getDate();
-    var mm = today.getMonth();
+    var mm = today.getMonth() + 1;
     var yyyy = today.getFullYear();
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;

@@ -48,7 +48,7 @@ describe('Date', () => {
 
 	// Unit Test #5
 	it('Valid date', () => {
-		const testVal = '2022-02-02';
+		const testVal = '2025-11-06';
         
 		const resVal = isValidDate(testVal);
 
