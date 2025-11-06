@@ -11,11 +11,13 @@ const { plugin } = require("mongoose");
 // ]);
 // .eslintrc.js
 // eslint.config.cjs
-// eslint.config.cjs
 module.exports = [
   {
     files: ["**/*.js"],
-    ignores: ["public/js/bootstrap.bundle.js"], //ignore library files
+    ignores: [
+      "public/js/bootstrap.bundle.js", // ignore vendor library
+      "node_modules/**"
+    ],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "script", // CommonJS
