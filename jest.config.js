@@ -2,14 +2,14 @@ module.exports = {
   testEnvironment: 'node',
   collectCoverage: true, //Enable coverage
   collectCoverageFrom: [
-    "controllers/**/*.js",
-    "helpers/**/*.js",
-    "models/**/*.js",
-    "routes/**/*.js",
-    "!**/node_modules/**"
+    'controllers/**/*.js',
+    'helpers/**/*.js',
+    'models/**/*.js',
+    'routes/**/*.js',
+    '!**/node_modules/**'
   ],
-  coverageDirectory: "coverage", //Output folder for coverage
-  coverageReporters: ["text", "lcov"],
+  coverageDirectory: 'coverage', //Output folder for coverage
+  coverageReporters: ['text', 'lcov'],
   //Enforce coverage thresholds
   coverageThreshold: {
     global: {
@@ -18,14 +18,14 @@ module.exports = {
       lines: 80,
       statements: 80
     },
-    "./helpers/": {
+    './helpers/': {
       branches: 90     //Helpers ≥ 90% branches
     },
-    "./controllers/": {
+    './controllers/': {
       branches: 75,    //Controllers ≥ 75%
       lines: 85        //Controllers ≥ 85% lines
     }
   },
-  testMatch: ["**/?(*.)+(spec|test).js"], //Detect test files
+  testMatch: ['**/?(*.)+(spec|test).js'], //Detect test files
   maxWorkers: 1 //Run tests serially (matches your CI --runInBand)
 };

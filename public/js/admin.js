@@ -5,14 +5,14 @@ $(document).ready(function () {
 
     $('[data-toggle="popover"]').popover();
 
-    filterEmployees()
+    filterEmployees();
 });
 
 function filterEmployees() {
     $('#current-employee-switch').change(function () {
-        if ($(this).prop("checked"))
-            $('.noaccess').addClass("d-none");
-        else $('.noaccess').removeClass("d-none");
+        if ($(this).prop('checked'))
+            $('.noaccess').addClass('d-none');
+        else $('.noaccess').removeClass('d-none');
     });
 }
 

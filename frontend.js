@@ -584,8 +584,8 @@ app.get('/event-tracker/calendar/:year/:month', (req, res) => {
     return res.status(400).send('Invalid year or month');
   }
   const currMonthYear = new Date(year, month - 1, 1);
-  const monthNames = ["January", "February", "March", "April", "May", "June",
-                      "July", "August", "September", "October", "November", "December"];
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                      'July', 'August', 'September', 'October', 'November', 'December'];
   const updatedEvents = mockData[template].events.map(event => ({
     ...event,
     eventTime: event.time?.includes('AM') ? 'Afternoon' : 'Evening',

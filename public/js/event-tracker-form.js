@@ -824,7 +824,7 @@ function setRequiredFields() {
 function showMenuItemInfo(div) {
     div.children('div')
         .children('div')
-        .find("input[type='radio']")
+        .find('input[type=\'radio\']')
         .first()
         .prop('checked', true);
 }
@@ -1856,7 +1856,7 @@ function checkStringInput(input) {
         '\\',
         ';',
         ':',
-        "'",
+        '\'',
         '"',
         '.',
         ',',

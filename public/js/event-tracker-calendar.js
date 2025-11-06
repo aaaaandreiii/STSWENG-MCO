@@ -9,5 +9,5 @@ $(document).ready(function () {
 });
 
 function highlightEventDays() {
-    $('.done').parent().addClass('withEvent')
+    $('.done').parent().addClass('withEvent');
 }

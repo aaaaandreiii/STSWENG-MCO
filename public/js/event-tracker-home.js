@@ -16,7 +16,7 @@ function setDate() {
         month: 'long',
         day: 'numeric'
     };
-    $('#today-date-text').text(date.toLocaleDateString("en-US", options));
+    $('#today-date-text').text(date.toLocaleDateString('en-US', options));
 }
 
 function deleteReservation(id) {

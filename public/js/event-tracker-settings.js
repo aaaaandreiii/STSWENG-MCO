@@ -7,7 +7,7 @@ if (typeof window != 'undefined') {
 
 function validateDiscountModal () {
     $('#discount-name').keyup(function () {
-        var result = isValidDiscountName($(this).val().trim())
+        var result = isValidDiscountName($(this).val().trim());
         if(!result[0]) 
             displayError($('#discount-name'), $('#discount-error'), result[1]);
         else resetField($('#discount-name'), $('#discount-error'));
@@ -144,7 +144,7 @@ function isValidDiscount(discountname, pax, percentage) {
 
 // Discount Name
 function isValidDiscountName(input) {
-    console.log(input.length)
+    console.log(input.length);
     if (input == '') return [false, 'Discount name cannot be empty.'];
     else if (input.length > 30) return [false, 'Discount name is only up to 30 characters.'];
     else return [true, ''];

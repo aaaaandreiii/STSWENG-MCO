@@ -1,12 +1,12 @@
 require('dotenv').config();
-hostname = process.env.HOSTNAME
-port = process.env.PORT
+hostname = process.env.HOSTNAME;
+port = process.env.PORT;
 
 //import the necessary modules
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
-const handlebars_helper = require(`./views/hbs-helper.js`);
+const handlebars_helper = require('./views/hbs-helper.js');
 const routes = require('./routes/routes.js');
 const mongoose = require('mongoose');
 const db = require('./models/db.js');

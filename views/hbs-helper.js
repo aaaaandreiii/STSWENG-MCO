@@ -1,10 +1,10 @@
 //returns the previous month
-const hbs = require(`hbs`);
+const hbs = require('hbs');
 
 hbs.registerHelper('formatDate', function (date) {
     if (date) {
         date = new Date(date);
-        let month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][date.getMonth()];
+        let month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][date.getMonth()];
         let day = date.getDate().toString().padStart(2, 0);
         let year = date.getFullYear().toString();
         return `${month} ${day}, ${year}`;
@@ -28,9 +28,9 @@ hbs.registerHelper('formatDateShort', function (date) {
 hbs.registerHelper('formatTimestamp', function (date) {
     if (date) {
         date = new Date(date);
-        let timestamp = new Intl.DateTimeFormat("en", {
-            timeStyle: "medium",
-            dateStyle: "short"
+        let timestamp = new Intl.DateTimeFormat('en', {
+            timeStyle: 'medium',
+            dateStyle: 'short'
         });
         return timestamp.format(date);
     } else {
@@ -95,7 +95,7 @@ hbs.registerHelper('getNextMonth', function (date) {
 
 //returns the next month
 hbs.registerHelper('getToday', function () {
-    let today = new Date()
+    let today = new Date();
     return `${today.getFullYear()}/${(today.getMonth() + 1).toString().padStart(2, 0)}`;
 });
 
