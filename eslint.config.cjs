@@ -8,19 +8,22 @@
 //   pluginReact.configs.flat.recommended,
 // ]);
 // .eslintrc.js
-module.exports = {
-  env: {
-    node: true,
-    es2021: true,
-    browser: true,
+// eslint.config.cjs
+module.exports = [
+  {
+    files: ["**/*.js"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "script", //CommonJS
+    },
+    env: {
+      node: true,
+      browser: true,
+      es2021: true,
+    },
+    rules: {
+      semi: ["error", "always"],
+      quotes: ["error", "single"],
+    },
   },
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "script",
-  },
-  extends: ["eslint:recommended", "prettier"],
-  rules: {
-    semi: ["error", "always"],
-    quotes: ["error", "single"],
-  },
-};
+];
