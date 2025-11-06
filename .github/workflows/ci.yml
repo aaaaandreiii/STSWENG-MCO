@@ -105,7 +105,10 @@ jobs:
       - name: Zip build and coverage
         run: |
           mkdir -p artifacts
-          cp -r coverage artifacts/
+          if [ -d coverage ]; then #copy if coverage exist
+            cp -r coverage artifacts/
+          fi
+          cp -r coverage artifacts/ #copy build folder if exist
           cp -r dist artifacts/ || true
           zip -r TableTango-${{ github.run_number }}.zip artifacts
 
