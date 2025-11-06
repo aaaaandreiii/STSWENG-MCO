@@ -31,7 +31,7 @@ jobs:
         run: npm ci
 
       - name: Lint code
-        run: npx eslint --config eslint.config.cjs .
+        run: npx eslint .
 
       - name: Check formatting
         run: npx prettier --check .
