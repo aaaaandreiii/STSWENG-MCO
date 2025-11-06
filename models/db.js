@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
-const url = process.env.DB_URL;
+
+//change this to ENV variable later
+const url = "mongodb+srv://admin:admin@cluster0.0vhklxp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
 // const options = {
 //     useUnifiedTopology: true,
 //     useNewUrlParser: true,

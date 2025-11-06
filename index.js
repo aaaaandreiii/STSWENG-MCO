@@ -8,7 +8,7 @@ const hbs = require('hbs');
 var handlebars_helper; //in the future, require(`./views hbs helper.js`) or something
 const routes = require('./routes/routes.js'); //same as abpve
 const mongoose = require('mongoose');
-const db = require('./models/db.js'); //same here; !! change to const
+const db = require('./models/db.js');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const app = express();

@@ -1,0 +1,27 @@
+{
+  "type": "Compass Connections",
+  "version": {
+    "$numberInt": "1"
+  },
+  "connections": [
+    {
+      "id": "19abb6f4-db73-4538-ab40-469ab390da42",
+      "lastUsed": {
+        "$date": {
+          "$numberLong": "1762450649589"
+        }
+      },
+      "favorite": {
+        "name": "STSWENG",
+        "color": "color8"
+      },
+      "savedConnectionType": "recent",
+      "connectionOptions": {
+        "connectionString": "mongodb://localhost:27017/",
+        "oidc": {
+          "serializedState": "eyJvaWRjUGx1Z2luU3RhdGVWZXJzaW9uIjoxLCJzdGF0ZSI6W119"
+        }
+      }
+    }
+  ]
+}
