@@ -9,12 +9,7 @@
 // ]);
 // .eslintrc.js
 // eslint.config.cjs
-import eslintRecommended from "eslint/conf/eslint-recommended.js";
-import prettierRecommended from "eslint-config-prettier/flat.js";
-
-export default [
-  ...eslintRecommended,
-  ...prettierRecommended,
+module.exports = [
   {
     files: ["**/*.js"],
     languageOptions: {
@@ -34,3 +29,4 @@ export default [
     },
   },
 ];
+
