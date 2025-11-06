@@ -1,7 +1,9 @@
 const {
     checkStringInput,
     formatAsDecimal,
-    formatAsNumber
+    formatAsNumber,
+    isValidQuantity,
+    isValidTotalAmountPaid,
 } = require('../public/js/event-tracker-form.js');
 
 describe('check if contains blacklisted characters', () => {
@@ -117,5 +119,128 @@ describe('format numbers with commas', () => {
 
         //expect
         expect(result).toEqual(874);
+    });
+});
+
+describe('validate quantity', () => {
+    it('check for undefined', () => {
+        //arrange
+        const input = undefined;
+
+        //act
+        const result = isValidQuantity(input);
+
+        //expect
+        expect(result).toEqual([false, 'Quantity cannot be zero.', '']);
+    });
+
+    it('check for negative', () => {
+        //arrange
+        const input = -123;
+
+        //act
+        const result = isValidQuantity(input);
+
+        //expect
+        expect(result).toEqual([false, 'Quantity cannot be negative.', '']);
+    });
+
+    it('check for 0', () => {
+        //arrange
+        const input = 0;
+
+        //act
+        const result = isValidQuantity(input);
+
+        //expect
+        expect(result).toEqual([false, 'Quantity cannot be zero.', '']);
+    });
+
+    it('check for string', () => {
+        //arrange
+        const input = 'hello';
+
+        //act
+        const result = isValidQuantity(input);
+
+        //expect
+        expect(result).toEqual([false, 'Quantity cannot be zero.', '']);
+    });
+
+    it('check for null', () => {
+        //arrange
+        const input = null;
+
+        //act
+        const result = isValidQuantity(input);
+
+        //expect
+        expect(result).toEqual([false, 'Quantity cannot be zero.', '']);
+    });
+
+    it('check for NaN', () => {
+        //arrange
+        const input = NaN;
+
+        //act
+        const result = isValidQuantity(input);
+
+        //expect
+        expect(result).toEqual([false, 'Quantity cannot be zero.', '']);
+    });
+
+    it('valid input', () => {
+        //arrange
+        const input = 123;
+
+        //act
+        const result = isValidQuantity(input);
+
+        //expect
+        expect(result).toEqual([true, '', input]);
+    });
+});
+
+describe('check for valid amount paid', () => {
+    it('check for negative balance', () => {
+        //arrange
+        const downPayment = 19875;
+        const finalPayment = 19875;
+        const total = 19000;
+
+        //act
+        const result = isValidTotalAmountPaid(downPayment, finalPayment, total);
+
+        //expect
+        expect(result).toEqual([
+            false,
+            'Customer payment is greater than the total price.',
+        ]);
+    });
+
+    it('check for positive balance', () => {
+        //arrange
+        const downPayment = 19875;
+        const finalPayment = 19875;
+        const total = 400000;
+
+        //act
+        const result = isValidTotalAmountPaid(downPayment, finalPayment, total);
+
+        //expect
+        expect(result).toEqual([true, 'Remaining Balance: P' + 360250]);
+    });
+
+    it('check for zero balance', () => {
+        //arrange
+        const downPayment = 19875;
+        const finalPayment = 19875;
+        const total = 39750;
+
+        //act
+        const result = isValidTotalAmountPaid(downPayment, finalPayment, total);
+
+        //expect
+        expect(result).toEqual([true, 'Event is fully paid.']);
     });
 });
