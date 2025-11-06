@@ -1,0 +1,171 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - feature/*
+      - frontend
+      - develop
+      - qa-testing
+      - master
+  pull_request:
+    branches:
+      - develop
+      - qa-testing
+      - master
+jobs:
+  lint:
+    name: Lint & Format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint code
+        run: npx eslint .
+
+      - name: Check formatting
+        run: npx prettier --check .
+
+  test:
+    name: Run Jest Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+    
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+    
+      - name: Run Jest tests with coverage
+        run: npx jest --coverage --ci --runInBand
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+
+  audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    needs: test
+    # skip feature/* branches
+    if: startsWith(github.ref, 'refs/heads/feature/') == false 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Security audit
+        run: npm audit --audit-level=high
+
+  build:
+    name: Build & Upload Artifact
+    runs-on: ubuntu-latest
+    needs: [test, audit]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build --if-present
+
+      - name: Zip build and coverage
+        run: |
+          mkdir -p artifacts
+          cp -r coverage artifacts/
+          cp -r dist artifacts/ || true
+          zip -r TableTango-${{ github.run_number }}.zip artifacts
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TableTango-Build-${{ github.run_number }}
+          path: TableTango-${{ github.run_number }}.zip
+    
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    permissions:
+      contents: write
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: TableTango-Build-${{ github.run_number }}
+          path: .
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: TableTango Release ${{ github.run_number }}
+          tag_name: v${{ github.run_number }}
+          body: |
+              Automated release from CI pipeline.
+              Includes linted, tested, and audited build.
+          files: TableTango-${{ github.run_number }}.zip
+# jobs:
+#   build-and-test:
+#     runs-on: ubuntu-latest
+
+#     steps:        
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
+
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 20
+
+#       - name: Install dependencies
+#         run: npm ci
+
+#       - name: Lint code
+#         run: npx eslint .
+
+#       - name: Check formatting
+#         run: npx prettier --check .
+
+#       - name: Run jest tests with coverage
+#         run: npx jest --coverage --ci --runInBand
+    
+#       - name: Security audit
+#         run: npm audit --audit-level=high
+
+#       - name: Upload coverage report
+#         if: always()
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: coverage-report
+#           path: coverage/
