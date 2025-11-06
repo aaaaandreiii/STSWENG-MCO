@@ -31,7 +31,7 @@ module.exports = [
     },
     rules: {
       semi: ["error", "always"],
-      quotes: 'off', //prettier
+      quotes: "off", //prettier
     },
   },
 ];
