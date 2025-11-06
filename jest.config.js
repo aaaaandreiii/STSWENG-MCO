@@ -6,6 +6,7 @@ module.exports = {
     "helpers/**/*.js",
     "models/**/*.js",
     "routes/**/*.js",
+    "index.js",
     "!**/node_modules/**",
   ],
   coverageDirectory: "coverage", //Output folder for coverage
