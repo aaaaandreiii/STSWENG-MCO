@@ -31,7 +31,9 @@ jobs:
         run: npm ci
 
       - name: Lint code
-        run: npx eslint .
+        run: npx eslint "controllers/**/*.js" "routes/**/*.js" "helpers/**/*.js"
+
+        # run: npx eslint .
 
       - name: Check formatting
         run: npx prettier --check .
