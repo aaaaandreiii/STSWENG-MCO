@@ -1,86 +1,92 @@
 .material-icons-two-tone {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 /* SIZES */
 .material-icons-two-tone.md-18 {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .material-icons-two-tone.md-24 {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .material-icons-two-tone.md-36 {
-    font-size: 36px;
+  font-size: 36px;
 }
 
 .material-icons-two-tone.md-48 {
-    font-size: 48px;
+  font-size: 48px;
 }
 
 .material-icons-two-tone.md-56 {
-    font-size: 56px;
+  font-size: 56px;
 }
 
 .material-icons-two-tone.md-60 {
-    font-size: 60px;
+  font-size: 60px;
 }
 
 .material-icons-two-tone.md-72 {
-    font-size: 72px;
+  font-size: 72px;
 }
 
 .material-icons-two-tone.md-96 {
-    font-size: 96px;
+  font-size: 96px;
 }
 
 .material-icons-two-tone.md-144 {
-    font-size: 144px;
+  font-size: 144px;
 }
 
 /* COLORS */
 .material-icons-two-tone.md-dark {
-    color: rgba(0, 0, 0, 0.54);
+  color: rgba(0, 0, 0, 0.54);
 }
 
 .material-icons-two-tone.md-dark.md-inactive {
-    color: rgba(0, 0, 0, 0.26);
+  color: rgba(0, 0, 0, 0.26);
 }
 
 .material-icons-two-tone.md-light {
-    color: rgba(255, 255, 255, 1);
+  color: rgba(255, 255, 255, 1);
 }
 
 .material-icons-two-tone.md-light.md-inactive {
-    color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.3);
 }
 
 /* FOR BUTTON ICONS */
 .material-icons-two-tone.md-btn {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .navy-icon {
-    filter: invert(15%) sepia(13%) saturate(6619%) hue-rotate(172deg) brightness(91%) contrast(101%);
+  filter: invert(15%) sepia(13%) saturate(6619%) hue-rotate(172deg)
+    brightness(91%) contrast(101%);
 }
 
 .red-icon {
-    filter: invert(22%) sepia(23%) saturate(7438%) hue-rotate(344deg) brightness(105%) contrast(99%);
+  filter: invert(22%) sepia(23%) saturate(7438%) hue-rotate(344deg)
+    brightness(105%) contrast(99%);
 }
 
 .orange-icon {
-    filter: invert(47%) sepia(39%) saturate(4734%) hue-rotate(15deg) brightness(110%) contrast(107%);
+  filter: invert(47%) sepia(39%) saturate(4734%) hue-rotate(15deg)
+    brightness(110%) contrast(107%);
 }
 
 .yellow-icon {
-    filter: invert(88%) sepia(43%) saturate(1432%) hue-rotate(321deg) brightness(102%) contrast(98%);
+  filter: invert(88%) sepia(43%) saturate(1432%) hue-rotate(321deg)
+    brightness(102%) contrast(98%);
 }
 
 .sand-icon {
-    filter: invert(88%) sepia(19%) saturate(385%) hue-rotate(9deg) brightness(104%) contrast(84%);
+  filter: invert(88%) sepia(19%) saturate(385%) hue-rotate(9deg)
+    brightness(104%) contrast(84%);
 }
 
 .white-icon {
-    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(333deg) brightness(101%) contrast(101%);
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(333deg)
+    brightness(101%) contrast(101%);
 }

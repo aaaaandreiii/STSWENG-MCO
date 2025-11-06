@@ -1,7 +1,7 @@
 //import models needed
 
 const controller = {
-    //add functions
+  //add functions
 };
 
 module.exports = controller;

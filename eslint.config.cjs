@@ -16,7 +16,7 @@ module.exports = [
     files: ["**/*.js"],
     ignores: [
       "public/js/bootstrap.bundle.js", // ignore vendor library
-      "node_modules/**"
+      "node_modules/**",
     ],
     languageOptions: {
       ecmaVersion: "latest",
