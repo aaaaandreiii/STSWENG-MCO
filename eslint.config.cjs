@@ -9,17 +9,24 @@
 // ]);
 // .eslintrc.js
 // eslint.config.cjs
-module.exports = [
+import eslintRecommended from "eslint/conf/eslint-recommended.js";
+import prettierRecommended from "eslint-config-prettier/flat.js";
+
+export default [
+  ...eslintRecommended,
+  ...prettierRecommended,
   {
     files: ["**/*.js"],
     languageOptions: {
       ecmaVersion: "latest",
-      sourceType: "script", //CommonJS
-    },
-    env: {
-      node: true,
-      browser: true,
-      es2021: true,
+      sourceType: "script", // CommonJS
+      globals: {
+        require: "readonly",
+        module: "readonly",
+        __dirname: "readonly",
+        process: "readonly",
+        console: "readonly",
+      },
     },
     rules: {
       semi: ["error", "always"],
