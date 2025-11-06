@@ -3,6 +3,8 @@
 // import pluginReact from "eslint-plugin-react";
 // import { defineConfig } from "eslint/config";
 
+const { plugin } = require("mongoose");
+
 // export default defineConfig([
 //   { files: ["**/*.{js,mjs,cjs,jsx}"], plugins: { js }, extends: ["js/recommended"], languageOptions: { globals: globals.browser } },
 //   pluginReact.configs.flat.recommended,
@@ -23,6 +25,7 @@ module.exports = [
         console: "readonly",
       },
     },
+    plugin: ['unicorn', 'import'],
     rules: {
       semi: ["error", "always"],
       quotes: ["error", "single"],
