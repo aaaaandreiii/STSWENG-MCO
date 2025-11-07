@@ -2,8 +2,7 @@
 
 # frontend
 1. npm install
-    npm install hbs
-    npm install dotenv
+    npm install hbs dotenv bcrypt calendar
 2. node frontend.js
     redirect -> http://localhost:3000
 3. navigate to different pages manually
