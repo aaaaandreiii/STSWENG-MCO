@@ -2,17 +2,17 @@ require('dotenv').config();
 hostname = process.env.HOSTNAME
 port = process.env.PORT
 
+//import the necessary modules
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
-var handlebars_helper; //in the future, require(`./views hbs helper.js`) or something
-const routes = require('./routes/routes.js'); //same as abpve
+const handlebars_helper = require(`./views/hbs-helper.js`);
+const routes = require('./routes/routes.js');
 const mongoose = require('mongoose');
 const db = require('./models/db.js');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const app = express();
-
 
 // Middleware setup
 
@@ -32,6 +32,11 @@ app.use(
         store: MongoStore.create({mongoUrl: process.env.DB_URL}),
     })
 );
+
+//set hbs as the view engine
+app.set('view engine', 'hbs');
+//set the file path containing the hbs files
+app.set('views', path.join(__dirname, 'views'));
 
 //check if current user has logged in
 app.use('/', (req, res, next) => {
