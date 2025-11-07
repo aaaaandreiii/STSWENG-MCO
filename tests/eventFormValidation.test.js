@@ -636,12 +636,12 @@ describe('Additional Food Name', () => {
 
 	// Unit Test #3
 	it ('Food Name is in the list', () => {
-		const testVal = 'Balai Yllana Garden Salad';
+		const testVal = 'Garden Salad';
 
 		const resVal = isAddFoodNameinList(testVal);
 		
 		expect(resVal[1]).toEqual(235);
-		expect(resVal[2]).toEqual('Balai Yllana Garden Salad is in the list.');
+		expect(resVal[2]).toEqual('Garden Salad is in the list.');
 	});		
 });
 

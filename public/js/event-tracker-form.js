@@ -107,8 +107,8 @@ let menuPackageHTML =
     '<h2 class="menu-item-header mx-4 align-self-center">Beef</h2>' +
     '<div class="form-check mx-5 align-self-center">' +
     '<input class="form-check-input" type="radio" name="beef-options" id="beef-1"' +
-    'value="Balai Yllana Kare Kare">' +
-    '<label class="form-check-label" for="beef-1">Balai Yllana Kare Kare</label>' +
+    'value="Kare Kare">' +
+    '<label class="form-check-label" for="beef-1">Kare Kare</label>' +
     '</div>' +
     '<div class="form-check mx-5 align-self-center">' +
     '<input class="form-check-input" type="radio" name="beef-options" id="beef-2"' +
@@ -151,8 +151,8 @@ let menuPackageHTML =
     '</div>' +
     '<div class="form-check mx-5 align-self-center">' +
     '<input class="form-check-input" type="radio" name="chicken-options" id="chicken-2"' +
-    'value="Balai Yllana Fried Chicken">' +
-    '<label class="form-check-label" for="chicken-2">Balai Yllana Fried Chicken</label>' +
+    'value="Fried Chicken">' +
+    '<label class="form-check-label" for="chicken-2">Fried Chicken</label>' +
     '</div>' +
     '<div class="form-group row my-3 ms-auto">' +
     '<label for="chicken-quantity" class="col col-form-label">Quantity</label>' +
@@ -2999,12 +2999,12 @@ function isAddFoodNameinList(foodname) {
     let foodNameList = [
         'Barbeque Chicken Salad',
         'Chicken Caesar Salad',
-        'Balai Yllana Garden Salad',
+        'Garden Salad',
     ];
     let foodList = [
         { name: 'Barbeque Chicken Salad', price: 235 },
         { name: 'Chicken Caesar Salad', price: 215 },
-        { name: 'Balai Yllana Garden Salad', price: 235 },
+        { name: 'Garden Salad', price: 235 },
     ];
     if (foodNameList.includes(foodname))
         return [
