@@ -16,4 +16,4 @@ http://localhost:3000/<page>
 TODO: 
 backend
 - cancel event -> back should back
-- receipt is broken
+- receipt is broken 
