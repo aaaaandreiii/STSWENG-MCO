@@ -2445,7 +2445,7 @@ function addExistingFields() {
                 $('#form-title')
                     .children('h1')
                     .html(
-                        '<span class="material-icons-two-tone mb-1 md-48">class</span> EDIT EVENT'
+                        '<span class="material-icons-two-tone mb-1 md-48">class</span> EDIT EVENT'
                     );
 
                 // set event time
