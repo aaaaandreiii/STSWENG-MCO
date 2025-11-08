@@ -2,15 +2,46 @@ const mongoose = require('mongoose');
 
 const url = process.env.DB_URL;
 
-const options = {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-};
+//remove depracated warnings
+// const options = {
+//     useUnifiedTopology: true,
+//     useNewUrlParser: true,
+// };
+
+function redact(u = '') {
+    return (u || '').replace(/\/\/([^:@]+):([^@]+)@/, '//***:***@');
+}
+
+function wireConnectionEvents() {
+    const c = mongoose.connection;
+    c.on('connecting', () => console.log('[DB] connecting…', redact(url)));
+    c.on('connected',  () => console.log('[DB] connected:', c.host, c.name));
+    c.on('reconnected',() => console.log('[DB] reconnected'));
+    c.on('disconnected',() => console.warn('[DB] disconnected'));
+    c.on('error',      (err) => console.error('[DB] error:', err.message));
+}
 
 const database = {
     connect: async function() {
-        await mongoose.connect(url, options);
-        console.log('Connected!');
+        if (!url) {
+            console.error('[DB] DB_URL is missing in environment.');
+            throw new Error('DB_URL not set');
+        }
+        wireConnectionEvents();
+        const started = Date.now();
+        console.log('[DB] connect called with', redact(url));
+        try {
+            await mongoose.connect(url);
+
+            //remove depracated warnings: useUnifiedTopology, useNewUrlParser
+            // await mongoose.connect(url, options);
+
+            // console.log('Connected!');
+            console.log(`[DB] ready in ${Date.now() - started}ms`);
+        } catch (err) {
+            console.error('[DB] failed to connect:', err.message);
+            throw err;
+        }
     },
 
     disconnect: async function() {
