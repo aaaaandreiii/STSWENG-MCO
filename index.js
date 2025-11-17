@@ -828,7 +828,6 @@ if (USE_MOCK) {
       res.redirect('/login');
     }
   });
-  });
 
   app.use('/admin', (req, res, next) => {
     if (req.session.isAdmin) {
