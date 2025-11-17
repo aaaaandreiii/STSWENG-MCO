@@ -1,3 +1,4 @@
+/database/**/*.json
 views/**/*.hbs
 public/js/bootstrap.bundle.js
 node_modules

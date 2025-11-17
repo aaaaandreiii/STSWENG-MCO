@@ -1,45 +1,45 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
 var TransactionSchema = new mongoose.Schema({
-    chargesList: {
-        type: [
-            {
-                reason: {
-                    type: String,
-                    trim: true,
-                },
+  chargesList: {
+    type: [
+      {
+        reason: {
+          type: String,
+          trim: true,
+        },
 
-                amount: {
-                    type: Number,
-                },
-            },
-        ],
-    },
+        amount: {
+          type: Number,
+        },
+      },
+    ],
+  },
 
-    discountsList: {
-        type: [
-            {
-                reason: {
-                    type: String,
-                    trim: true,
-                },
+  discountsList: {
+    type: [
+      {
+        reason: {
+          type: String,
+          trim: true,
+        },
 
-                amount: {
-                    type: Number,
-                },
-            },
-        ],
-    },
+        amount: {
+          type: Number,
+        },
+      },
+    ],
+  },
 
-    totalCost: {
-        type: Number,
-        required: true,
-    },
+  totalCost: {
+    type: Number,
+    required: true,
+  },
 
-    customerPayment: {
-        type: Number,
-        required: true,
-    },
+  customerPayment: {
+    type: Number,
+    required: true,
+  },
 });
 
-module.exports = mongoose.model('Transaction', TransactionSchema);
+module.exports = mongoose.model("Transaction", TransactionSchema);

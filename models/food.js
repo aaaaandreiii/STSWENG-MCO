@@ -1,13 +1,13 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
 var FoodSchema = new mongoose.Schema({
-    name: {
-        type: String,
-    },
+  name: {
+    type: String,
+  },
 
-    price: {
-        type: Number,
-    },
+  price: {
+    type: Number,
+  },
 });
 
-module.exports = mongoose.model('Food', FoodSchema);
+module.exports = mongoose.model("Food", FoodSchema);
