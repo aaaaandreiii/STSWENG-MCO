@@ -4,7 +4,7 @@ const Activity = require('../models/activity.js');
 const Discount = require('../models/discount.js');
 const {
     isValidPassword,
-    isOldPasswordSameAsPassword,
+    isOldPasswordSameAsPassword,    //is not used yet, TODO: add functionality/password validation
 } = require('../helpers/newPasswordValidator.js');
 const saltRounds = 10;
 
