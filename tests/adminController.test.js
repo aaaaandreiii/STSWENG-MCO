@@ -17,7 +17,7 @@ describe("Admin Controller", () => {
     req = {
       body: {},
       params: {},
-      session: { user: { username: "admin" }, isAdmin: true},
+      session: { user: { username: "admin" }, isAdmin: true },
     };
     res = {
       status: jest.fn().mockReturnThis(),
@@ -32,7 +32,8 @@ describe("Admin Controller", () => {
   describe("getAdminHome", () => {
     it("should render admin home page", async () => {
       const now = new Date();
-      Employee.aggregate.mockResolvedValue([ //returns
+      Employee.aggregate.mockResolvedValue([
+        //returns
         {
           username: "admin",
           dateRegistered: new Date("2025-01-01"),
@@ -43,7 +44,7 @@ describe("Admin Controller", () => {
         },
       ]);
       Activity.find.mockResolvedValue([{ username: "admin", timestamp: now }]);
-      
+
       await adminController.getAdminHome(req, res);
 
       expect(res.render).toHaveBeenCalledWith(
@@ -62,20 +63,27 @@ describe("Admin Controller", () => {
           ]),
           username: "admin",
           isAdmin: true,
-        })
+        }),
       );
     });
 
     it("filters out old activities", async () => {
       const now = new Date();
       const sevenDaysAgo = new Date();
-      sevenDaysAgo.setHours(0,0,0,0);
+      sevenDaysAgo.setHours(0, 0, 0, 0);
       sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
       const recentActivity = { username: "admin", timestamp: now };
-      const oldActivity = { username: "admin", timestamp: new Date("2000-01-01") };
+      const oldActivity = {
+        username: "admin",
+        timestamp: new Date("2000-01-01"),
+      };
       Employee.aggregate.mockResolvedValue([
-        { username: "admin", dateRegistered: new Date(), activities: [recentActivity, oldActivity] },
+        {
+          username: "admin",
+          dateRegistered: new Date(),
+          activities: [recentActivity, oldActivity],
+        },
       ]);
       Activity.find.mockResolvedValue([recentActivity]);
 
@@ -119,12 +127,14 @@ describe("Admin Controller", () => {
 
       expect(Employee.findOne).toHaveBeenCalledWith({ username: "ano" });
       expect(bcrypt.hash).toHaveBeenCalledWith("password123", 10);
-      expect(Employee.create).toHaveBeenCalledWith(expect.objectContaining({
-        username: "ano",
-        password: "hashedPassword",
-        role: "employee",
-        hasAccess: true,
-      }));
+      expect(Employee.create).toHaveBeenCalledWith(
+        expect.objectContaining({
+          username: "ano",
+          password: "hashedPassword",
+          role: "employee",
+          hasAccess: true,
+        }),
+      );
       expect(res.redirect).toHaveBeenCalledWith("/admin");
     });
 
@@ -161,7 +171,10 @@ describe("Admin Controller", () => {
 
       await adminController.getAllCurrentEmployees(req, res);
 
-      expect(Employee.find).toHaveBeenCalledWith({ role: "employee", hasAccess: true });
+      expect(Employee.find).toHaveBeenCalledWith({
+        role: "employee",
+        hasAccess: true,
+      });
       expect(res.json).toHaveBeenCalledWith(currentEmployees);
     });
   });
@@ -174,7 +187,10 @@ describe("Admin Controller", () => {
 
       await adminController.getAllFormerEmployees(req, res);
 
-      expect(Employee.find).toHaveBeenCalledWith({ role: "employee", hasAccess: false });
+      expect(Employee.find).toHaveBeenCalledWith({
+        role: "employee",
+        hasAccess: false,
+      });
       expect(res.json).toHaveBeenCalledWith(formerEmployees);
     });
   });
@@ -199,7 +215,9 @@ describe("Admin Controller", () => {
 
       await adminController.getEmployee(req, res);
 
-      expect(Employee.findOne).toHaveBeenCalledWith({ username: "doesnotexist" });
+      expect(Employee.findOne).toHaveBeenCalledWith({
+        username: "doesnotexist",
+      });
       expect(res.status).toHaveBeenCalledWith(404);
       expect(res.json).toHaveBeenCalledWith(null);
     });
@@ -236,7 +254,7 @@ describe("Admin Controller", () => {
           emergencyContactNum: "09987654321",
           password: "hashedNewPass",
         }),
-        { new: true }
+        { new: true },
       );
       expect(res.json).toHaveBeenCalledWith(updatedEmployee);
     });
@@ -252,15 +270,16 @@ describe("Admin Controller", () => {
       });
     });
   });
-    
+
   // ------------------ getEmployeeActivity ------------------ //
   describe("getEmployeeActivity", () => {
     it("should return activities for a specific employee", async () => {
       req.params.username = "they";
       const activities = [
-        { username: "they" , timestamp: new Date("2025-01-01") }, 
-        { username: "they" , timestamp: new Date("2025-01-01") },
-        { username: "them" , timestamp: new Date("2025-01-01") }];
+        { username: "they", timestamp: new Date("2025-01-01") },
+        { username: "they", timestamp: new Date("2025-01-01") },
+        { username: "them", timestamp: new Date("2025-01-01") },
+      ];
       Activity.find.mockResolvedValue(activities);
 
       await adminController.getEmployeeActivity(req, res);
@@ -306,7 +325,7 @@ describe("Admin Controller", () => {
       expect(Employee.findOneAndUpdate).toHaveBeenCalledWith(
         { username: "they" },
         { hasAccess: true },
-        { returnDocument: "after" }
+        { returnDocument: "after" },
       );
       expect(res.json).toHaveBeenCalledWith(updatedEmployee);
     });
@@ -324,7 +343,7 @@ describe("Admin Controller", () => {
       expect(Employee.findOneAndUpdate).toHaveBeenCalledWith(
         { username: "them" },
         { hasAccess: false },
-        { returnDocument: "after" }
+        { returnDocument: "after" },
       );
       expect(res.json).toHaveBeenCalledWith(updatedEmployee);
     });
