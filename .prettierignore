@@ -1,4 +1,5 @@
-/database/**/*.json
+coverage
+database
 views/**/*.hbs
 public/js/bootstrap.bundle.js
 node_modules
