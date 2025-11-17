@@ -1,14 +1,14 @@
 .withEvent {
-  background-color: #902D41 !important;
+  background-color: #902d41 !important;
 }
 
 .calendar-day {
-    background-color: #F0F0F0;
-    transition: 0.3s;
+  background-color: #f0f0f0;
+  transition: 0.3s;
 }
 
 .calendar-day:hover {
-    background-color: #EAEAEA;
+  background-color: #eaeaea;
 }
 
 .border-gray {

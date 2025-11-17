@@ -46,6 +46,7 @@ hbs.registerPartials(path.join(__dirname, 'views/partials'), (err) => {
 // Parse incoming requests with urlencoded payloads
 app.use(express.urlencoded({ extended: false }));
 // Parse incoming json payload
+// Parse incoming json payload
 app.use(express.json());
 
 // Set the file path containing the static assets
@@ -822,13 +823,16 @@ if (USE_MOCK) {
       req.path === '/authenticate'
     ) {
       next();
+      next();
     } else {
       res.redirect('/login');
     }
   });
+  });
 
   app.use('/admin', (req, res, next) => {
     if (req.session.isAdmin) {
+      next();
       next();
     } else {
       res.redirect('/event-tracker/home');
@@ -856,3 +860,4 @@ app.listen(port, () => {
 });
 
 module.exports = app;
+

@@ -2,8 +2,7 @@
   background-image: url("/images/flags.png");
 }
 
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .iti__flag {
     background-image: url("/images/flags@2x.png");
   }
@@ -26,9 +25,9 @@ label {
   font-weight: 600;
 }
 
-#form-title>h1 {
-    font-weight: 700;
-    text-transform: uppercase;
+#form-title > h1 {
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .menu-item-header,

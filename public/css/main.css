@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap");
 
 html,
 body {
-    color: #0d1f2d;
-    min-height: 100vh;
-    background-color: #DBDBDB;
+  color: #0d1f2d;
+  min-height: 100vh;
+  background-color: #dbdbdb;
 }
 
 a,
@@ -23,115 +23,116 @@ div,
 .h4,
 .h5,
 .h6 {
-    font-family: "Raleway";
+  font-family: "Raleway";
 }
 
 button,
 .btn {
-    font-family: "Raleway";
-    font-style: normal;
+  font-family: "Raleway";
+  font-style: normal;
 }
 
 input,
 option,
 select,
 textarea {
-    font-family: "Roboto Mono";
+  font-family: "Roboto Mono";
 }
 
 .number {
-    font-family: "Roboto Mono" !important;
+  font-family: "Roboto Mono" !important;
 }
 
 .no-content {
-    font-weight: 600;
-    color: #505050;
+  font-weight: 600;
+  color: #505050;
 }
 
 .tooltip {
-    font-family: "Raleway";
-    font-size: 20px;
+  font-family: "Raleway";
+  font-size: 20px;
 }
 
 .tooltip-inner {
-    max-width: 600px;
-    padding: 12px;
-    border-radius: 10px;
+  max-width: 600px;
+  padding: 12px;
+  border-radius: 10px;
 }
 
 /* BORDER RADIUS */
 .rounded-sm {
-    border-radius: 25px;
+  border-radius: 25px;
 }
 
 .rounded-lg {
-    border-radius: 75px;
+  border-radius: 75px;
 }
 
 /* COLORS */
 .bg-dark {
-    background-color: #2E2E2E !important;
+  background-color: #2e2e2e !important;
 }
 
 .bg-gray {
-    background-color: #3b3b3b !important;
+  background-color: #3b3b3b !important;
 }
 
 /* LIST ITEM CONTAINERS */
 .rounded-list-item {
-    background-color: #EAEAEA;
-    transition: 0.3s;
-    cursor: pointer;
+  background-color: #eaeaea;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 .rounded-list-item:hover {
-    background-color: #DADADA;
+  background-color: #dadada;
 }
 
-.rounded-list-item>h1 {
-    font-weight: 700;
-    font-size: 24px;
+.rounded-list-item > h1 {
+  font-weight: 700;
+  font-size: 24px;
 }
 
 .table-xs > :not(caption) > * > * {
-    padding: 0rem 0rem;
+  padding: 0rem 0rem;
 }
 
 body {
-    font-size: 0.95rem;
+  font-size: 0.95rem;
 }
 .col-11 {
-    max-width: 900px;
+  max-width: 900px;
 }
-#today-title, #today-main {
-    /* no change */
-    padding: 0.5rem;
+#today-title,
+#today-main {
+  /* no change */
+  padding: 0.5rem;
 }
 #today-title h1 {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 #today-main h4 {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 #today-title .material-icons-two-tone,
 .material-icons-two-tone.md-48 {
-    font-size: 2rem !important;
+  font-size: 2rem !important;
 }
 .no-content {
-    font-size: 1.1rem;
-    padding: 2rem !important;
+  font-size: 1.1rem;
+  padding: 2rem !important;
 }
 .p-4 {
-    /* events for today table content */
-    padding: 1rem !important;
+  /* events for today table content */
+  padding: 1rem !important;
 }
 .py-5 {
-    padding-top: 1.5rem !important;
-    padding-bottom: 1.5rem !important;
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
 }
 .rounded-lg {
-    border-radius: 0.5rem !important;
+  border-radius: 0.5rem !important;
 }
 .rounded-sm {
-    border-radius: 0.5rem !important;
+  border-radius: 0.5rem !important;
 }

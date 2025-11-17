@@ -1,13 +1,13 @@
 $(document).ready(function () {
-    $('[data-bs-toggle="tooltip"]').tooltip({
-        placement: 'left'
-    });
+  $('[data-bs-toggle="tooltip"]').tooltip({
+    placement: "left",
+  });
 
-    $('[data-toggle="popover"]').popover();
+  $('[data-toggle="popover"]').popover();
 
-    highlightEventDays();
+  highlightEventDays();
 });
 
 function highlightEventDays() {
-    $('.done').parent().addClass('withEvent')
+  $(".done").parent().addClass("withEvent");
 }
