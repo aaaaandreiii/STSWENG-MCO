@@ -15,6 +15,7 @@ const {
   checkPaxDiscountTest,
 } = require("../public/js/event-tracker-form.js");
 
+
 // ------------------ GENERAL ------------------ //
 // Test Suite #1
 describe("Date", () => {
@@ -27,14 +28,14 @@ describe("Date", () => {
     expect(resVal[1]).toEqual("Date should be at least a month ago.");
   });
 
-  // Unit Test #2
-  it("After maximum date", () => {
-    const testVal = "2040-01-01";
-
-    const resVal = isValidDate(testVal);
-
-    expect(resVal[1]).toEqual("Date cannot be later than 2031.");
-  });
+	// Unit Test #2
+	it('After maximum date', () => {
+		const testVal = '2040-01-01';
+		
+		const resVal  = isValidDate(testVal);
+		
+		expect(resVal[1]).toEqual('Date cannot be later than 2031.');
+	});
 
   // Unit Test #3
   it("No date", () => {
