@@ -9,16 +9,17 @@ function oid(seed) { // deterministic 24-hex
   for (let i = 0; i < 24; i++) { x = (x * 1664525 + 1013904223) >>> 0; s += hex[x & 15]; }
   return s;
 }
+
 function d(year, month1to12, day, hour = 0) {
-  // month1to12 = 1..12
   const dt = new Date(Date.UTC(year, month1to12 - 1, day, hour, 0, 0));
-  return { $date: dt.toISOString().replace('.000Z', '.000Z') };
+  return { $date: dt.toISOString() };
 }
+
 function range(n){ return Array.from({length:n}, (_,i)=>i+1); }
 
 // -------- settings --------
 const N = 50;
-const venues = ["Hall A","Hall B","Garden","Beachfront","Ballroom"];
+const venues = ["Garden", "Sunroom", "Terrace"];
 const eventTypes = ["Wedding","Birthday","Corporate","Reunion","Christening"];
 const statuses = ["booked","reserved","finished","cancelled"];
 
@@ -116,6 +117,7 @@ const Events = range(N).map(i => {
 
   const eventType = eventTypes[i % eventTypes.length];
   const venue = venues[i % venues.length];
+  const eventTimeLabel = (i % 2 === 0) ? 'Afternoon' : 'Evening';
 
   const ev = {
     status,
@@ -125,9 +127,12 @@ const Events = range(N).map(i => {
     repName: rep.name,
     repMobileNumber: rep.contactNum,
 
-    eventType,
-    eventDate: d(2025, 9, 1 + (i % 30)),  // 2025-10-01
-    eventTime: `${String(10 + (i % 10)).padStart(2, '0')}:00`,
+    eventType: [eventType],
+
+    eventDate: d(2025, 11, 1 + (i % 30)), // November 1–30, 2025
+
+    // eventTime: `${String(10 + (i % 10)).padStart(2, '0')}:00`,
+    eventTime: eventTimeLabel,
 
     numOfPax: 50 + (i % 150),
 
