@@ -4,9 +4,9 @@ module.exports = {
   collectCoverageFrom: [
     "controllers/**/*.js",
     "helpers/**/*.js",
-    "models/**/*.js",
-    "routes/**/*.js",
-    "index.js",
+    "!models/**/*.js",
+    "!routes/**/*.js",
+    "!index.js",
     "!**/node_modules/**",
   ],
   coverageDirectory: "coverage", //Output folder for coverage
@@ -14,17 +14,17 @@ module.exports = {
   //Enforce coverage thresholds
   coverageThreshold: {
     global: {
-      branches: 0, //Global >= 80%
-      functions: 0,
-      lines: 0,
-      statements: 0,
+      branches: 80, //Global >= 80%
+      functions: 80,
+      lines: 80,
+      statements: 80,
     },
-    // "./helpers/": {
-    //   branches: 90, //Helpers ≥ 90% branches
-    // },
+    "./helpers/": {
+      branches: 90, //Helpers ≥ 90% branches
+    },
     "./controllers/": {
-      branches: 0, //Controllers >= 75%
-      lines: 0, //Controllers >= 85% lines
+      branches: 75, //Controllers >= 75%
+      lines: 85, //Controllers >= 85% lines
     },
   },
   testMatch: ["**/?(*.)+(spec|test).js"], //Detect test files

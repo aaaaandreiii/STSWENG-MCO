@@ -166,6 +166,13 @@ const controller = {
     if (newPassword != "") {
       var isValidNewPassword = await isValidPassword(newPassword, username);
 
+      if (!isValidNewPassword) {
+        res.status(406).json({
+          message: "New password is not valid",
+        });
+        return;
+      }
+
       if (reenteredPassword != newPassword) {
         res.status(406).json({
           message: "New password and re-entered password do not match",

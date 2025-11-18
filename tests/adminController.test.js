@@ -1,15 +1,15 @@
-jest.mock("../models/employee.js");
-jest.mock("../models/activity.js");
-jest.mock("../models/discount.js");
-jest.mock("bcrypt");
-jest.mock("../helpers/newPasswordValidator.js");
-
 const bcrypt = require("bcrypt");
 const Employee = require("../models/employee.js");
 const Activity = require("../models/activity.js");
 const Discount = require("../models/discount.js");
 const { isValidPassword } = require("../helpers/newPasswordValidator.js");
 const adminController = require("../controllers/admin-controller.js");
+
+jest.mock("../models/employee.js");
+jest.mock("../models/activity.js");
+jest.mock("../models/discount.js");
+jest.mock("bcrypt");
+jest.mock("../helpers/newPasswordValidator.js");
 
 describe("Admin Controller", () => {
   let req, res;
@@ -267,6 +267,18 @@ describe("Admin Controller", () => {
       expect(res.status).toHaveBeenCalledWith(406);
       expect(res.json).toHaveBeenCalledWith({
         message: "New password and re-entered password do not match",
+      });
+    });
+
+    it("returns 406 if password is not valid", async () => {
+      req.body.newPassword = "invalidPass";
+      isValidPassword.mockResolvedValue(false);
+
+      await adminController.putEmployeeInfo(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(406);
+      expect(res.json).toHaveBeenCalledWith({
+        message: "New password is not valid",
       });
     });
   });
