@@ -57,74 +57,123 @@ const database = {
 
     // FULLY ACCOMPLISHED CRUD FUNCTIONS:
 
+    //Adjustments made for Mongoose 7
+
     insertOne: function (model, doc, callback) {
-        model.create(doc, function (error, result) {
-            if (error) return callback(false);
-            console.log('Added ' + result);
-            return callback(true);
-        });
+        model.create(doc)
+            .then(result => {
+                console.log('Added ' + result);
+                return callback(true);      // same behaviour as before
+            })
+            .catch(error => {
+                console.error('[DB] insertOne error:', error);
+                return callback(false);
+            });
     },
 
     insertMany: function (model, docs, callback) {
-        model.insertMany(docs, function (error, result) {
-            if (error) return callback(false);
-            console.log('Added ' + result);
-            return callback(true);
-        });
+        model.insertMany(docs)
+            .then(result => {
+                console.log('Added ' + result);
+                return callback(true);
+            })
+            .catch(error => {
+                console.error('[DB] insertMany error:', error);
+                return callback(false);
+            });
     },
 
     findOne: function (model, query, projection, callback) {
-        model.findOne(query, projection, function (error, result) {
-            if (error) return callback(false);
-            return callback(result);
-        });
+        model.findOne(query, projection)
+            .then(result => {
+                return callback(result);
+            })
+            .catch(error => {
+                console.error('[DB] findOne error:', error);
+                return callback(false);
+            });
     },
 
     findMany: function (model, query, projection, callback) {
-        model.find(query, projection, function (error, result) {
-            if (error) return callback(false);
-            return callback(result);
-        });
+        model.find(query, projection)
+            .then(result => {
+                return callback(result);    // array of docs
+            })
+            .catch(error => {
+                console.error('[DB] findMany error:', error);
+                return callback(false);
+            });
     },
 
     updateOne: function (model, filter, update, callback) {
-        model.findOneAndUpdate(filter, update, function (error, result) {
-            if (error) return callback(false);
-            console.log('Document modified: ' + result.nModified);
-            return callback(result);
-        });
+        model.findOneAndUpdate(filter, update, { new: true })
+            .then(result => {
+                console.log('Document modified');
+                return callback(result);
+            })
+            .catch(error => {
+                console.error('[DB] updateOne error:', error);
+                return callback(false);
+            });
     },
 
     updateMany: function (model, filter, update, callback) {
-        model.updateMany(filter, update, function (error, result) {
-            if (error) return callback(false);
-            console.log('Documents modified: ' + result.nModified);
-            return callback(result);
-        });
+        model.updateMany(filter, update)
+            .then(result => {
+                const modified =
+                    typeof result.modifiedCount !== 'undefined'
+                        ? result.modifiedCount
+                        : result.nModified;
+
+                console.log('Documents modified: ' + modified);
+
+                if (typeof result.nModified === 'undefined' &&
+                    typeof result.modifiedCount !== 'undefined') {
+                    result.nModified = result.modifiedCount;
+                }
+
+                return callback(result);
+            })
+            .catch(error => {
+                console.error('[DB] updateMany error:', error);
+                return callback(false);
+            });
     },
 
     deleteOne: function (model, conditions, callback) {
-        model.deleteOne(conditions, function (error, result) {
-            if (error) return callback(false);
-            console.log('Document deleted: ' + result.deletedCount);
-            return callback(true);
-        });
+        model.deleteOne(conditions)
+            .then(result => {
+                console.log('Document deleted: ' + result.deletedCount);
+                return callback(true);
+            })
+            .catch(error => {
+                console.error('[DB] deleteOne error:', error);
+                return callback(false);
+            });
     },
 
     deleteMany: function (model, conditions, callback) {
-        model.deleteMany(conditions, function (error, result) {
-            if (error) return callback(false);
-            console.log('Document deleted: ' + result.deletedCount);
-            return callback(result.deletedCount);
-        });
+        model.deleteMany(conditions)
+            .then(result => {
+                console.log('Document deleted: ' + result.deletedCount);
+                return callback(result.deletedCount);
+            })
+            .catch(error => {
+                console.error('[DB] deleteMany error:', error);
+                return callback(false);
+            });
     },
 
     count: function (model, query, callback) {
-        model.countDocuments(query, function (error, result) {
-            if (error) return callback(false);
-            console.log('Documents: ' + result);
-            return callback(result);
-        });
+        model.countDocuments(query)
+            .then(result => {
+                console.log('Documents: ' + result);
+                return callback(result);
+            })
+            .catch(error => {
+                console.error('[DB] count error:', error);
+                return callback(false);
+            });
     },
 };
 
