@@ -12,7 +12,8 @@ var EventSchema = new mongoose.Schema({
     repName: {type: String},
     repMobileNumber: {type: String},
 
-    eventType: {type: String},
+    // eventType: {type: String},
+    eventType: { type: [String] },  //mock is array
     eventDate: {type: Date},
     eventTime: {type: String},
 
@@ -21,8 +22,23 @@ var EventSchema = new mongoose.Schema({
     eventNotes: {type: String},
     eventVenues: {type: [String]},
     eventPackages: {type: [mongoose.ObjectId]},
-    
+
     packageAdditionalPax: {type: Boolean},
+
+    //additional variables from mock data
+    name: { type: String },
+    location: { type: String },
+    tags: { type: [String] },
+    guests: { type: [String] },
+    formatArray: { type: [String] },
+    categories: { type: [String] },
+    attendees: { type: [String] },
+    reasons: { type: [String] },
+    skills: { type: [String] },
+    items: { type: [String] },
+    services: { type: [String] },
+    keywords: { type: [String] },
+    participants: { type: [String] },
 
     menuPackage: {
         type: {
