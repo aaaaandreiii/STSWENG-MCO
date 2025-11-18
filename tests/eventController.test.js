@@ -63,7 +63,7 @@ describe("Event Controller", () => {
       req.body.data = JSON.stringify({ name: "Test Event" });
       const mockDoc = { _id: "123" };
       Event.create.mockResolvedValue(mockDoc);
-      
+
       await eventController.postCreateEvent(req, res);
 
       expect(Event.create).toHaveBeenCalledWith({ name: "Test Event" });
@@ -82,7 +82,12 @@ describe("Event Controller", () => {
 
       eventController.getEditEvent(req, res);
 
-      expect(db.findOne).toHaveBeenCalledWith(Event, { _id: "123" }, "", expect.any(Function));
+      expect(db.findOne).toHaveBeenCalledWith(
+        Event,
+        { _id: "123" },
+        "",
+        expect.any(Function),
+      );
       expect(res.render).toHaveBeenCalledWith("event-tracker-form", {
         event: mockEvent,
         username: "admin",
@@ -141,12 +146,12 @@ describe("Event Controller", () => {
       expect(Event.findOneAndUpdate).toHaveBeenCalledWith(
         { _id: "123", status: "reserved" },
         req.body.data,
-        { returnDocument: "after" }
+        { returnDocument: "after" },
       );
       expect(logActivity).toHaveBeenCalledWith(
         "admin",
         `Modified reservation: ${mockDoc._id}
-            Modified Fields: ${req.body.modified}`
+            Modified Fields: ${req.body.modified}`,
       );
       expect(res.send).toHaveBeenCalledWith(mockDoc);
     });
@@ -167,12 +172,12 @@ describe("Event Controller", () => {
       expect(Event.findOneAndUpdate).toHaveBeenCalledWith(
         { _id: "123", status: "booked" },
         req.body.data,
-        { returnDocument: "after" }
+        { returnDocument: "after" },
       );
       expect(logActivity).toHaveBeenCalledWith(
         "admin",
         `Modified pencil booking: ${mockDoc._id}
-            Modified Fields: ${req.body.modified}`
+            Modified Fields: ${req.body.modified}`,
       );
       expect(res.send).toHaveBeenCalledWith(mockDoc);
     });
@@ -189,13 +194,13 @@ describe("Event Controller", () => {
       await eventController.putCancelEvent(req, res);
 
       expect(Event.findOneAndUpdate).toHaveBeenCalledWith(
-        { _id: "123" }, 
+        { _id: "123" },
         { status: "cancelled" },
-        { returnDocument: "after" }
+        { returnDocument: "after" },
       );
       expect(logActivity).toHaveBeenCalledWith(
         "admin",
-        `Cancelled event: ${mockDoc._id}`
+        `Cancelled event: ${mockDoc._id}`,
       );
       expect(res.json).toHaveBeenCalledWith(mockDoc);
     });
@@ -212,13 +217,13 @@ describe("Event Controller", () => {
       await eventController.putFinishEvent(req, res);
 
       expect(Event.findOneAndUpdate).toHaveBeenCalledWith(
-        { _id: "123" }, 
+        { _id: "123" },
         { status: "finished" },
-        { returnDocument: "after" }
+        { returnDocument: "after" },
       );
       expect(logActivity).toHaveBeenCalledWith(
         "admin",
-        `Finished event: ${mockDoc._id}`
+        `Finished event: ${mockDoc._id}`,
       );
       expect(res.json).toHaveBeenCalledWith(mockDoc);
     });
@@ -284,7 +289,7 @@ describe("Event Controller", () => {
       Event.aggregate.mockResolvedValue(mockBookings);
 
       await eventController.getPencilBookingsFilter(req, res);
-  
+
       expect(Event.aggregate).toHaveBeenCalledWith([
         { $match: { status: "booked" } },
         { $sort: { eventDate: 1 } },
@@ -315,7 +320,7 @@ describe("Event Controller", () => {
         isAdmin: true,
       });
     });
-    
+
     it("applies venue, time, and date filters with descending sort", async () => {
       req.query = {
         venue: "Terrace",
@@ -335,15 +340,21 @@ describe("Event Controller", () => {
 
       expect(Event.aggregate).toHaveBeenCalledWith(
         expect.arrayContaining([
-          expect.objectContaining({ $match: expect.objectContaining({ status: "booked", eventVenues: { $in: ["Terrace"] }, eventTime: "10:00" }) }),
+          expect.objectContaining({
+            $match: expect.objectContaining({
+              status: "booked",
+              eventVenues: { $in: ["Terrace"] },
+              eventTime: "10:00",
+            }),
+          }),
           expect.objectContaining({ $sort: { eventDate: -1 } }),
           expect.objectContaining({
-            $lookup: expect.objectContaining({ from: "packages" })
+            $lookup: expect.objectContaining({ from: "packages" }),
           }),
           expect.objectContaining({
-            $lookup: expect.objectContaining({ from: "foods" })
+            $lookup: expect.objectContaining({ from: "foods" }),
           }),
-        ])
+        ]),
       );
       expect(res.render).toHaveBeenCalledWith(
         "event-tracker-pencilbookings",
@@ -354,7 +365,7 @@ describe("Event Controller", () => {
           date: "2025-11-18",
           username: "admin",
           isAdmin: true,
-        })
+        }),
       );
     });
   });
@@ -377,7 +388,7 @@ describe("Event Controller", () => {
             localField: "eventPackages",
             foreignField: "_id",
             as: "packageList",
-            },
+          },
         },
         {
           $lookup: {
@@ -388,15 +399,12 @@ describe("Event Controller", () => {
           },
         },
       ]);
-      expect(res.render).toHaveBeenCalledWith(
-        "event-tracker-pencilbookings",
-        {
-          bookings: mockBookings,
-          search: undefined,
-          username: "admin",
-          isAdmin: true,
-        }
-      );
+      expect(res.render).toHaveBeenCalledWith("event-tracker-pencilbookings", {
+        bookings: mockBookings,
+        search: undefined,
+        username: "admin",
+        isAdmin: true,
+      });
     });
 
     it("filters bookings by client name", async () => {
@@ -431,15 +439,12 @@ describe("Event Controller", () => {
         },
       ]);
 
-      expect(res.render).toHaveBeenCalledWith(
-        "event-tracker-pencilbookings",
-        {
-          bookings: mockBookings,
-          search: "Alice",
-          username: "admin",
-          isAdmin: true,
-        }
-      );
+      expect(res.render).toHaveBeenCalledWith("event-tracker-pencilbookings", {
+        bookings: mockBookings,
+        search: "Alice",
+        username: "admin",
+        isAdmin: true,
+      });
     });
   });
 
@@ -474,14 +479,11 @@ describe("Event Controller", () => {
           },
         },
       ]);
-      expect(res.render).toHaveBeenCalledWith(
-        "event-tracker-reservations",
-        {
-          reservations: mockReservations,
-          username: "admin",
-          isAdmin: true,
-        }
-      );
+      expect(res.render).toHaveBeenCalledWith("event-tracker-reservations", {
+        reservations: mockReservations,
+        username: "admin",
+        isAdmin: true,
+      });
     });
   });
 
@@ -516,17 +518,14 @@ describe("Event Controller", () => {
         },
       ]);
 
-      expect(res.render).toHaveBeenCalledWith(
-        "event-tracker-reservations",
-        {
-          reservations: mockReservations,
-          venue: undefined,
-          time: undefined,
-          date: undefined,
-          username: "admin",
-          isAdmin: true,
-        }
-      );
+      expect(res.render).toHaveBeenCalledWith("event-tracker-reservations", {
+        reservations: mockReservations,
+        venue: undefined,
+        time: undefined,
+        date: undefined,
+        username: "admin",
+        isAdmin: true,
+      });
     });
 
     it("applies venue, time, date filters with descending sort", async () => {
@@ -555,9 +554,13 @@ describe("Event Controller", () => {
             }),
           }),
           expect.objectContaining({ $sort: { eventDate: -1 } }),
-          expect.objectContaining({ $lookup: expect.objectContaining({ from: "packages" }) }),
-          expect.objectContaining({ $lookup: expect.objectContaining({ from: "foods" }) }),
-        ])
+          expect.objectContaining({
+            $lookup: expect.objectContaining({ from: "packages" }),
+          }),
+          expect.objectContaining({
+            $lookup: expect.objectContaining({ from: "foods" }),
+          }),
+        ]),
       );
       expect(res.render).toHaveBeenCalledWith(
         "event-tracker-reservations",
@@ -568,7 +571,7 @@ describe("Event Controller", () => {
           date: "2025-11-18",
           username: "admin",
           isAdmin: true,
-        })
+        }),
       );
     });
   });
@@ -591,7 +594,7 @@ describe("Event Controller", () => {
             localField: "eventPackages",
             foreignField: "_id",
             as: "packageList",
-            },
+          },
         },
         {
           $lookup: {
@@ -602,15 +605,12 @@ describe("Event Controller", () => {
           },
         },
       ]);
-      expect(res.render).toHaveBeenCalledWith(
-        "event-tracker-reservations",
-        {
-          reservations: mockReservations,
-          search: undefined,
-          username: "admin",
-          isAdmin: true,
-        }
-      );
+      expect(res.render).toHaveBeenCalledWith("event-tracker-reservations", {
+        reservations: mockReservations,
+        search: undefined,
+        username: "admin",
+        isAdmin: true,
+      });
     });
 
     it("filters reservations by client name", async () => {
@@ -645,18 +645,15 @@ describe("Event Controller", () => {
         },
       ]);
 
-      expect(res.render).toHaveBeenCalledWith(
-        "event-tracker-reservations",
-        {
-          reservations: mockReservations,
-          search: "Alice",
-          username: "admin",
-          isAdmin: true,
-        }
-      );
+      expect(res.render).toHaveBeenCalledWith("event-tracker-reservations", {
+        reservations: mockReservations,
+        search: "Alice",
+        username: "admin",
+        isAdmin: true,
+      });
     });
   });
-  
+
   describe("getCancelledEvents", () => {
     it("renders page with cancelled events", async () => {
       const mockCanceled = [
@@ -688,14 +685,11 @@ describe("Event Controller", () => {
           },
         },
       ]);
-      expect(res.render).toHaveBeenCalledWith(
-        "event-tracker-cancelled",
-        {
-          cancelled: mockCanceled,
-          username: "admin",
-          isAdmin: true,
-        }
-      );
+      expect(res.render).toHaveBeenCalledWith("event-tracker-cancelled", {
+        cancelled: mockCanceled,
+        username: "admin",
+        isAdmin: true,
+      });
     });
   });
 
@@ -730,17 +724,14 @@ describe("Event Controller", () => {
         },
       ]);
 
-      expect(res.render).toHaveBeenCalledWith(
-        "event-tracker-cancelled",
-        {
-          cancelled: mockCancelled,
-          venue: undefined,
-          time: undefined,
-          date: undefined,
-          username: "admin",
-          isAdmin: true,
-        }
-      );
+      expect(res.render).toHaveBeenCalledWith("event-tracker-cancelled", {
+        cancelled: mockCancelled,
+        venue: undefined,
+        time: undefined,
+        date: undefined,
+        username: "admin",
+        isAdmin: true,
+      });
     });
 
     it("applies venue, time, date filters with descending sort", async () => {
@@ -769,9 +760,13 @@ describe("Event Controller", () => {
             }),
           }),
           expect.objectContaining({ $sort: { eventDate: -1 } }),
-          expect.objectContaining({ $lookup: expect.objectContaining({ from: "packages" }) }),
-          expect.objectContaining({ $lookup: expect.objectContaining({ from: "foods" }) }),
-        ])
+          expect.objectContaining({
+            $lookup: expect.objectContaining({ from: "packages" }),
+          }),
+          expect.objectContaining({
+            $lookup: expect.objectContaining({ from: "foods" }),
+          }),
+        ]),
       );
       expect(res.render).toHaveBeenCalledWith(
         "event-tracker-cancelled",
@@ -782,7 +777,7 @@ describe("Event Controller", () => {
           date: "2025-11-18",
           username: "admin",
           isAdmin: true,
-        })
+        }),
       );
     });
   });
@@ -805,7 +800,7 @@ describe("Event Controller", () => {
             localField: "eventPackages",
             foreignField: "_id",
             as: "packageList",
-            },
+          },
         },
         {
           $lookup: {
@@ -816,15 +811,12 @@ describe("Event Controller", () => {
           },
         },
       ]);
-      expect(res.render).toHaveBeenCalledWith(
-        "event-tracker-cancelled",
-        {
-          cancelled: mockCancelled,
-          search: undefined,
-          username: "admin",
-          isAdmin: true,
-        }
-      );
+      expect(res.render).toHaveBeenCalledWith("event-tracker-cancelled", {
+        cancelled: mockCancelled,
+        search: undefined,
+        username: "admin",
+        isAdmin: true,
+      });
     });
 
     it("filters cancelled events by client name", async () => {
@@ -859,15 +851,12 @@ describe("Event Controller", () => {
         },
       ]);
 
-      expect(res.render).toHaveBeenCalledWith(
-        "event-tracker-cancelled",
-        {
-          cancelled: mockCancelled,
-          search: "Alice",
-          username: "admin",
-          isAdmin: true,
-        }
-      );
+      expect(res.render).toHaveBeenCalledWith("event-tracker-cancelled", {
+        cancelled: mockCancelled,
+        search: "Alice",
+        username: "admin",
+        isAdmin: true,
+      });
     });
   });
 
@@ -902,14 +891,11 @@ describe("Event Controller", () => {
           },
         },
       ]);
-      expect(res.render).toHaveBeenCalledWith(
-        "event-tracker-pastevents",
-        {
-          pastevents: mockPast,
-          username: "admin",
-          isAdmin: true,
-        }
-      );
+      expect(res.render).toHaveBeenCalledWith("event-tracker-pastevents", {
+        pastevents: mockPast,
+        username: "admin",
+        isAdmin: true,
+      });
     });
   });
 
@@ -944,17 +930,14 @@ describe("Event Controller", () => {
         },
       ]);
 
-      expect(res.render).toHaveBeenCalledWith(
-        "event-tracker-pastevents",
-        {
-          pastevents: mockPast,
-          venue: undefined,
-          time: undefined,
-          date: undefined,
-          username: "admin",
-          isAdmin: true,
-        }
-      );
+      expect(res.render).toHaveBeenCalledWith("event-tracker-pastevents", {
+        pastevents: mockPast,
+        venue: undefined,
+        time: undefined,
+        date: undefined,
+        username: "admin",
+        isAdmin: true,
+      });
     });
 
     it("applies venue, time, date filters with descending sort", async () => {
@@ -983,9 +966,13 @@ describe("Event Controller", () => {
             }),
           }),
           expect.objectContaining({ $sort: { eventDate: -1 } }),
-          expect.objectContaining({ $lookup: expect.objectContaining({ from: "packages" }) }),
-          expect.objectContaining({ $lookup: expect.objectContaining({ from: "foods" }) }),
-        ])
+          expect.objectContaining({
+            $lookup: expect.objectContaining({ from: "packages" }),
+          }),
+          expect.objectContaining({
+            $lookup: expect.objectContaining({ from: "foods" }),
+          }),
+        ]),
       );
       expect(res.render).toHaveBeenCalledWith(
         "event-tracker-pastevents",
@@ -996,7 +983,7 @@ describe("Event Controller", () => {
           date: "2025-11-18",
           username: "admin",
           isAdmin: true,
-        })
+        }),
       );
     });
   });
@@ -1019,7 +1006,7 @@ describe("Event Controller", () => {
             localField: "eventPackages",
             foreignField: "_id",
             as: "packageList",
-            },
+          },
         },
         {
           $lookup: {
@@ -1030,15 +1017,12 @@ describe("Event Controller", () => {
           },
         },
       ]);
-      expect(res.render).toHaveBeenCalledWith(
-        "event-tracker-pastevents",
-        {
-          pastevents: mockPast,
-          search: undefined,
-          username: "admin",
-          isAdmin: true,
-        }
-      );
+      expect(res.render).toHaveBeenCalledWith("event-tracker-pastevents", {
+        pastevents: mockPast,
+        search: undefined,
+        username: "admin",
+        isAdmin: true,
+      });
     });
 
     it("filters finished events by client name", async () => {
@@ -1073,15 +1057,12 @@ describe("Event Controller", () => {
         },
       ]);
 
-      expect(res.render).toHaveBeenCalledWith(
-        "event-tracker-pastevents",
-        {
-          pastevents: mockPast,
-          search: "Alice",
-          username: "admin",
-          isAdmin: true,
-        }
-      );
+      expect(res.render).toHaveBeenCalledWith("event-tracker-pastevents", {
+        pastevents: mockPast,
+        search: "Alice",
+        username: "admin",
+        isAdmin: true,
+      });
     });
   });
 
@@ -1098,7 +1079,12 @@ describe("Event Controller", () => {
 
       eventController.getFood(req, res);
 
-      expect(db.findMany).toHaveBeenCalledWith(Food, {}, "name price", expect.any(Function));
+      expect(db.findMany).toHaveBeenCalledWith(
+        Food,
+        {},
+        "name price",
+        expect.any(Function),
+      );
       expect(res.send).toHaveBeenCalledWith(mockFood);
     });
   });
@@ -1116,10 +1102,15 @@ describe("Event Controller", () => {
 
       eventController.getCharges(req, res);
 
-      expect(db.findMany).toHaveBeenCalledWith(Charge, {}, "name price", expect.any(Function));
+      expect(db.findMany).toHaveBeenCalledWith(
+        Charge,
+        {},
+        "name price",
+        expect.any(Function),
+      );
       expect(res.send).toHaveBeenCalledWith(mockCharge);
     });
-  });  
+  });
 
   describe("getPackages", () => {
     it("sends all packages", () => {
@@ -1134,10 +1125,15 @@ describe("Event Controller", () => {
 
       eventController.getPackages(req, res);
 
-      expect(db.findMany).toHaveBeenCalledWith(Package, {}, "", expect.any(Function));
+      expect(db.findMany).toHaveBeenCalledWith(
+        Package,
+        {},
+        "",
+        expect.any(Function),
+      );
       expect(res.send).toHaveBeenCalledWith(mockPackage);
     });
-  });  
+  });
 
   describe("getCheckEventAvailability", () => {
     it("checks event availability and sends result", () => {
@@ -1168,7 +1164,7 @@ describe("Event Controller", () => {
           eventVenues: { $in: ["Terrace", "Garden"] },
         },
         "",
-        expect.any(Function)
+        expect.any(Function),
       );
       expect(res.send).toHaveBeenCalledWith(mockEvent);
     });
@@ -1218,7 +1214,7 @@ describe("Event Controller", () => {
             as: "foodList",
           },
         },
-        ]);
+      ]);
       expect(res.send).toHaveBeenCalledWith(mockEvent);
     });
   });
@@ -1226,7 +1222,7 @@ describe("Event Controller", () => {
   describe("getEventsInMonth", () => {
     it("renders calendar with events for the given month and year", async () => {
       req.params = { month: "11", year: "2025" };
-        const mockEvents = [
+      const mockEvents = [
         { _id: "1", status: "booked", eventDate: new Date("2025-11-05") },
         { _id: "2", status: "reserved", eventDate: new Date("2025-11-12") },
       ];
@@ -1239,14 +1235,14 @@ describe("Event Controller", () => {
       await eventController.getEventsInMonth(req, res);
 
       expect(Event.find).toHaveBeenCalledWith({
-      $expr: {
+        $expr: {
           $and: [
             { $ne: ["$status", "cancelled"] },
             { $ne: ["$status", "finished"] },
             { $eq: [2025, { $year: "$eventDate" }] },
             { $eq: [11, { $month: "$eventDate" }] },
           ],
-      },
+        },
       });
 
       expect(getEventsInMonth).toHaveBeenCalledWith("11", "2025", mockEvents);

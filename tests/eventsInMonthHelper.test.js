@@ -34,7 +34,7 @@ describe("eventsInMonth", () => {
 
   //describe("getEventsPerDay and getVenuesAvailability", () => {
   it("returns correct events and venue availability for a day with multiple events", () => {
-    const day5 = result.eventArray.flat().find(d => d.day === "05");
+    const day5 = result.eventArray.flat().find((d) => d.day === "05");
 
     expect(day5.event.length).toBe(2);
     expect(day5.aftGar).toBe(true);
@@ -47,7 +47,7 @@ describe("eventsInMonth", () => {
   });
 
   it("returns correct events and venue availability for a day with single events", () => {
-    const day5 = result.eventArray.flat().find(d => d.day === "10");
+    const day5 = result.eventArray.flat().find((d) => d.day === "10");
 
     expect(day5.event.length).toBe(1);
     expect(day5.aftGar).toBe(false);
@@ -58,9 +58,9 @@ describe("eventsInMonth", () => {
 
     expect(day5.aftTer).toBe(true);
   });
-    //Check a day without events
+  //Check a day without events
   it("handles days with no events", () => {
-    const day1 = result.eventArray.flat().find(d => d.day === "01");
+    const day1 = result.eventArray.flat().find((d) => d.day === "01");
 
     expect(day1.event).toEqual([]);
     expect(day1.aftGar).toBe(false);
@@ -70,13 +70,13 @@ describe("eventsInMonth", () => {
     expect(day1.eveSun).toBe(false);
     expect(day1.eveTer).toBe(false);
   });
-//   });
+  //   });
 
-//   describe("empty event array", () => {
+  //   describe("empty event array", () => {
   it("no events", () => {
     empty = getEventsInMonth(11, 2025, []);
 
-    const day5 = empty.eventArray.flat().find(d => d.day === "05");
+    const day5 = empty.eventArray.flat().find((d) => d.day === "05");
     expect(day5.event).toEqual([]);
     expect(day5.aftGar).toBe(false);
     expect(day5.aftSun).toBe(false);
@@ -85,5 +85,5 @@ describe("eventsInMonth", () => {
     expect(day5.eveSun).toBe(false);
     expect(day5.eveTer).toBe(false);
   });
-    // });
+  // });
 });

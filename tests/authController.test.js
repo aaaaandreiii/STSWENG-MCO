@@ -42,11 +42,16 @@ describe("Auth Controller", () => {
       await controller.authenticate(req, res);
 
       expect(res.status).toHaveBeenCalledWith(401);
-      expect(res.render).toHaveBeenCalledWith("login", { error: "Invalid credentials" });
+      expect(res.render).toHaveBeenCalledWith("login", {
+        error: "Invalid credentials",
+      });
     });
 
     it("should return 401 if password mismatch", async () => {
-      Employee.findOne.mockResolvedValue({ username: "admin", password: "hashed" });
+      Employee.findOne.mockResolvedValue({
+        username: "admin",
+        password: "hashed",
+      });
       bcrypt.compare.mockResolvedValue(false);
 
       req.body = { username: "admin", password: "wrong" };
@@ -54,7 +59,9 @@ describe("Auth Controller", () => {
       await controller.authenticate(req, res);
 
       expect(res.status).toHaveBeenCalledWith(401);
-      expect(res.render).toHaveBeenCalledWith("login", { error: "Invalid credentials" });
+      expect(res.render).toHaveBeenCalledWith("login", {
+        error: "Invalid credentials",
+      });
     });
 
     it("should return 403 if account disabled", async () => {
@@ -71,7 +78,9 @@ describe("Auth Controller", () => {
       await controller.authenticate(req, res);
 
       expect(res.status).toHaveBeenCalledWith(403);
-      expect(res.render).toHaveBeenCalledWith("login", { error: "Account disabled" });
+      expect(res.render).toHaveBeenCalledWith("login", {
+        error: "Account disabled",
+      });
     });
 
     it("should login and redirect to home when successful", async () => {
@@ -103,7 +112,9 @@ describe("Auth Controller", () => {
       await controller.authenticate(req, res);
 
       expect(res.status).toHaveBeenCalledWith(500);
-      expect(res.render).toHaveBeenCalledWith("login", { error: "Server error" });
+      expect(res.render).toHaveBeenCalledWith("login", {
+        error: "Server error",
+      });
     });
   });
 
