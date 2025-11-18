@@ -823,7 +823,6 @@ if (USE_MOCK) {
       req.path === '/authenticate'
     ) {
       next();
-      next();
     } else {
       res.redirect('/login');
     }
@@ -831,7 +830,6 @@ if (USE_MOCK) {
 
   app.use('/admin', (req, res, next) => {
     if (req.session.isAdmin) {
-      next();
       next();
     } else {
       res.redirect('/event-tracker/home');
