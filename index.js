@@ -1064,6 +1064,24 @@ app.use((req, res) => {
   res.status(404).send(`Page not found: ${req.originalUrl}`);
 });
 
+//Added Global Error Handler
+app.use((err, req, res, next) => {
+  console.error("[GLOBAL][ERROR]", err && err.stack ? err.stack : err);
+
+  if (res.headersSent) {
+    return next(err);
+  }
+
+  try {
+    return res
+      .status(500)
+      .render("error", { message: "Something went wrong. Please try again." });
+  } catch (e) {
+    // fallback if error view is not available
+    return res.status(500).send("Something went wrong. Please try again.");
+  }
+});
+
 // 7) Start server
 //bind the server to a port and a host
 app.listen(port, () => {

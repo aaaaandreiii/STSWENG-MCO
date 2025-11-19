@@ -1,17 +1,32 @@
 const bcrypt = require("bcrypt");
 const Employee = require("../models/employee.js");
 
-async function isValidPassword(password, username) {
-  if (password < 8) return false;
+// async function isValidPassword(password, username) {
+//   if (password < 8) return false;
 
-  const result = await comparePassword(username, password);
-  return !result;
+//   const result = await comparePassword(username, password);
+//   return !result;
+// }
+
+async function isValidPassword(password, username) {
+  if (typeof password !== "string") return false;
+  const trimmed = password.trim();
+  if (trimmed.length < 8) return false;
+
+  // check if new password not equal to old password
+  if (username) {
+    const sameAsOld = await isOldPasswordSameAsPassword(trimmed, username);
+    if (sameAsOld) return false;
+  }
+
+  return true;
 }
 
 async function comparePassword(username, password) {
   const employee = await Employee.findOne({ username });
-  const hash = employee.password;
+  if (!employee || !employee.password) return false;
 
+  const hash = employee.password;
   const result = await bcrypt.compare(password, hash);
   return result;
 }

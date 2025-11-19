@@ -362,18 +362,24 @@ function submitForm() {
     let data = {
       username: $("#username").val(),
       password: $("#password").val(),
+      role: $("#role").val(),
       name: $("#employee-name").val(),
       contactNum: $("#employee-mobile-number").intlTelInput("getNumber"),
-      emergencyContactName: $("#employee-contact-name").val(),
-      emergencyContactNum: $("#employee-contact-mobile-number").intlTelInput(
+      emergencyContactName: $("#emergency-contact-name").val(),
+      emergencyContactNum: $("#emergency-contact-mobile-number").intlTelInput(
         "getNumber",
       ),
     };
 
-    // makes a POST request using AJAX to add the event to the database
-    $.post("/settings/event/discount", data, function (result) {
-      window.location.href = "/settings/event";
-    });
+    // makes a POST request using AJAX to add the employee to the database
+    $.post("/admin/register", data)
+      .done(function () {
+        window.location.href = "/admin";
+      })
+      .fail(function () {
+        // generic error message – we don't expose server details
+        alert("Could not create account. Please check the form and try again.");
+      });
   });
 }
 
@@ -392,6 +398,7 @@ function submitEditForm() {
       ).intlTelInput("getNumber"),
       newPassword: $("#new-password-" + id).val(),
       reenteredPassword: $("#reenter-password-" + id).val(),
+      role: $("#role-" + id).val(),
     };
 
     $.ajax({
@@ -399,8 +406,11 @@ function submitEditForm() {
       url: "/admin/employee/" + username,
       data: JSON.stringify(data),
       contentType: "application/json",
-      success: function (result) {
+      success: function () {
         window.location.href = "/admin";
+      },
+      error: function () {
+        alert("Could not update employee. Please try again.");
       },
     });
   });
