@@ -4,10 +4,17 @@ const { Schema } = mongoose;
 const employeeSchema = new Schema({
   username: String,
   password: String,
-  hasAccess: Boolean,
+
+  hasAccess: {
+    type: Boolean,
+    default: true
+  },
+
   role: {
     type: String,
-    enum: ["admin", "employee"],
+    enum: ['admin', 'manager', 'frontdesk'],
+    default: 'frontdesk',                     //principle of least privilege
+    required: true
   },
 
   name: String,
