@@ -66,25 +66,24 @@ const controller = {
 
       // req.session.user = user;
       req.session.loggedIn = true;
-      // req.session.isAdmin = user.role === "admin";
+      req.session.isAdmin = user.role === "admin";
 
       //use instead bc we are now storing full user in session
       req.session.user = {
         _id: user._id,
         username: user.username,
         role: user.role,
-        hasAccess: user.hasAccess
+        hasAccess: user.hasAccess,
       };
 
       // on login failure:
-        // if user not found / wrong password --> generic "Invalid credentials"
-        // if hasAccess === false --> "Account disabled"
-        // for all failures, log with activityLogger(username || 'unknown', 'Login failed: reason')
-        // never leak specifics in UI
+      // if user not found / wrong password --> generic "Invalid credentials"
+      // if hasAccess === false --> "Account disabled"
+      // for all failures, log with activityLogger(username || 'unknown', 'Login failed: reason')
+      // never leak specifics in UI
       // on logout:
-        // log "Logout" using activityLogger
-        // destroy session safely
-
+      // log "Logout" using activityLogger
+      // destroy session safely
 
       console.info("[AUTH][OK] login", {
         ...meta,
