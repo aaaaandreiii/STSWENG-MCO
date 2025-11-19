@@ -7,14 +7,14 @@ const employeeSchema = new Schema({
 
   hasAccess: {
     type: Boolean,
-    default: true
+    default: true,
   },
 
   role: {
     type: String,
-    enum: ['admin', 'manager', 'frontdesk'],
-    default: 'frontdesk',                     //principle of least privilege
-    required: true
+    enum: ["admin", "manager", "frontdesk"],
+    default: "frontdesk", //principle of least privilege
+    required: true,
   },
 
   name: String,
