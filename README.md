@@ -3,7 +3,7 @@
 # frontend
 
 1. npm install
-    npm install hbs dotenv bcrypt calendar
+   npm install hbs dotenv bcrypt calendar
 2. node index.js
    redirect -> http://localhost:3000
 3. navigate to different pages manually
@@ -14,5 +14,4 @@ TODO:
 backend
 
 - cancel event -> back should back
-- receipt is broken 
-
+- receipt is broken
