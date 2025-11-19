@@ -1,11 +1,18 @@
 const bcrypt = require("bcrypt");
 const Employee = require("../models/employee.js");
 
-async function isValidPassword(password, username) {
-  if (password < 8) return false;
+// async function isValidPassword(password, username) {
+//   if (password < 8) return false;
 
-  const result = await comparePassword(username, password);
-  return !result;
+//   const result = await comparePassword(username, password);
+//   return !result;
+// }
+
+async function isValidPassword(password) {
+  if (typeof password !== 'string') return false;
+  const trimmed = password.trim();
+  if (trimmed.length < 8) return false;
+  return true;
 }
 
 async function comparePassword(username, password) {
