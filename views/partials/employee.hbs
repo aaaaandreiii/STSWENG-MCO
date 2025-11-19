@@ -49,6 +49,7 @@
                             </div>
                             <hr>
                             <h6><strong>Username: </strong> {{username}}</h6>
+                            <h6><strong>Role: </strong> {{role}}</h6>
                             <h6><strong>Has System Access: </strong> {{#if hasAccess}} Yes {{else}} No {{/if}}</h6>
                         </div>
                     </div>
@@ -113,6 +114,14 @@
                 <form class="edit">
                     <p class="id" hidden>{{_id}}</p>
                     <p class="username" hidden>{{username}}</p>
+                    <div class="form-group my-3">
+                        <label for="role-{{_id}}">Role</label>
+                        <select class="form-select" id="role-{{_id}}" name="role">
+                            <option value="frontdesk" {{#ifEquals role "frontdesk"}}selected{{/ifEquals}}>Frontdesk</option>
+                            <option value="manager" {{#ifEquals role "manager"}}selected{{/ifEquals}}>Manager</option>
+                            <option value="admin" {{#ifEquals role "admin"}}selected{{/ifEquals}}>Admin</option>
+                        </select>
+                    </div>
                     <div class="form-group my-3">
                         <label for="employee-mobile-number-{{_id}}">Employee Mobile Number</label>
                         <input type="tel" class="form-control w-100 employee-mobile-number" id="employee-mobile-number-{{_id}}" name="contactNum" value="{{contactNum}}">

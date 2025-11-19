@@ -1,0 +1,118 @@
+{{!-- TO SHOW:
+    name, username (read-only), role (read-only), contactNum, etc
+
+FORM TO UPDATE:
+    contactNum and maybe name
+    password fields (oldPassword, newPassword, confirmPassword) optional
+    Show only generic error message at the top if update fails --}}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone" rel="stylesheet">
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="d-flex flex-column">
+    {{>navbar}}
+
+    <div class="d-flex flex-row justify-content-center flex-fill">
+        <div class="col-10 d-flex flex-column py-5">
+
+            <div class="container-fluid shadow-sm bg-light rounded-sm p-4">
+                <div class="d-flex flex-row align-items-center mb-3">
+                    <h2 class="me-auto"><span class="material-icons-two-tone mb-1 md-36">person</span> My Profile</h2>
+                </div>
+
+                {{#if error}}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+                {{/if}}
+
+                {{#if success}}
+                <div class="alert alert-success" role="alert">
+                    {{success}}
+                </div>
+                {{/if}}
+
+                {{#if employee}}
+                <form method="POST" action="/profile">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Account</h5>
+                            <hr>
+                            <p><strong>Username:</strong> {{employee.username}}</p>
+                            <p><strong>Role:</strong> {{employee.role}}</p>
+
+                            <div class="form-group my-3">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    value="{{employee.name}}">
+                            </div>
+
+                            <div class="form-group my-3">
+                                <label for="contactNum">Mobile Number</label>
+                                <input type="text" class="form-control" id="contactNum" name="contactNum"
+                                    value="{{employee.contactNum}}">
+                            </div>
+
+                            <div class="form-group my-3">
+                                <label for="emergencyContactName">Emergency Contact Name</label>
+                                <input type="text" class="form-control" id="emergencyContactName"
+                                    name="emergencyContactName" value="{{employee.emergencyContactName}}">
+                            </div>
+
+                            <div class="form-group my-3">
+                                <label for="emergencyContactNum">Emergency Contact Mobile Number</label>
+                                <input type="text" class="form-control" id="emergencyContactNum"
+                                    name="emergencyContactNum" value="{{employee.emergencyContactNum}}">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h5>Change Password (optional)</h5>
+                            <hr>
+
+                            <div class="form-group my-3">
+                                <label for="oldPassword">Current Password</label>
+                                <input type="password" class="form-control" id="oldPassword" name="oldPassword">
+                            </div>
+
+                            <div class="form-group my-3">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" class="form-control" id="newPassword" name="newPassword">
+                                <div class="form-text">
+                                    Must be at least 8 characters. Avoid reusing your old password.
+                                </div>
+                            </div>
+
+                            <div class="form-group my-3">
+                                <label for="confirmPassword">Re-enter New Password</label>
+                                <input type="password" class="form-control" id="confirmPassword"
+                                    name="confirmPassword">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row mt-4">
+                        <button type="submit" class="btn btn-primary ms-auto">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+                {{/if}}
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

@@ -121,13 +121,26 @@
                                 <div class="form-group my-3">
                                     <label for="username">Username</label>
                                     <input type="text" class="form-control" id="username" name="username" required>
-                                    <div id="username-help" class="form-text">Name used by the employee to login.</div>
+                                    <div id="username-help" class="form-text">
+                                        Choose a unique username for the employee.
+                                    </div>
+                                </div>
+                                <div class="form-group my-3">
+                                    <label for="role">Role</label>
+                                    <select class="form-select" id="role" name="role" required>
+                                        <option value="frontdesk" selected>Frontdesk</option>
+                                        <option value="manager">Manager</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                    <div id="role-help" class="form-text">
+                                        Select the appropriate role for this account.
+                                    </div>
                                 </div>
                                 <div class="form-group my-3">
                                     <label for="password">Password</label>
                                     <input type="password" class="form-control" id="password" name="password" required>
-                                    <div id="password-help" class="form-text">Must be at least 8 characters long. A
-                                        combination of letters, numbers, and at least one special character is
+                                    <div id="password-help" class="form-text">
+                                        Must be at least 8 characters long. A combination of letters, numbers, and at least one special character is
                                         recommended.
                                     </div>
                                 </div>
