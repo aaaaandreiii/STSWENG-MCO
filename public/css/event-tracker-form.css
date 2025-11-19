@@ -1,0 +1,114 @@
+.iti__flag {
+  background-image: url("/images/flags.png");
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag {
+    background-image: url("/images/flags@2x.png");
+  }
+}
+
+.ui-autocomplete {
+  position: absolute;
+  z-index: 1000;
+  cursor: default;
+  padding: 0;
+  margin-top: 2px;
+  list-style: none;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.ui-autocomplete > li {
+  padding: 3px 20px;
+}
+
+.ui-autocomplete > li.ui-state-focus {
+  background-color: #ddd;
+}
+
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+.form-type-header {
+  font-weight: 600;
+}
+
+textarea {
+  font-size: 20px;
+}
+
+label,
+input {
+  font-size: 20px;
+}
+
+label {
+  font-weight: 600;
+}
+
+.nav-link.active {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 700;
+}
+
+.menu-item-header,
+.transaction-item-header {
+  font-weight: 600;
+  min-width: 150px;
+}
+
+.menu-button {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.menu-button:hover {
+  background-color: #e1e1e1;
+  color: #000000;
+}
+
+.menu-button-active,
+.additional-add-button,
+.extra-charges-add-button,
+.discount-add-button {
+  background-color: #2e2e2e !important;
+  color: #ffffff !important;
+}
+
+.menu-button-active:hover {
+  background-color: #5b5b5b !important;
+  color: #ffffff !important;
+}
+
+.additional-item-name {
+  min-width: 250px;
+}
+
+.required:after {
+  content: "[required]";
+  color: red;
+  font-weight: light;
+  font-size: small;
+  margin-left: 10px;
+}
+
+.required.package:after {
+  content: "[at least 1 package required]";
+  color: red;
+  font-weight: light;
+  font-size: small;
+  margin-left: 10px;
+}
+
+#submit {
+  font-weight: 600;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/event-tracker.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone" rel="stylesheet">
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/event-tracker-home.js"></script>
+</head>
+
+<body class="d-flex flex-column">
+    {{>navbar}}
+    <div class="d-flex flex-row justify-content-center flex-fill">
+        <div class="col-11 d-flex flex-column py-5">
+            
+            {{!-- top bar (home, +) section--}}
+            <div class="d-flex flex-row">
+                <div id="today-title" class="shadow-sm bg-light rounded-lg py-3 px-4 me-auto align-content-center">
+                    <h1 class="mb-0 mt-1"><span class="material-icons-two-tone mb-1 md-48">home</span> HOME</h1>
+                </div>
+
+                <a href="/event-tracker/create" data-bs-toggle="tooltip" data-bs-placement="left"
+                    title="Create a new event!">
+                    <div class="shadow-sm bg-light rounded-lg py-3 px-4 align-self-end">
+                        <h1 class="mb-0 mt-1">
+                            <span class="material-icons-two-tone mb-1 md-48">add</span>
+                        </h1>
+                    </div>
+                </a>
+
+            </div>
+
+            <br>
+            {{!-- WITH EVENT --}}
+            {{#if events}}
+            <div id="today-main"
+                class="container-fluid shadow-sm bg-light rounded-sm p-4 d-flex flex-column align-self-center">
+                <div class="d-flex flex-row">
+                    <h4 class="fw-bolder mt-1 ms-2 text-black-50">Events for Today</h4>
+                    <h4 id="today-date-text" class="fw-bolder mt-1 me-2 ms-auto text-black-50"></h4>
+                </div>
+                <hr>
+                <div class="p-4">
+                    {{#each events}}
+                        {{>event}}
+                    {{/each}}
+                </div>
+            </div>
+
+            {{!-- NO EVENTS --}}
+            {{else}}
+            <div id="today-main"
+                class="container-fluid shadow-sm bg-light rounded-sm p-4 d-flex flex-column align-self-center">
+                <div class="d-flex flex-row">
+                    <h4 class="fw-bolder mt-1 ms-2 text-black-50">Events for Today</h4>
+                    <h4 id="today-date-text" class="fw-bolder mt-1 me-2 ms-auto text-black-50"></h4>
+                </div>
+                <hr>
+                <h1 class="no-content text-center p-5">No Events Today</h1>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</body>
+
+</html>

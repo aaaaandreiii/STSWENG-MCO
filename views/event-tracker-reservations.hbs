@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/event-tracker.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone" rel="stylesheet">
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/event-tracker-reservations.js"></script>
+</head>
+
+<body class="d-flex flex-column">
+    {{>navbar}}
+    <div class="d-flex flex-row justify-content-center flex-fill">
+        <div class="col-11 d-flex flex-column py-5">
+            <div class="d-flex flex-row">
+                <div id="today-title" class="shadow-sm bg-light rounded-lg py-3 px-4 me-auto">
+                    <h1 class="mb-0 mt-1"><span class="material-icons-two-tone mb-1 md-48">class</span> RESERVATIONS
+                </div>
+                <div class="shadow-sm bg-light rounded-lg py-3 px-4 align-self-end" data-bs-toggle="tooltip"
+                    data-bs-placement="left" title="Search, filter, or sort!">
+                    <h1 class="mb-0 mt-1">
+                        <a data-bs-toggle="offcanvas" href="#search-filter-sort" role="button">
+                            <span class="material-icons-two-tone mb-1 md-48">filter_alt</span>
+                        </a>
+                    </h1>
+                </div>
+            </div>
+
+            <br>
+            {{!-- WITH EVENT --}}
+            {{#if reservations}}
+            <div id="today-main"
+                class="container-fluid shadow-sm bg-light rounded-sm p-4 d-flex flex-column align-self-center">
+                <div class="p-4">
+                    {{#each reservations}}
+                    {{>event}}
+                    {{/each}}
+                </div>
+            </div>
+
+            {{!-- NO EVENTS --}}
+            {{else}}
+            <div id="today-main"
+                class="container-fluid shadow-sm bg-light rounded-sm p-4 d-flex flex-column align-self-center">
+                <h1 class="no-content text-center p-5">No Events Found</h1>
+            </div>
+            {{/if}}
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="search-filter-sort">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <form action="/event-tracker/reservations/search" method="get">
+                        <h5 class="fw-bold">SEARCH BY CLIENT NAME</h5>
+                        <div class="form-group m-3">
+                            <input type="search" class="form-control autocomplete" id="name" name="name" value="{{search}}">
+                        </div>
+                        <div class="m-3 d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn button">Search</button>
+                        </div>
+                    </form>
+                    <form action="/event-tracker/reservations/filter" method="get">
+                        <hr class="my-4">
+                        <h5 class="fw-bold">FILTER</h5>
+                        <div class="form-group m-3">
+                            <label for="filter-venue">Venue</label>
+                            <select class="form-control form-select" id="venue" name="venue">
+                                <option value="" selected value>None</option>
+                                <option value="Garden">Garden</option>
+                                <option value="Sunroom">Sunroom</option>
+                                <option value="Terrace">Terrace</option>
+                            </select>
+                        </div>
+                        <div class="form-group m-3">
+                            <label for="filter-venue">Time</label>
+                            <select class="form-control form-select" id="time" name="time">
+                                <option value="" selected value>None</option>
+                                <option value="Afternoon">Afternoon (11:00 AM - 02:00 PM)</option>
+                                <option value="Evening">Evening (04:00 PM - 07:00 PM)</option>
+                            </select>
+                        </div>
+                        <div class="form-group m-3">
+                            <label for="filter-date">Date of Event</label>
+                            <input type="date" class="form-control" id="date" name="date">
+                        </div>
+                        <h5 class="fw-bold mt-5 mb-3">SORT BY</h5>
+                        <div class="form-group m-3">
+                            <select class="form-control form-select" id="sort" name="sort">
+                                <option value="date-asc" selected value>Date (Ascending)</option>
+                                <option value="date-dsc">Date (Descending)</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="m-3 d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn button" onclick="window.location='/event-tracker/reservations';">Reset</button>
+                            <button type="submit" class="btn button">Filter and Sort</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,13 +1,16 @@
 {
   "name": "stsweng-mco",
   "version": "1.0.0",
-  "description": "",
+  "description": "1. npm install\r     npm install hbs\r     npm install dotenv\r 2. node frontend.js\r     redirect -> http://localhost:3000\r 3. navigate to different pages manually\r http://localhost:3000/<page>\r     available pages:\r     - login\r     - /event-tracker/home\r     - /event-tracker/create",
   "main": "index.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint . --ext .js",
+    "format": "prettier --write .",
+    "test": "jest --coverage",
+    "build": "echo 'Building project...'"
   },
   "repository": {
     "type": "git",
@@ -23,8 +26,21 @@
   "homepage": "https://github.com/aaaaandreiii/STSWENG-MCO#readme",
   "dependencies": {
     "axios": "^1.12.2",
-    "dotenv": "^17.2.2",
+    "bcrypt": "^6.0.0",
+    "calendar": "^0.1.1",
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "hbs": "^4.2.0",
     "mongoose": "^8.18.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.5.0",
+    "jest": "^30.2.0",
+    "prettier": "^3.6.2"
   }
 }

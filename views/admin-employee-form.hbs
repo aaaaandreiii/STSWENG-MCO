@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/intlTelInput.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin-form.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone">
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js/intlTelInput-jquery.min.js"></script>
+    <script type="text/javascript" src="/js/validator.min.js"></script>
+    <script type="text/javascript" src="/js/admin-employee-form.js"></script>
+</head>
+
+<body class="d-flex flex-column flex-fill">
+    <nav class="navbar navbar-expand-xl bg-dark sticky-top shadow-sm" id="navbar">
+        <div class="container-fluid">
+            <div class="me-auto">
+                <span class="material-icons-two-tone md-light md-btn md-24" data-bs-toggle="modal"
+                    data-bs-target="#confirm-exit-modal">arrow_back_ios</span>
+            </div>
+        </div>
+    </nav>
+    <div class="d-flex flex-row flex-fill justify-content-center">
+        <div class="col-10 d-flex flex-column p-4">
+
+            {{!-- FORM TITLE --}}
+            <div class="d-flex flex-row">
+                <div id="form-title" class="shadow-sm bg-light rounded-lg py-3 px-4 ms-2">
+                    <h1 class="mb-0 mt-1"><span class="material-icons-two-tone mb-1 md-48">class</span> REGISTER EMPLOYEE
+                    </h1>
+                </div>
+            </div>
+
+            <br>
+            <form id="create">
+                <div class="row">
+
+                    {{!-- EMPLOYEE DETAILS --}}
+                    <div id="form-employee-info" class="container-fluid shadow-sm bg-light rounded-sm p-5 col mx-3">
+
+                        {{!-- EMPLOYEE HEADER --}}
+                        <div class="d-flex flex-row align-items-center">
+                            <h1 class="form-type-header me-auto align-self-center"><span
+                                    class="material-icons-two-tone mb-1 md-48">face</span> Employee Details</h1>
+                        </div>
+
+                        <hr>
+                        {{!-- EMPLOYEE CONTENT --}}
+                        <div id="form-employee-contents" class="row">
+
+                            {{!-- EMPLOYEE DETAILS --}}
+                            <div class="col px-4">
+                                <div class="form-group my-3">
+                                    <label for="employee-name">Employee Name</label>
+                                    <input type="text" class="form-control" id="employee-name" name="employee-name"
+                                        required>
+                                    <div id="employee-name-help" class="form-text">Employee's given name as stated in
+                                        resume.</div>
+                                </div>
+                                <div class="form-group my-3">
+                                    <label for="employee-mobile-number">Employee Mobile Number</label>
+                                    <input type="tel" class="form-control w-100" id="employee-mobile-number"
+                                        name="employee-mobile-number" required>
+                                    <div id="employee-mobile-number-help" class="form-text">Country code can be changed
+                                        if
+                                        needed.
+                                    </div>
+                                </div>
+                                <div class="form-group my-3">
+                                    <label for="emergency-contact-name">Emergency Contact Name</label>
+                                    <input type="text" class="form-control" id="emergency-contact-name"
+                                        name="emergency-contact-name">
+                                    <div id="emergency-contact-name-help" class="form-text">Person to contact in case of
+                                        emergency.</div>
+                                </div>
+                                <div class="form-group my-3">
+                                    <label for="emergency-contact-mobile-number">Emergency Contact Mobile Number</label>
+                                    <input type="tel" class="form-control w-100" id="emergency-contact-mobile-number"
+                                        name="emergency-contact-mobile-number">
+                                    <div id="emergency-contact-mobile-number-help" class="form-text">Country code can be
+                                        changed if needed.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{!-- EMPLOYEE ERROR MESSAGES --}}
+                        <div id="form-employee-errors">
+                            <strong>
+                                <div class="text-center text-danger error" id="missing-error"></div>
+                                <div class="text-center text-danger error" id="employee-name-error"></div>
+                                <div class="text-center text-danger error" id="employee-number-error"></div>
+                                <div class="text-center text-danger error" id="ec-name-error"></div>
+                                <div class="text-center text-danger error" id="ec-number-error"></div>
+                            </strong>
+                        </div>
+                    </div>
+
+                    {{!-- ACCOUNT DETAILS --}}
+                    <div id="form-account-info" class="container-fluid shadow-sm bg-light rounded-sm p-5 col-7 mx-3">
+
+                        {{!-- ACCOUNT HEADER --}}
+                        <div class="d-flex flex-row align-items-center">
+                            <h1 class="form-type-header me-auto align-self-center"><span
+                                    class="material-icons-two-tone mb-1 md-48">person_outline</span> Account Details</h1>
+                        </div>
+
+                        <hr>
+                        {{!-- ACCOUNT CONTENT --}}
+                        <div id="form-account-contents" class="row">
+
+                            {{!-- ACCOUNT DETAILS --}}
+                            <div class="col px-4">
+                                <div class="form-group my-3">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" required>
+                                    <div id="username-help" class="form-text">Name used by the employee to login.</div>
+                                </div>
+                                <div class="form-group my-3">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <div id="password-help" class="form-text">Must be at least 8 characters long. A
+                                        combination of letters, numbers, and at least one special character is
+                                        recommended.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{!-- EVENT ERROR MESSAGES --}}
+                        <div id="form-account-errors">
+                            <strong>
+                                <div class="text-center text-danger error" id="username-error"></div>
+                                <div class="text-center text-danger error" id="password-error"></div>
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                {{!-- SUBMIT BUTTON --}}
+                <div class="d-flex flex-row">
+                    <div id="submit-button" class="shadow-sm bg-light rounded-lg py-3 px-4 ms-auto">
+                        <a data-bs-toggle="tooltip" data-placement="left"
+                            title="Tip: Double check the required* fields">
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#confirm-submit-modal"
+                                class="btn btn-light" id="submit">Submit</button></a>
+                    </div>
+                </div>
+
+                {{!-- CONFIRM SUBMIT MODAL --}}
+                <div class="modal fade" id="confirm-submit-modal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirm-submit-modal-header">Confirm Submit</h5>
+                            </div>
+                            <div class="modal-body p-4 ui-front">
+                                <div class="text-center">Are you sure you want to <strong>submit</strong> the form?
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{!-- CONFIRM EXIT MODAL --}}
+                <div class="modal fade" id="confirm-exit-modal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirm-exit-modal-header">Confirm Exit</h5>
+                            </div>
+                            <div class="modal-body p-4 ui-front">
+                                <div class="text-center">Are you sure you want to <strong>leave</strong> the page?
+                                    Information typed will not be saved.
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" onclick="window.location='/admin'"
+                                    class="btn btn-danger">Exit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>

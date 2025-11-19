@@ -1,0 +1,48 @@
+.iti__flag {
+  background-image: url("/images/flags.png");
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag {
+    background-image: url("/images/flags@2x.png");
+  }
+}
+
+.form-type-header {
+  font-weight: 600;
+}
+
+textarea {
+  font-size: 20px;
+}
+
+label,
+input {
+  font-size: 20px;
+}
+
+label {
+  font-weight: 600;
+}
+
+#form-title > h1 {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.menu-item-header,
+.transaction-item-header {
+  font-weight: 600;
+  min-width: 150px;
+}
+
+.required:after {
+  content: "[required]";
+  color: red;
+  font-weight: light;
+  font-size: small;
+  margin-left: 10px;
+}
+#submit {
+  font-weight: 600;
+}

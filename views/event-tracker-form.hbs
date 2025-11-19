@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/intlTelInput.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/event-tracker.css">
+    <link rel="stylesheet" type="text/css" href="/css/event-tracker-form.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone">
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="/js/intlTelInput-jquery.min.js"></script>
+    <script type="text/javascript" src="/js/validator.min.js"></script>
+    <script type="text/javascript" src="/js/event-tracker-form.js"></script>
+</head>
+
+<body class="d-flex flex-column position-relative" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="50"
+    tabindex="0">
+    <nav class="navbar navbar-expand-xl bg-dark sticky-top shadow-sm" id="navbar">
+        <div class="container-fluid">
+            {{!-- <div class="me-auto">
+                <span class="material-icons-two-tone md-light md-btsn md-24" data-bs-toggle="modal"
+                    data-bs-target="#confirm-exit-modal">arrow_back_ios</span>
+            </div> --}}
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link" href="#form-event-info">Event Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#form-menu-info">Menu Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#form-transaction-info">Transaction Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#form-breakdown-info">Total Breakdown</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#form-payment-info">Payment Details</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="d-flex flex-row justify-content-center">
+        <div class="col-10 d-flex flex-column p-5">
+
+            {{!-- FORM TITLE --}}
+            <div class="d-flex flex-row">
+                <div id="form-title" class="shadow-sm bg-light rounded-lg py-3 px-4 ms-2">
+                    <h1 class="mb-0 mt-1"><span class="material-icons-two-tone mb-1 md-48">class</span> CREATE EVENT
+                    </h1>
+                </div>
+            </div>
+
+            <p id="event-id" hidden>{{event._id}}</p>
+
+            <br>
+            <form>
+                {{!-- EVENT DETAILS --}}
+                <div id="form-event-info" class="container-fluid shadow-sm bg-light rounded-sm p-5">
+
+                    {{!-- EVENT HEADER --}}
+                    <div class="d-flex flex-row align-items-center">
+                        <h1 class="form-type-header me-auto align-self-center"><span
+                                class="material-icons-two-tone mb-1 md-48">event_available</span> Event Details</h1>
+                    </div>
+
+                    <hr>
+                    {{!-- EVENT CONTENT --}}
+                    <div id="form-event-contents" class="row">
+
+                        {{!-- CLIENT DETAILS --}}
+                        <div class="col px-4">
+                            <div class="form-group my-3">
+                                <label for="client-name">Client Name</label>
+                                <input type="text" class="form-control" id="client-name" name="client-name" value="{{event.clientName}}" required>
+                                <div id="client-name-help" class="form-text">Can be the client's given name or Facebook
+                                    name.</div>
+                            </div>
+                            <div class="form-group my-3">
+                                <label for="client-mobile-number">Client Mobile Number</label>
+                                <input type="tel" class="form-control" id="client-mobile-number"
+                                    name="client-mobile-number" value="{{event.clientMobileNumber}}" required>
+                                <div id="client-mobile-number-help" class="form-text">Country code can be changed if
+                                    needed.
+                                </div>
+                            </div>
+                            <div class="form-group my-3">
+                                <label for="representative-name">Representative Name</label>
+                                <input type="text" class="form-control" id="representative-name"
+                                    name="representative-name" value="{{event.repName}}">
+                                <div id="representative-name-help" class="form-text">Authorized representative of the
+                                    client. <span class="fw-bold">Optional.</span></div>
+                            </div>
+                            <div class="form-group my-3">
+                                <label for="representative-contact-number">Representative Mobile Number</label>
+                                <input type="tel" class="form-control" id="representative-mobile-number"
+                                    name="representative-mobile-number" value="{{event.repMobileNumber}}">
+                                <div id="representative-mobile-number-help" class="form-text">Country code can be
+                                    changed if needed. <span class="fw-bold">Optional.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{!-- EVENT DETAILS --}}
+                        <div class="col px-4">
+                            <div class="form-group my-3">
+                                <label for="event-type">Type of Event</label>
+                                <input type="text" class="form-control autocomplete" id="event-type" name="event-type" value="{{event.eventType}}"
+                                    required>
+                                <div id="event-type-help" class="form-text">Start typing for suggestions or input a new
+                                    type.</div>
+                            </div>
+                            <div class="form-group my-3">
+                                <label for="event-date">Date of Event</label>
+                                <input type="date" class="form-control w-100" id="event-date" name="event-date" required>
+                                <div id="event-date-help" class="form-text">Choose a date from the date picker.</div>
+                            </div>
+                            <div class="form-group my-3">
+                                <label for="event-time">Time of Event</label>
+                                <select class="form-control form-select" id="event-time" name="event-time" required>
+                                    <option value="">Select an option...</option>
+                                    <option value="Afternoon">Afternoon (11:00 AM - 02:00 PM)</option>
+                                    <option value="Evening">Evening (04:00 PM - 07:00 PM)</option>
+                                </select>
+                                <div id="event-time-help" class="form-text">Extra hours are added in the transaction
+                                    details.</div>
+                            </div>
+                            <div class="form-group my-3">
+                                <label for="event-pax">Number of Pax</label>
+                                <input type="number" class="form-control w-50" id="event-pax" name="event-pax" value="{{event.numOfPax}}" required>
+                                <div id="event-pax-help" class="form-text">Input by typing or using the spinner.
+                                </div>
+                            </div>
+                        </div>
+
+                        {{!-- PACKAGE AND NOTES --}}
+                        <div class="col-5 px-4 d-flex flex-column">
+                            <label class="mt-3 required package" for="">Event Venue and Package</label>
+
+                            {{!-- GARDEN OPTIONS --}}
+                            <div class="input-group mb-1">
+                                <div class="input-group-text">
+                                    <input class="form-check-input mt-0 venue-checkbox" id="venue-garden"
+                                        name="venue-garden" type="checkbox" value="Garden">
+                                </div>
+                                <label class="input-group-text" for="garden-options"><strong>Garden</strong></label>
+                                <select class="form-select package" id="garden-options" name="garden-options" disabled>
+                                    <option value="" selected> No Package </option>
+                                </select>
+                            </div>
+
+                            {{!-- SUNROOM OPTIONS --}}
+                            <div class="input-group mb-1">
+                                <div class="input-group-text">
+                                    <input class="form-check-input mt-0 venue-checkbox" id="venue-sunroom"
+                                        name="venue-sunroom" type="checkbox" value="Sunroom">
+                                </div>
+                                <label class="input-group-text" for="sunroom-options"><strong>Sunroom</strong></label>
+                                <select class="form-select package" id="sunroom-options" name="sunroom-options"
+                                    disabled>
+                                    <option value="" selected> No Package </option>
+                                </select>
+                            </div>
+
+                            {{!-- TERRACE OPTIONS --}}
+                            <div class="input-group mb-1">
+                                <div class="input-group-text">
+                                    <input class="form-check-input mt-0 venue-checkbox" id="venue-terrace"
+                                        name="venue-terrace" type="checkbox" value="Terrace">
+                                </div>
+                                <label class="input-group-text" for="terrace-options"><strong>Terrace</strong></label>
+                                <select class="form-select package" id="terrace-options" name="terrace-options"
+                                    disabled>
+                                    <option value="" selected> No Package </option>
+                                </select>
+                            </div>
+
+                            {{!-- ADDITIONAL PAX OPTION --}}
+                            <div class="form-check align-self-end">
+                                <input class="form-check-input" type="checkbox" id="additional-pax"
+                                    name="additional-pax">
+                                <label class="form-check-label number fs-6" for="additional-pax">Add Additional 5 Pax
+                                    (Php
+                                    2,000.00)</label>
+                            </div>
+                            <div id="event-pax-help" class="form-text">Put a check on the venue/s and select the
+                                packages from the dropdown menu.
+                            </div>
+
+                            <div class="form-group my-3">
+                                <label for="event-notes">Notes</label>
+                                <textarea class="form-control" id="event-notes" name="event-notes" rows="4" value="{{event.eventNotes}}"></textarea>
+                                <div id="event-notes-help" name class="form-text">Additional details about the event, if
+                                    any.
+                                    The box can be resized by dragging the lower-right corner. <span class="fw-bold">Optional.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{!-- EVENT ERROR MESSAGES --}}
+                    <div id="form-event-errors">
+                        <strong>
+                            <div class="text-center text-danger error" id="missing-error"></div>
+                            <div class="text-center text-danger error" id="client-name-error"></div>
+                            <div class="text-center text-danger error" id="client-number-error"></div>
+                            <div class="text-center text-danger error" id="rep-name-error"></div>
+                            <div class="text-center text-danger error" id="rep-number-error"></div>
+                            <div class="text-center text-danger error" id="event-type-error"></div>
+                            <div class="text-center text-danger error" id="event-date-error"></div>
+                            <div class="text-center text-danger error" id="event-time-error"></div>
+                            <div class="text-center text-danger error" id="event-pax-error"></div>
+                        </strong>
+                    </div>
+                </div>
+
+                <br>
+                {{!-- MENU DETAILS --}}
+                <div id="form-menu-info" class="container-fluid shadow-sm bg-light rounded-sm p-5">
+
+                    {{!-- MENU HEADER --}}
+                    <div class="d-flex flex-row align-items-center">
+                        <h1 class="form-type-header me-auto align-self-center"><span
+                                class="material-icons-two-tone mb-1 md-48">menu_book</span> Menu Details
+                        </h1>
+                    </div>
+
+                    {{!-- MENU CONTENTS --}}
+                    <div id="form-menu-contents">
+
+                        <hr>
+                        <div class="mx-5 p-3 text-center">Choose the food to be served at the event by clicking the
+                            respective button. Clicking again will deselect the option. Additional food
+                            options may also be added below.</div>
+<div id="menu-package">
+                        {{!-- MENU BUTTONS --}}
+                        <div class="d-flex flex-row flex-wrap justify-content-center">
+                            <button id="menu-salad-button" class="btn menu-button border rounded-pill mx-2 px-4 py-2"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#menu-salad-contents"
+                                aria-expanded="false" aria-controls="menu-salad-contents" disabled>
+                                SALAD
+                            </button>
+                            <button id="menu-pasta-button" class="btn menu-button border rounded-pill mx-2 px-4 py-2"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#menu-pasta-contents"
+                                aria-expanded="false" aria-controls="menu-pasta-contents" disabled>
+                                PASTA
+                            </button>
+                            <button id="menu-beef-button" class="btn menu-button border rounded-pill mx-2 px-4 py-2"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#menu-beef-contents"
+                                aria-expanded="false" aria-controls="menu-beef-contents" disabled>
+                                BEEF
+                            </button>
+                            <button id="menu-pork-button" class="btn menu-button border rounded-pill mx-2 px-4 py-2"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#menu-pork-contents"
+                                aria-expanded="false" aria-controls="menu-pork-contents" disabled>
+                                PORK
+                            </button>
+                            <button id="menu-chicken-button" class="btn menu-button border rounded-pill mx-2 px-4 py-2"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#menu-chicken-contents"
+                                aria-expanded="false" aria-controls="menu-chicken-contents" disabled>
+                                CHICKEN
+                            </button>
+                            <button id="menu-fish-button" class="btn menu-button border rounded-pill mx-2 px-4 py-2"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#menu-fish-contents"
+                                aria-expanded="false" aria-controls="menu-fish-contents" disabled>
+                                FISH
+                            </button>
+                        </div>
+
+                        {{!-- SALAD PACKAGE ITEMS --}}
+                        <div id="menu-salad-contents" class="menu-item-content collapse">
+                            <hr>
+                            <div class="d-flex flex-row justify-content-start">
+                                <h2 class="menu-item-header mx-4 align-self-center">Salad</h2>
+                                <div class="form-check mx-5 align-self-center">
+                                    <input class="form-check-input" type="radio" name="salad-options" id="salad-1"
+                                        value="Chicken Caesar Salad">
+                                    <label class="form-check-label" for="salad-1">Chicken Caesar Salad</label>
+                                </div>
+                                <div class="form-group row my-3 ms-auto">
+                                    <label for="salad-quantity" class="col col-form-label">Quantity</label>
+                                    <div class="col-8">
+                                        <input type="number" class="form-control w-75" id="salad-quantity" value="{{event.menuPackage.saladQuantity}}" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{!-- PASTA PACKAGE ITEMS --}}
+                        <div id="menu-pasta-contents" class="menu-item-content collapse">
+                            <hr>
+                            <div class="d-flex flex-row justify-content-start">
+                                <h2 class="menu-item-header mx-4 align-self-center">Pasta</h2>
+                                <div class="form-check mx-5 align-self-center">
+                                    <input class="form-check-input" type="radio" name="pasta-options" id="pasta-1"
+                                        value="Creamy Chicken Pesto">
+                                    <label class="form-check-label" for="pasta-1">Creamy Chicken Pesto</label>
+                                </div>
+                                <div class="form-check mx-5 align-self-center">
+                                    <input class="form-check-input" type="radio" name="pasta-options" id="pasta-2"
+                                        value="Shirmp and Squid Marinara">
+                                    <label class="form-check-label" for="pasta-2">Shirmp and Squid Marinara</label>
+                                </div>
+                                <div class="form-group row my-3 ms-auto">
+                                    <label for="pasta-quantity" class="col col-form-label">Quantity</label>
+                                    <div class="col-8">
+                                        <input type="number" class="form-control w-75" id="pasta-quantity" value="{{event.menuPackage.pastaQuantity}}" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{!-- BEEF PACKAGE ITEMS --}}
+                        <div id="menu-beef-contents" class="menu-item-content collapse">
+                            <hr>
+                            <div class="d-flex flex-row justify-content-start">
+                                <h2 class="menu-item-header mx-4 align-self-center">Beef</h2>
+                                <div class="form-check mx-5 align-self-center">
+                                    <input class="form-check-input" type="radio" name="beef-options" id="beef-1"
+                                        value="Kare Kare">
+                                    <label class="form-check-label" for="beef-1">Kare Kare</label>
+                                </div>
+                                <div class="form-check mx-5 align-self-center">
+                                    <input class="form-check-input" type="radio" name="beef-options" id="beef-2"
+                                        value="Caldereta">
+                                    <label class="form-check-label" for="beef-2">Caldereta</label>
+                                </div>
+                                <div class="form-group row my-3 ms-auto">
+                                    <label for="beef-quantity" class="col col-form-label">Quantity</label>
+                                    <div class="col-8">
+                                        <input type="number" class="form-control w-75" id="beef-quantity" value="{{event.menuPackage.beefQuantity}}" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{!-- PORK PACKAGE ITEMS --}}
+                        <div id="menu-pork-contents" class="menu-item-content collapse">
+                            <hr>
+                            <div class="d-flex flex-row justify-content-start">
+                                <h2 class="menu-item-header mx-4 align-self-center">Pork</h2>
+                                <div class="form-check mx-5 align-self-center">
+                                    <input class="form-check-input" type="radio" name="pork-options" id="pork-1"
+                                        value="Sisig Ihaw">
+                                    <label class="form-check-label" for="pork-1">Sisig Ihaw</label>
+                                </div>
+                                <div class="form-group row my-3 ms-auto">
+                                    <label for="pork-quantity" class="col col-form-label">Quantity</label>
+                                    <div class="col-8">
+                                        <input type="number" class="form-control w-75" id="pork-quantity" value="{{event.menuPackage.porkQuantity}}" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{!-- CHICKEN PACKAGE ITEMS --}}
+                        <div id="menu-chicken-contents" class="menu-item-content collapse">
+                            <hr>
+                            <div class="d-flex flex-row justify-content-start">
+                                <h2 class="menu-item-header mx-4 align-self-center">Chicken</h2>
+                                <div class="form-check mx-5 align-self-center">
+                                    <input class="form-check-input" type="radio" name="chicken-options" id="chicken-1"
+                                        value="Buttered Chicken">
+                                    <label class="form-check-label" for="chicken-1">Buttered Chicken</label>
+                                </div>
+                                <div class="form-check mx-5 align-self-center">
+                                    <input class="form-check-input" type="radio" name="chicken-options" id="chicken-2"
+                                        value="Fried Chicken">
+                                    <label class="form-check-label" for="chicken-2">Fried Chicken</label>
+                                </div>
+                                <div class="form-group row my-3 ms-auto">
+                                    <label for="chicken-quantity" class="col col-form-label">Quantity</label>
+                                    <div class="col-8">
+                                        <input type="number" class="form-control w-75" id="chicken-quantity" value="{{event.menuPackage.chickenQuantity}}" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{!-- FISH PACKAGE ITEMS --}}
+                        <div id="menu-fish-contents" class="menu-item-content collapse">
+                            <hr>
+                            <div class="d-flex flex-row justify-content-start">
+                                <h2 class="menu-item-header mx-4 align-self-center">Fish</h2>
+                                <div class="form-check mx-5 align-self-center">
+                                    <input class="form-check-input" type="radio" name="fish-options" id="fish-1"
+                                        value="Parmesan Crusted Fish">
+                                    <label class="form-check-label" for="fish-1">Parmesan Crusted Fish</label>
+                                </div>
+                                <div class="form-group row my-3 ms-auto">
+                                    <label for="fish-quantity" class="col col-form-label">Quantity</label>
+                                    <div class="col-8">
+                                        <input type="number" class="form-control w-75" id="fish-quantity" value="{{event.menuPackage.fishQuantity}}" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+</div>
+                        {{!-- RICE AND ICED TEA --}}
+                        <div id="menu-ricedtea-contents" class="menu-item-content">
+                            <hr>
+                            <div class="d-flex flex-row justify-content-start">
+                                <h2 class="menu-item-header mx-4 align-self-center">Iced Tea</h2>
+                                <div class="form-group row my-3 ms-auto">
+                                    <label for="icedtea-quantity" class="col col-form-label">Quantity</label>
+                                    <div class="col-8">
+                                        <input type="number" class="form-control w-75" id="icedtea-quantity"
+                                            name="icedtea-quantity" value="{{event.menuPackage.icedTeaQuantity}}" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex flex-row justify-content-start">
+                                <h2 class="menu-item-header mx-4 align-self-center">Rice</h2>
+                                <div class="form-group row my-3 ms-auto">
+                                    <label for="rice-quantity" class="col col-form-label">Quantity</label>
+                                    <div class="col-8">
+                                        <input type="number" class="form-control w-75" id="rice-quantity"
+                                            name="rice-quantity" value="{{event.menuPackage.riceQuantity}}" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{!-- ADDITIONAL MENU ITEMS --}}
+                        <div id="menu-additional-contents" class="menu-additional-content">
+                            <hr>
+                            <div class="d-flex justify-items-around mt-4">
+                                <h2 class="menu-item-header ms-4 align-self-center">Additional Food</h2>
+                                <button class="btn additional-modal-button ms-auto me-4" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#additional-item-modal">
+                                    <span class="material-icons-two-tone md-48">
+                                        add_circle
+                                    </span>
+                                </button>
+                            </div>
+
+                            {{!-- ADDITIONAL MENU MODAL --}}
+                            <div class="modal fade" id="additional-item-modal" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="additional-item-modal-header">Add Additional
+                                                Food</h5>
+                                        </div>
+                                        <div class="modal-body p-4 ui-front">
+                                            <div class="text-center">Enter the item's name, quantity, and price before
+                                                clicking <strong>Add Item</strong>. Remove an item by clicking the
+                                                <strong>X</strong> button.
+                                            </div>
+                                            <div class="form-group my-3">
+                                                <label for="additional-name">Food Name</label>
+                                                <input type="text" class="form-control menu-item-autocomplete"
+                                                    id="additional-name" name="additional-name">
+                                            </div>
+                                            <div class="form-group my-3">
+                                                <label for="additional-quantity">Quantity</label>
+                                                <input type="number" class="form-control" id="additional-quantity"
+                                                    name="additional-quantity">
+                                            </div>
+                                            <div class="form-group my-3">
+                                                <label for="additional-price">Price</label>
+                                                <input type="number" class="form-control" id="additional-price"
+                                                    name="additional-price" disabled>
+                                            </div>
+                                            <strong>
+                                                <div class="mx-5 p-3 text-center text-danger error"
+                                                    id="additional-items-error"></div>
+                                            </strong>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn additional-add-button" disabled>Add
+                                                Item</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{!-- ADDITIONAL MENU ITEMS TABLE --}}
+                            <div class="row px-4 py-2 mx-5 mt-4" id="additional-items-header">
+                                <h6 class="col mb-0 mt-1 text-center">No additional food.</h6>
+                            </div>
+                            <div id="additional-items-list"></div>
+                            <div class="me-5 mt-4" id="additional-items-total"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <br>
+                {{!-- TRANSACTION DETAILS --}}
+                <div id="form-transaction-info" class="container-fluid shadow-sm bg-light rounded-sm p-5">
+                    <div class="d-flex flex-row align-items-center">
+                        <h1 class="form-type-header me-auto align-self-center"><span
+                                class="material-icons-two-tone mb-1 md-48">payments</span> Transaction Details</h1>
+                    </div>
+
+                    <hr>
+                    {{!-- EXTRA CHARGES DETAILS --}}
+                    <div id="extra-charges-contents" class="mt-4 mb-5">
+
+                        {{!-- EXTRA CHARGES TITLE --}}
+                        <div class="d-flex justify-items-around">
+                            <h2 class="transaction-item-header ms-4 my-auto">Extra Charges and Corkage Fees</h2>
+                            <button class="btn charges-modal-button ms-auto me-4" type="button" data-bs-toggle="modal"
+                                data-bs-target="#extra-charges-modal">
+                                <span class="material-icons-two-tone md-48">
+                                    add_circle
+                                </span>
+                            </button>
+                        </div>
+
+                        {{!-- EXTRA CHARGES MODAL --}}
+                        <div class="modal fade" id="extra-charges-modal" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="extra-charges-modal-header">Add Extra Charges</h5>
+                                    </div>
+                                    <div class="modal-body p-4 ui-front">
+                                        <div class="text-center">Enter the item's name, quantity, and price before
+                                            clicking <strong>Add Item</strong>. Remove an item by clicking the
+                                            <strong>X</strong> button.
+                                        </div>
+                                        <div class="form-group my-3">
+                                            <label for="extra-charges-name">Charge Name</label>
+                                            <input type="text" class="form-control extra-charges-autocomplete"
+                                                id="extra-charges-name" name="extra-charges-name">
+                                        </div>
+                                        <div class="form-group my-3">
+                                            <label for="extra-charges-quantity">Quantity</label>
+                                            <input type="number" class="form-control" id="extra-charges-quantity"
+                                                name="extra-charges-quantity">
+                                        </div>
+                                        <div class="form-group my-3">
+                                            <label for="extra-charges-price">Price</label>
+                                            <input type="number" class="form-control" id="extra-charges-price"
+                                                name="extra-charges-price">
+                                        </div>
+                                        <strong>
+                                            <div class="mx-5 p-3 text-center text-danger error"
+                                                id="extra-charges-error">
+                                            </div>
+                                        </strong>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn extra-charges-add-button" disabled>Add
+                                            Item</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{!-- EXTRA CHARGES TABLE --}}
+                        <div class="row px-4 py-2 mx-5 my-4" id="extra-charges-header">
+                            <h6 class="col mb-0 mt-1 text-center">No charges applied.</h6>
+                        </div>
+                        <div id="extra-charges-list"></div>
+                        <div class="me-5 my-4" id="extra-charges-total"></div>
+                    </div>
+
+                    {{!-- DISCOUNTS DETAILS --}}
+                    <div id="discounts-contents">
+                        <hr>
+                        {{!-- DISCOUNT TITLE --}}
+                        <div class="d-flex justify-items-around my-4">
+                            <h2 class="transaction-item-header ms-4 my-auto">Discounts</h2>
+                            <button class="btn discounts-modal-button ms-auto me-4" type="button" data-bs-toggle="modal"
+                                data-bs-target="#discounts-modal">
+                                <span class="material-icons-two-tone md-48">
+                                    add_circle
+                                </span>
+                            </button>
+                        </div>
+
+                        {{!-- DISCOUNT MODAL --}}
+                        <div class="modal fade" id="discounts-modal" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="discounts-modal-header">Add Discounts</h5>
+                                    </div>
+                                    <div class="modal-body p-4 ui-front">
+                                        <div class="text-center">Enter the discount's name, and price before
+                                            clicking <strong>Add Item</strong>. Remove an item by clicking the
+                                            <strong>X</strong> button.
+                                        </div>
+                                        <div class="form-group my-3">
+                                            <label for="discount-name">Discount Name</label>
+                                            <input type="text" class="form-control" id="discount-name"
+                                                name="discount-name">
+                                        </div>
+                                        <div class="form-group my-3">
+                                            <label for="discount-price">Price</label>
+                                            <input type="number" class="form-control" id="discount-price"
+                                                name="discount-price">
+                                        </div>
+                                        <strong>
+                                            <div class="mx-5 p-3 text-center text-danger error" id="discount-error"
+                                                name="discount-error">
+                                            </div>
+                                        </strong>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn discount-add-button" disabled>Add
+                                            Item</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{!-- DISCOUNTS TABLE --}}
+                        <div class="row px-4 py-2 mx-5 my-4" id="discounts-header">
+                            <h6 class="col mb-0 mt-1 text-center">No discounts applied.</h6>
+                        </div>
+                        <div id="discounts-list"></div>
+                        <div class="me-5 my-4" id="discounts-total"></div>
+                    </div>
+
+                </div>
+
+                <br>
+                {{!-- BREAKDOWN --}}
+                <div id="form-breakdown-info" class="container-fluid shadow-sm bg-light rounded-sm p-5">
+                    <div class="d-flex flex-row align-items-center">
+                        <h1 class="form-type-header me-auto align-self-center"><span
+                                class="material-icons-two-tone mb-1 md-48">receipt_long</span> Total Breakdown
+                        </h1>
+                        </button>
+                    </div>
+
+                    <hr>
+
+                    {{!-- BREAKDOWN TABLE --}}
+                    <div id="breakdown-list">
+                        <h6 class="mb-0 mt-3 text-center">Please fill out the information above.</h6>
+                    </div>
+                    <div class="row px-4 mx-5" id="breakdown-total"></div>
+                </div>
+
+                <br>
+                {{!-- PAYMENT DETAILS --}}
+                <div id="form-payment-info" class="container-fluid shadow-sm bg-light rounded-sm p-5">
+                    <div class="d-flex flex-row align-items-center">
+                        <h1 class="form-type-header me-auto align-self-center"><span
+                                class="material-icons-two-tone mb-1 md-48">payment</span> Payment Details</h1>
+                    </div>
+
+                    <hr>
+                    {{!-- PAYMENT DETAILS --}}
+                    <div id="form-payment-contents">
+
+                        {{!-- DOWNPAYMENT --}}
+                        <div id="downpayment-contents">
+                            <div class="form-check">
+                                <input class="form-check-input mt-2 payment-checkbox" type="checkbox" id="downpayment"
+                                    name="downpayment">
+                                <label class="form-check-label number fs-4" for="downpayment">Downpayment</label>
+                            </div>
+                            <div class="row px-5">
+                                <div class="col form-group my-3">
+                                    <label for="downpayment-date">Date of Payment</label>
+                                    <input type="date" class="form-control" id="downpayment-date"
+                                        name="downpayment-date" value={{event.downpaymentDate}} disabled>
+                                    <div id="downpayment-date-help" class="form-text">Choose a date from the date
+                                        picker.</div>
+                                </div>
+                                <div class="col form-group my-3">
+                                    <label for="downpayment-mode">Mode of Payment</label>
+                                    <select class="form-control form-select" id="downpayment-mode"
+                                        name="downpayment-mode" disabled>
+                                        <option value="" selected value>Select an option...</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Credit Card">Credit Card</option>
+                                        <option value="GCash">GCash</option>
+                                        <option value="Bank Transfer">Bank Transfer</option>
+                                    </select>
+                                    <div id="downpayment-mode-help" class="form-text">Select an option from the
+                                        dropdown
+                                        menu.</div>
+                                </div>
+                                <div class="col form-group my-3">
+                                    <label for="downpayment-amount">Amount Paid</label>
+                                    <input type="number" class="form-control" id="downpayment-amount"
+                                        name="downpayment-amount" value={{event.downpaymentAmount}} disabled>
+                                    <div id="downpayment-amount-help" class="form-text">Input by typing or using the
+                                        spinner.</div>
+                                </div>
+                            </div>
+                            <div id="form-event-errors">
+                                <strong>
+                                    <div class="text-center text-danger error" id="downpayment-error"></div>
+                                    <div class="text-center text-danger error" id="downpayment-mode-error"></div>
+                                    <div class="text-center text-danger error" id="downpayment-amount-error"></div>
+                                </strong>
+                            </div>                        
+                        </div>
+
+                        <hr>
+                        {{!-- FINAL PAYMENT --}}
+                        <div id="final-payment-contents">
+                            <div class="form-check">
+                                <input class="form-check-input mt-2 payment-checkbox" type="checkbox"
+                                    id="final-payment">
+                                <label class="form-check-label number fs-4" for="final-payment">Final Payment</label>
+                            </div>
+                            <div class="row px-5">
+                                <div class="col form-group my-3">
+                                    <label for="event-date">Date of Payment</label>
+                                    <input type="date" class="form-control" id="final-payment-date"
+                                        name="final-payment-date" disabled>
+                                    <div id="event-date-help" class="form-text">Choose a date from the date picker.
+                                    </div>
+                                </div>
+                                <div class="col form-group my-3">
+                                    <label for="final-payment-mode">Mode of Payment</label>
+                                    <select class="form-control form-select" id="final-payment-mode"
+                                        name="final-payment-mode" disabled>
+                                        <option value="" selected value>Select an option...</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Credit Card">Credit Card</option>
+                                        <option value="GCash">GCash</option>
+                                        <option value="Bank Transfer">Bank Transfer</option>
+                                    </select>
+                                    <div id="final-payment-mode-help" class="form-text">Select an option from the
+                                        dropdown
+                                        menu.</div>
+                                </div>
+                                <div class="col form-group my-3">
+                                    <label for="final-payment-amount">Amount Paid</label>
+                                    <input type="number" class="form-control" id="final-payment-amount"
+                                        name="final-payment-amount" value={{event.finalPaymentAmount}} disabled>
+                                    <div id="final-payment-amount-help" class="form-text">Input by typing or using the
+                                        spinner.</div>
+                                </div>
+                            </div>
+                        <div id="form-event-errors">
+                            <strong>
+                                <div class="text-center text-danger error" id="final-payment-error"></div>
+                                <div class="text-center text-danger error" id="final-payment-mode-error"></div>
+                                <div class="text-center text-danger error" id="final-payment-amount-error"></div>
+                            </strong>
+                        </div>   
+                        </div>
+
+                        <hr>
+                        <div id="payment-contents">
+                            <div class="row px-5">
+                                <div class="col-4"></div>
+                                <div class="col form-group my-3">
+                                    <label for="payment-amount-total">Total Amount Paid</label>
+                                    <input type="text" class="form-control static" id="payment-amount-total"
+                                        name="payment-amount-total" disabled>
+                                    <div id="payment-amount-total-help" class="form-text">Total amount paid by the
+                                        client.</div>
+                                </div>
+                                <div class="col form-group my-3">
+                                    <label for="payment-balance">Balance</label>
+                                    <input type="text" class="form-control static" id="payment-balance"
+                                        name="payment-balance" disabled>
+                                    <div id="payment-balance-help" class="form-text">Amount owed by the client.</div>
+                                </div>
+                            </div>
+                        <div id="form-event-errors">
+                            <strong>
+                                <div class="text-center text-danger error" id="payment-error"></div>
+                            </strong>
+                        </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <br>
+                {{!-- SUBMIT & CANCEL BUTTON --}}
+                <div class="d-flex flex-row">
+                    <div id="submit-button" class="shadow-sm bg-light rounded-lg py-3 px-4 ms-auto">
+                        <a href="/event-tracker/home" data-bs-toggle="tooltip" data-placement="left" title="Cancel and go back to Home">
+                            <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                        </a>
+                        <a data-bs-toggle="tooltip" data-placement="left" title="Tip: Double check the [required] fields">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#confirm-submit-modal"
+                            class="btn btn-light" id="submit">Submit</button>
+                        </a>
+                    </div>
+                </div>
+
+                {{!-- CONFIRM SUBMIT MODAL --}}
+                <div class="modal fade" id="confirm-submit-modal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirm-submit-modal-header">Confirm Submit</h5>
+                            </div>
+                            <div class="modal-body p-4 ui-front">
+                                <div class="text-center">Are you sure you want to <strong>submit</strong> the form?
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{!-- CONFIRM EXIT MODAL --}}
+                <div class="modal fade" id="confirm-exit-modal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirm-exit-modal-header">Confirm Exit</h5>
+                            </div>
+                            <div class="modal-body p-4 ui-front">
+                                <div class="text-center">Are you sure you want to <strong>leave</strong> the page?
+                                    Information typed will not be saved.
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" onclick="window.location='/event-tracker/reservations'"
+                                    class="btn btn-danger">Exit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>

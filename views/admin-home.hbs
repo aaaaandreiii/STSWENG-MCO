@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/intlTelInput.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin-form.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone" rel="stylesheet">
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/intlTelInput-jquery.min.js"></script>
+    <script type="text/javascript" src="/js/validator.min.js"></script>
+    <script type="text/javascript" src="/js/admin.js"></script>
+    <script type="text/javascript" src="/js/admin-employee-form.js"></script>
+</head>
+
+<body class="d-flex flex-column">
+    {{>navbar}}
+    <div class="d-flex flex-row justify-content-center flex-fill">
+        <div class="col-11 d-flex flex-column py-5">
+
+            <div class="d-flex flex-row">
+                <div id="admin-title" class="shadow-sm bg-light rounded-lg py-3 px-4 me-auto">
+                    <h1 class="mb-0 mt-1"><span class="material-icons-two-tone mb-1 md-48">admin_panel_settings</span>
+                        ADMIN MENU</h1>
+                </div>
+            </div>
+
+            <br>
+            {{!-- WITH EMPLOYEES --}}
+            {{#if employees}}
+            <div id="admin-main"
+                class="container-fluid shadow-sm bg-light rounded-sm p-4 d-flex flex-column align-self-center">
+                <div class="d-flex flex-row">
+                    <h4 class="fw-bolder mt-1 ms-2 text-black-50">Employees List</h4>
+                    <div class="form-check form-switch mt-1 ms-5">
+                        <input class="form-check-input" type="checkbox" role="switch" id="current-employee-switch">
+                        <label class="form-check-label" for="current-employee-switch">Show only current employees</label>
+                    </div>
+                    <a class="ms-auto" href="/admin/register" data-bs-toggle="tooltip" data-bs-placement="left"
+                        title="Create a new employee account!">
+                        <span class="material-icons-two-tone md-36">add</span>
+                    </a>
+                </div>
+                <hr>
+                <div class="p-4">
+                    {{#each employees}}
+                    {{>employee}}
+                    {{/each}}
+                </div>
+            </div>
+
+            {{!-- NO EMPLOYEES --}}
+            {{else}}
+            <div id="today-main"
+                class="container-fluid shadow-sm bg-light rounded-sm p-4 d-flex flex-column align-self-center">
+                <div class="d-flex flex-row">
+                    <h4 class="fw-bolder mt-1 ms-2 text-black-50">Employees List</h4>
+
+                    <a class="ms-auto" href="/admin/create" data-bs-toggle="tooltip" data-bs-placement="left"
+                        title="Create a employee account!">
+                        <span class="material-icons-two-tone md-36">add</span>
+                    </a>
+                </div>
+                <hr>
+                <h1 class="no-content text-center p-5">No Employees</h1>
+            </div>
+            {{/if}}
+
+            <br>
+            {{!-- WITH ACTIVITIES --}}
+            {{#if activities}}
+            <div id="admin-main"
+                class="container-fluid shadow-sm bg-light rounded-sm p-4 d-flex flex-column align-self-center">
+                <div class="d-flex flex-row">
+                    <h4 class="fw-bolder mt-1 ms-2 text-black-50">Recent Activities</h4>
+                </div>
+                <hr>
+                <div class="p-4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Activity</th>
+                                <th>Employee Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each activities}}
+                            {{>activity}}
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            {{!-- NO ACTIVITIES --}}
+            {{else}}
+            <div id="today-main"
+                class="container-fluid shadow-sm bg-light rounded-sm p-4 d-flex flex-column align-self-center">
+                <div class="d-flex flex-row">
+                    <h4 class="fw-bolder mt-1 ms-2 text-black-50">Recent Activities</h4>
+                </div>
+                <hr>
+                <h1 class="no-content text-center p-5">No Recent Activities</h1>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</body>
+
+</html>
