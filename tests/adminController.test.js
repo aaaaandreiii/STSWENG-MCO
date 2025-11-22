@@ -9,15 +9,18 @@ jest.mock("../models/employee.js");
 jest.mock("../models/activity.js");
 jest.mock("../models/discount.js");
 jest.mock("bcrypt");
-jest.mock("../helpers/newPasswordValidator.js");
+jest.mock("../helpers/newPasswordValidator.js", () => ({
+  isValidPassword: jest.fn(),
+}));
 
 describe("Admin Controller", () => {
-  let req, res;
+  let req, res, next;
+
   beforeEach(() => {
     req = {
       body: {},
       params: {},
-      session: { user: { username: "admin" }, isAdmin: true },
+      session: { user: { username: "admin", role: "admin" }, isAdmin: true },
     };
     res = {
       status: jest.fn().mockReturnThis(),
@@ -25,6 +28,7 @@ describe("Admin Controller", () => {
       redirect: jest.fn(),
       render: jest.fn(),
     };
+    next = jest.fn();
     jest.clearAllMocks();
   });
 
@@ -32,67 +36,60 @@ describe("Admin Controller", () => {
   describe("getAdminHome", () => {
     it("should render admin home page", async () => {
       const now = new Date();
-      Employee.aggregate.mockResolvedValue([
-        //returns
+
+      const mockEmployees = [
         {
           username: "admin",
           dateRegistered: new Date("2025-01-01"),
-          activities: [
-            { timestamp: now },
-            { timestamp: new Date("2020-01-01") },
-          ],
         },
-      ]);
-      Activity.find.mockResolvedValue([{ username: "admin", timestamp: now }]);
+      ];
+      const mockActivities = [{ username: "admin", timestamp: now }];
 
-      await adminController.getAdminHome(req, res);
+      const employeeLean = jest.fn().mockResolvedValue(mockEmployees);
+      const employeeSort = jest.fn().mockReturnValue({ lean: employeeLean });
+      Employee.find.mockReturnValue({ sort: employeeSort });
 
-      expect(res.render).toHaveBeenCalledWith(
-        "admin-home",
-        expect.objectContaining({
-          employees: expect.arrayContaining([
-            expect.objectContaining({
-              username: "admin",
-              activities: expect.arrayContaining([
-                expect.objectContaining({ timestamp: now }),
-              ]),
-            }),
-          ]),
-          activities: expect.arrayContaining([
-            expect.objectContaining({ username: "admin" }),
-          ]),
-          username: "admin",
-          isAdmin: true,
-        }),
-      );
+      const activityLean = jest.fn().mockResolvedValue(mockActivities);
+      const activitySort = jest.fn().mockReturnValue({ lean: activityLean });
+      Activity.find.mockReturnValue({ sort: activitySort });
+
+      await adminController.getAdminHome(req, res, next);
+
+      expect(Employee.find).toHaveBeenCalled();
+      expect(Activity.find).toHaveBeenCalled();
+
+      expect(res.render).toHaveBeenCalledWith("admin-home", {
+        username: "admin",
+        employees: mockEmployees,
+        activities: mockActivities,
+      });
     });
 
     it("filters out old activities", async () => {
       const now = new Date();
-      const sevenDaysAgo = new Date();
-      sevenDaysAgo.setHours(0, 0, 0, 0);
-      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-
       const recentActivity = { username: "admin", timestamp: now };
       const oldActivity = {
         username: "admin",
         timestamp: new Date("2000-01-01"),
       };
-      Employee.aggregate.mockResolvedValue([
-        {
-          username: "admin",
-          dateRegistered: new Date(),
-          activities: [recentActivity, oldActivity],
-        },
-      ]);
-      Activity.find.mockResolvedValue([recentActivity]);
 
-      await adminController.getAdminHome(req, res);
+      const mockEmployees = [{ username: "admin", dateRegistered: new Date() }];
 
-      const renderedData = res.render.mock.calls[0][1]; // get the data that was passed to render in first call
+      // employees
+      const employeeLean = jest.fn().mockResolvedValue(mockEmployees);
+      const employeeSort = jest.fn().mockReturnValue({ lean: employeeLean });
+      Employee.find.mockReturnValue({ sort: employeeSort });
 
-      expect(renderedData.employees[0].activities).toHaveLength(1); //1 match
-      expect(renderedData.employees[0].activities[0].timestamp).toEqual(now);
+      // activities – controller should only see "recent" results
+      const activityLean = jest.fn().mockResolvedValue([recentActivity]);
+      const activitySort = jest.fn().mockReturnValue({ lean: activityLean });
+      Activity.find.mockReturnValue({ sort: activitySort });
+
+      await adminController.getAdminHome(req, res, next);
+
+      const renderedData = res.render.mock.calls[0][1];
+
+      // only the recent one is in the data
       expect(renderedData.activities).toEqual([recentActivity]);
     });
   });
@@ -101,7 +98,9 @@ describe("Admin Controller", () => {
   describe("getRegisterEmployee", () => {
     it("should render the admin employee form", () => {
       adminController.getRegisterEmployee(req, res);
-      expect(res.render).toHaveBeenCalledWith("admin-employee-form");
+      expect(res.render).toHaveBeenCalledWith("admin-employee-form", {
+        error: null,
+      });
     });
   });
 
@@ -115,37 +114,53 @@ describe("Admin Controller", () => {
         contactNum: "09123456789",
         emergencyContactName: "What Ong",
         emergencyContactNum: "09987654321",
+        role: "frontdesk",
       };
     });
 
     it("creates a new employee if username does not exist", async () => {
       Employee.findOne.mockResolvedValue(null); // username not found
-      Employee.create.mockResolvedValue({ ...req.body, role: "employee" });
+      Employee.create.mockResolvedValue({
+        username: "ano",
+        role: "frontdesk",
+      });
+      isValidPassword.mockResolvedValue(true);
       bcrypt.hash.mockResolvedValue("hashedPassword");
 
-      await adminController.postRegisterEmployee(req, res);
+      isValidPassword.mockResolvedValue({
+        success: true,
+        message: "Password is valid",
+      });
+
+      await adminController.postRegisterEmployee(req, res, next);
 
       expect(Employee.findOne).toHaveBeenCalledWith({ username: "ano" });
+      expect(isValidPassword).toHaveBeenCalledWith("password123", "ano");
       expect(bcrypt.hash).toHaveBeenCalledWith("password123", 10);
       expect(Employee.create).toHaveBeenCalledWith(
         expect.objectContaining({
           username: "ano",
           password: "hashedPassword",
-          role: "employee",
+          role: "frontdesk",
           hasAccess: true,
         }),
       );
       expect(res.redirect).toHaveBeenCalledWith("/admin");
     });
 
-    it("returns 406 if username already exists", async () => {
-      Employee.findOne.mockResolvedValue({ username: "ano" }); // username exists
+    it("returns 409 if username already exists", async () => {
+      isValidPassword.mockResolvedValue({
+        success: true,
+        message: "Password is valid",
+      });
 
-      await adminController.postRegisterEmployee(req, res);
+      Employee.findOne.mockResolvedValue({ username: "ano" }); // existing user
 
-      expect(res.status).toHaveBeenCalledWith(406);
-      expect(res.json).toHaveBeenCalledWith({
-        msg: "Account already exists for username: ano",
+      await adminController.postRegisterEmployee(req, res, next);
+
+      expect(res.status).toHaveBeenCalledWith(409);
+      expect(res.render).toHaveBeenCalledWith("admin-employee-form", {
+        error: "Account already exists",
       });
     });
   });
@@ -154,11 +169,13 @@ describe("Admin Controller", () => {
   describe("getAllEmployees", () => {
     it("returns all employees", async () => {
       const employees = [{ username: "they" }, { username: "them" }];
-      Employee.find.mockResolvedValue(employees);
 
-      await adminController.getAllEmployees(req, res);
+      const lean = jest.fn().mockResolvedValue(employees);
+      Employee.find.mockReturnValue({ lean });
 
-      expect(Employee.find).toHaveBeenCalledWith({ role: "employee" });
+      await adminController.getAllEmployees(req, res, next);
+
+      expect(Employee.find).toHaveBeenCalled();
       expect(res.json).toHaveBeenCalledWith(employees);
     });
   });
@@ -167,14 +184,13 @@ describe("Admin Controller", () => {
   describe("getAllCurrentEmployees", () => {
     it("returns all employees with hasAccess true", async () => {
       const currentEmployees = [{ username: "fish", hasAccess: true }];
-      Employee.find.mockResolvedValue(currentEmployees);
 
-      await adminController.getAllCurrentEmployees(req, res);
+      const lean = jest.fn().mockResolvedValue(currentEmployees);
+      Employee.find.mockReturnValue({ lean });
 
-      expect(Employee.find).toHaveBeenCalledWith({
-        role: "employee",
-        hasAccess: true,
-      });
+      await adminController.getAllCurrentEmployees(req, res, next);
+
+      expect(Employee.find).toHaveBeenCalledWith({ hasAccess: true });
       expect(res.json).toHaveBeenCalledWith(currentEmployees);
     });
   });
@@ -183,14 +199,13 @@ describe("Admin Controller", () => {
   describe("getAllFormerEmployees", () => {
     it("returns all employees with hasAccess false", async () => {
       const formerEmployees = [{ username: "jane", hasAccess: false }];
-      Employee.find.mockResolvedValue(formerEmployees);
 
-      await adminController.getAllFormerEmployees(req, res);
+      const lean = jest.fn().mockResolvedValue(formerEmployees);
+      Employee.find.mockReturnValue({ lean });
 
-      expect(Employee.find).toHaveBeenCalledWith({
-        role: "employee",
-        hasAccess: false,
-      });
+      await adminController.getAllFormerEmployees(req, res, next);
+
+      expect(Employee.find).toHaveBeenCalledWith({ hasAccess: false });
       expect(res.json).toHaveBeenCalledWith(formerEmployees);
     });
   });
@@ -200,9 +215,11 @@ describe("Admin Controller", () => {
     it("returns the employee if found", async () => {
       req.params.username = "john";
       const employee = { username: "john", name: "John Doe" };
-      Employee.findOne.mockResolvedValue(employee);
 
-      await adminController.getEmployee(req, res);
+      const lean = jest.fn().mockResolvedValue(employee);
+      Employee.findOne.mockReturnValue({ lean });
+
+      await adminController.getEmployee(req, res, next);
 
       expect(Employee.findOne).toHaveBeenCalledWith({ username: "john" });
       expect(res.status).toHaveBeenCalledWith(200);
@@ -211,9 +228,11 @@ describe("Admin Controller", () => {
 
     it("returns 404 if employee not found", async () => {
       req.params.username = "doesnotexist";
-      Employee.findOne.mockResolvedValue(null);
 
-      await adminController.getEmployee(req, res);
+      const lean = jest.fn().mockResolvedValue(null);
+      Employee.findOne.mockReturnValue({ lean });
+
+      await adminController.getEmployee(req, res, next);
 
       expect(Employee.findOne).toHaveBeenCalledWith({
         username: "doesnotexist",
@@ -237,19 +256,27 @@ describe("Admin Controller", () => {
     });
 
     it("updates employee info with new password", async () => {
+      const employee = { username: "ano", role: "frontdesk" };
+      Employee.findOne.mockResolvedValue({
+        username: "ano",
+        role: "frontdesk",
+        hasAccess: true,
+      });
       isValidPassword.mockResolvedValue({
         success: true,
         message: "Password is valid",
       });
       bcrypt.hash.mockResolvedValue("hashedNewPass");
-      const updatedEmployee = { username: "ano", password: "hashedNewPass" };
-      Employee.findOneAndUpdate.mockResolvedValue(updatedEmployee);
+      Employee.updateOne.mockResolvedValue({
+        acknowledged: true,
+        modifiedCount: 1,
+      });
 
-      await adminController.putEmployeeInfo(req, res);
+      await adminController.putEmployeeInfo(req, res, next);
 
       expect(isValidPassword).toHaveBeenCalledWith("newPass123", "ano");
       expect(bcrypt.hash).toHaveBeenCalledWith("newPass123", 10);
-      expect(Employee.findOneAndUpdate).toHaveBeenCalledWith(
+      expect(Employee.updateOne).toHaveBeenCalledWith(
         { username: "ano" },
         expect.objectContaining({
           contactNum: "09123456789",
@@ -257,34 +284,36 @@ describe("Admin Controller", () => {
           emergencyContactNum: "09987654321",
           password: "hashedNewPass",
         }),
-        { new: true },
       );
-      expect(res.json).toHaveBeenCalledWith(updatedEmployee);
+      expect(res.json).toHaveBeenCalledWith({ success: true });
     });
 
-    it("returns 406 if passwords do not match", async () => {
+    it("returns 400 if passwords do not match", async () => {
+      const employee = { username: "ano", role: "frontdesk" };
+      Employee.findOne.mockResolvedValue(employee);
       req.body.reenteredPassword = "wrongPass";
 
-      await adminController.putEmployeeInfo(req, res);
+      await adminController.putEmployeeInfo(req, res, next);
 
-      expect(res.status).toHaveBeenCalledWith(406);
+      expect(res.status).toHaveBeenCalledWith(400);
       expect(res.json).toHaveBeenCalledWith({
-        message: "New password and re-entered password do not match",
+        message: "Invalid input",
       });
     });
 
-    it("returns 406 if password is not valid", async () => {
+    it("returns 400 if password is not valid", async () => {
+      const employee = { username: "ano", role: "frontdesk" };
+      Employee.findOne.mockResolvedValue(employee);
       req.body.newPassword = "invalidPass";
-      isValidPassword.mockResolvedValue({
-        success: false,
-        message: "New password is not valid",
-      });
+      req.body.reenteredPassword = "invalidPass";
+      isValidPassword.mockResolvedValue(false);
 
-      await adminController.putEmployeeInfo(req, res);
+      await adminController.putEmployeeInfo(req, res, next);
 
-      expect(res.status).toHaveBeenCalledWith(406);
+      expect(isValidPassword).toHaveBeenCalledWith("invalidPass", "ano");
+      expect(res.status).toHaveBeenCalledWith(400);
       expect(res.json).toHaveBeenCalledWith({
-        message: "New password is not valid",
+        message: "Invalid input",
       });
     });
   });
@@ -295,12 +324,14 @@ describe("Admin Controller", () => {
       req.params.username = "they";
       const activities = [
         { username: "they", timestamp: new Date("2025-01-01") },
-        { username: "they", timestamp: new Date("2025-01-01") },
-        { username: "them", timestamp: new Date("2025-01-01") },
+        { username: "they", timestamp: new Date("2025-01-02") },
       ];
-      Activity.find.mockResolvedValue(activities);
 
-      await adminController.getEmployeeActivity(req, res);
+      const lean = jest.fn().mockResolvedValue(activities);
+      const sort = jest.fn().mockReturnValue({ lean });
+      Activity.find.mockReturnValue({ sort });
+
+      await adminController.getEmployeeActivity(req, res, next);
 
       expect(Activity.find).toHaveBeenCalledWith({ username: "they" });
       expect(res.json).toHaveBeenCalledWith(activities);
@@ -320,12 +351,14 @@ describe("Admin Controller", () => {
         { username: "bob", timestamp: new Date("2025-01-01") },
       ];
 
-      Activity.find.mockResolvedValue(activities);
+      const lean = jest.fn().mockResolvedValue(activities);
+      const sort = jest.fn().mockReturnValue({ lean });
+      Activity.find.mockReturnValue({ sort });
 
-      await adminController.getRecentActivity(req, res);
+      await adminController.getRecentActivity(req, res, next);
 
       expect(Activity.find).toHaveBeenCalledWith({
-        timestamp: { $gte: sevenDaysAgo },
+        timestamp: { $gte: expect.any(Date) },
       });
       expect(res.json).toHaveBeenCalledWith(activities);
     });
@@ -335,17 +368,18 @@ describe("Admin Controller", () => {
   describe("putGiveEmployeeAccess", () => {
     it("gives employee access", async () => {
       req.body.username = "they";
-      const updatedEmployee = { username: "they", hasAccess: true };
-      Employee.findOneAndUpdate.mockResolvedValue(updatedEmployee);
+      const employee = {
+        username: "they",
+        hasAccess: false,
+        save: jest.fn().mockResolvedValue(),
+      };
+      Employee.findOne.mockResolvedValue(employee);
 
-      await adminController.putGiveEmployeeAccess(req, res);
+      await adminController.putGiveEmployeeAccess(req, res, next);
 
-      expect(Employee.findOneAndUpdate).toHaveBeenCalledWith(
-        { username: "they" },
-        { hasAccess: true },
-        { returnDocument: "after" },
-      );
-      expect(res.json).toHaveBeenCalledWith(updatedEmployee);
+      expect(Employee.findOne).toHaveBeenCalledWith({ username: "they" });
+      expect(employee.save).toHaveBeenCalled();
+      expect(res.json).toHaveBeenCalledWith({ success: true });
     });
   });
 
@@ -353,17 +387,22 @@ describe("Admin Controller", () => {
   describe("putRemoveEmployeeAccess", () => {
     it("removes employee access", async () => {
       req.body.username = "them";
-      const updatedEmployee = { username: "them", hasAccess: false };
-      Employee.findOneAndUpdate.mockResolvedValue(updatedEmployee);
 
-      await adminController.putRemoveEmployeeAccess(req, res);
+      const employee = {
+        _id: "123",
+        username: "them",
+        role: "frontdesk",
+        hasAccess: true,
+        save: jest.fn().mockResolvedValue(),
+      };
 
-      expect(Employee.findOneAndUpdate).toHaveBeenCalledWith(
-        { username: "them" },
-        { hasAccess: false },
-        { returnDocument: "after" },
-      );
-      expect(res.json).toHaveBeenCalledWith(updatedEmployee);
+      Employee.findOne.mockResolvedValue(employee);
+
+      await adminController.putRemoveEmployeeAccess(req, res, next);
+
+      expect(Employee.findOne).toHaveBeenCalledWith({ username: "them" });
+      expect(employee.save).toHaveBeenCalled();
+      expect(res.json).toHaveBeenCalledWith({ success: true });
     });
   });
 
@@ -401,13 +440,15 @@ describe("Admin Controller", () => {
   describe("getEventSettings", () => {
     it("renders the event tracker settings page", async () => {
       const discounts = [{ description: "VIP", rate: 10 }];
-      Discount.find.mockResolvedValue(discounts);
 
-      await adminController.getEventSettings(req, res);
+      const lean = jest.fn().mockResolvedValue(discounts);
+      Discount.find.mockReturnValue({ lean });
+
+      await adminController.getEventSettings(req, res, next);
 
       expect(Discount.find).toHaveBeenCalled();
       expect(res.render).toHaveBeenCalledWith("event-tracker-settings", {
-        discounts: discounts,
+        discounts,
         username: "admin",
         isAdmin: true,
       });

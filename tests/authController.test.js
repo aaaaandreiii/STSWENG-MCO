@@ -85,6 +85,7 @@ describe("Auth Controller", () => {
 
     it("should login and redirect to home when successful", async () => {
       const user = {
+        _id: "abc123",
         username: "admin",
         password: "hashed",
         hasAccess: true,
@@ -98,7 +99,12 @@ describe("Auth Controller", () => {
 
       await controller.authenticate(req, res);
 
-      expect(req.session.user).toEqual(user);
+      expect(req.session.user).toEqual({
+        _id: "abc123",
+        username: "admin",
+        role: "admin",
+        hasAccess: true,
+      });
       expect(req.session.loggedIn).toBe(true);
       expect(req.session.isAdmin).toBe(true);
       expect(res.redirect).toHaveBeenCalledWith("/event-tracker/home");
