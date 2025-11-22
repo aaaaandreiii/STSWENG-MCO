@@ -14,6 +14,35 @@ const activityLogger = require("../helpers/activityLogger.js");
 const saltRounds = 10;
 const ALLOWED_ROLES = ["admin", "manager", "frontdesk"];
 
+async function ensureNotLastAdmin(employee, newRole, newHasAccess) {
+  // What will the employee's role/access be *after* the change?
+  const targetRole = typeof newRole === "string" ? newRole : employee.role;
+  const targetHasAccess =
+    typeof newHasAccess === "boolean" ? newHasAccess : employee.hasAccess;
+
+  // We only care about the case where we're turning an active admin
+  // into a non-admin or removing their access.
+  const isCurrentlyActiveAdmin =
+    employee.role === "admin" && employee.hasAccess === true;
+  const willRemainAdmin = targetRole === "admin" && targetHasAccess === true;
+
+  if (!isCurrentlyActiveAdmin || willRemainAdmin) {
+    // Not touching the last active admin -> safe
+    return;
+  }
+
+  // Check if there is *another* active admin
+  const otherActiveAdmins = await Employee.countDocuments({
+    _id: { $ne: employee._id },
+    role: "admin",
+    hasAccess: true,
+  });
+
+  if (otherActiveAdmins === 0) {
+    throw new Error("Cannot modify last active admin");
+  }
+}
+
 const controller = {
   getAdminHome: async function (req, res, next) {
     try {
