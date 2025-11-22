@@ -17,10 +17,7 @@ async function isValidPassword(password, username) {
     [/[A-Z]/, "Password must include at least one uppercase letter"],
     [/[a-z]/, "Password must include at least one lowercase letter"],
     [/[0-9]/, "Password must include at least one number"],
-    [
-      /[^A-Za-z0-9]/,
-      "Password must include at least one special character",
-    ],
+    [/[^A-Za-z0-9]/, "Password must include at least one special character"],
   ];
 
   for (const [regex, message] of requirements) {
