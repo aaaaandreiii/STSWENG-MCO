@@ -381,6 +381,36 @@ describe("Admin Controller", () => {
       expect(employee.save).toHaveBeenCalled();
       expect(res.json).toHaveBeenCalledWith({ success: true });
     });
+
+    it("returns 404 when employee is not found", async () => {
+      req.body.username = "ghost";
+      Employee.findOne.mockResolvedValue(null);
+
+      await adminController.putGiveEmployeeAccess(req, res, next);
+
+      expect(Employee.findOne).toHaveBeenCalledWith({ username: "ghost" });
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({ message: "Employee not found" });
+    });
+
+    it("does nothing when employee already has access", async () => {
+      // No session user => adminUsername falls back to "unknown"
+      req.session = {};
+      req.body.username = "they";
+
+      const employee = {
+        username: "they",
+        hasAccess: true,
+        save: jest.fn(),
+      };
+      Employee.findOne.mockResolvedValue(employee);
+
+      await adminController.putGiveEmployeeAccess(req, res, next);
+
+      expect(Employee.findOne).toHaveBeenCalledWith({ username: "they" });
+      expect(employee.save).not.toHaveBeenCalled();
+      expect(res.json).toHaveBeenCalledWith({ success: true });
+    });
   });
 
   // ------------------ putRemoveEmployeeAccess ------------------ //
@@ -403,6 +433,65 @@ describe("Admin Controller", () => {
       expect(Employee.findOne).toHaveBeenCalledWith({ username: "them" });
       expect(employee.save).toHaveBeenCalled();
       expect(res.json).toHaveBeenCalledWith({ success: true });
+    });
+
+    it("returns 404 when employee is not found", async () => {
+      req.body.username = "ghost";
+      Employee.findOne.mockResolvedValue(null);
+
+      await adminController.putRemoveEmployeeAccess(req, res, next);
+
+      expect(Employee.findOne).toHaveBeenCalledWith({ username: "ghost" });
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({ message: "Employee not found" });
+    });
+
+    it("returns success without changes when employee already has no access", async () => {
+      // force adminUsername fallback path as well
+      req.session = null;
+      req.body.username = "them";
+
+      const employee = {
+        _id: "id-1",
+        username: "them",
+        role: "employee",
+        hasAccess: false,
+        save: jest.fn(),
+      };
+      Employee.findOne.mockResolvedValue(employee);
+
+      await adminController.putRemoveEmployeeAccess(req, res, next);
+
+      expect(employee.save).not.toHaveBeenCalled();
+      expect(res.json).toHaveBeenCalledWith({ success: true });
+    });
+
+    it("returns 400 when trying to remove access from last active admin", async () => {
+      req.body.username = "admin";
+      const employee = {
+        _id: "admin-id",
+        username: "admin",
+        role: "admin",
+        hasAccess: true,
+        save: jest.fn(),
+      };
+
+      Employee.findOne.mockResolvedValue(employee);
+      // no other active admins
+      Employee.countDocuments = jest.fn().mockResolvedValue(0);
+
+      await adminController.putRemoveEmployeeAccess(req, res, next);
+
+      expect(Employee.countDocuments).toHaveBeenCalledWith({
+        _id: { $ne: employee._id },
+        role: "admin",
+        hasAccess: true,
+      });
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.json).toHaveBeenCalledWith({
+        message: "Could not update employee",
+      });
+      expect(next).not.toHaveBeenCalled();
     });
   });
 
@@ -433,6 +522,59 @@ describe("Admin Controller", () => {
 
       expect(Discount.create).toHaveBeenCalledWith(req.body);
       expect(res.json).toHaveBeenCalledWith(createdDiscount);
+    });
+
+    it("returns 400 if basic username validation fails", async () => {
+      req.body.username = "ab"; // too short to be valid
+
+      await adminController.postRegisterEmployee(req, res, next);
+
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.render).toHaveBeenCalledWith("admin-employee-form", {
+        error: "Invalid input",
+      });
+      expect(Employee.findOne).not.toHaveBeenCalled();
+      expect(isValidPassword).not.toHaveBeenCalled();
+    });
+
+    it("returns 400 if contact number is invalid", async () => {
+      req.body.contactNum = "invalid-phone";
+
+      await adminController.postRegisterEmployee(req, res, next);
+
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.render).toHaveBeenCalledWith("admin-employee-form", {
+        error: "Invalid input",
+      });
+      expect(Employee.findOne).not.toHaveBeenCalled();
+    });
+
+    it("returns 400 if emergency contact number is invalid", async () => {
+      req.body.emergencyContactNum = "not-a-phone";
+
+      await adminController.postRegisterEmployee(req, res, next);
+
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.render).toHaveBeenCalledWith("admin-employee-form", {
+        error: "Invalid input",
+      });
+      expect(Employee.findOne).not.toHaveBeenCalled();
+    });
+
+    it("returns 400 if password validator fails", async () => {
+      isValidPassword.mockResolvedValue({
+        success: false,
+        message: "Password invalid",
+      });
+
+      await adminController.postRegisterEmployee(req, res, next);
+
+      expect(isValidPassword).toHaveBeenCalledWith("password123", "ano");
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.render).toHaveBeenCalledWith("admin-employee-form", {
+        error: "Password invalid",
+      });
+      expect(Employee.findOne).not.toHaveBeenCalled();
     });
   });
 
