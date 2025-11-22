@@ -237,7 +237,10 @@ describe("Admin Controller", () => {
     });
 
     it("updates employee info with new password", async () => {
-      isValidPassword.mockResolvedValue(true);
+      isValidPassword.mockResolvedValue({
+        success: true,
+        message: "Password is valid",
+      });
       bcrypt.hash.mockResolvedValue("hashedNewPass");
       const updatedEmployee = { username: "ano", password: "hashedNewPass" };
       Employee.findOneAndUpdate.mockResolvedValue(updatedEmployee);
@@ -272,7 +275,10 @@ describe("Admin Controller", () => {
 
     it("returns 406 if password is not valid", async () => {
       req.body.newPassword = "invalidPass";
-      isValidPassword.mockResolvedValue(false);
+      isValidPassword.mockResolvedValue({
+        success: false,
+        message: "New password is not valid",
+      });
 
       await adminController.putEmployeeInfo(req, res);
 

@@ -89,10 +89,10 @@ const controller = {
         });
       }
 
-      const passwordOK = await isValidPassword(password, cleanUsername);
-      if (!passwordOK) {
+      const passwordResult = await isValidPassword(password, cleanUsername);
+      if (!passwordResult.success) {
         return res.status(400).render("admin-employee-form", {
-          error: "Invalid input",
+          error: passwordResult.message,
         });
       }
 
@@ -287,9 +287,11 @@ const controller = {
           return res.status(400).json({ message: "Invalid input" });
         }
 
-        const passwordOK = await isValidPassword(newPassword, username);
-        if (!passwordOK) {
-          return res.status(400).json({ message: "Invalid input" });
+        const passwordResult = await isValidPassword(newPassword, username);
+        if (!passwordResult.success) {
+          return res
+            .status(400)
+            .json({ message: passwordResult.message || "Invalid input" });
         }
 
         const hash = await bcrypt.hash(newPassword, saltRounds);
