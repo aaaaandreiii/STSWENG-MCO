@@ -180,15 +180,15 @@ const controller = {
           });
         }
 
-        const passwordOK = await isValidPassword(newPassword, username);
-        if (!passwordOK) {
+        const passwordResult = await isValidPassword(newPassword, username);
+        if (!passwordResult.success) {
           await activityLogger(
             username,
             "Failed profile update (weak or reused password)",
           );
           return res.status(400).render("profile", {
             employee: viewModel,
-            error: "Could not update profile",
+            error: passwordResult.message || "Could not update profile",
           });
         }
 
