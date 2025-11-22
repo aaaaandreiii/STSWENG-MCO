@@ -10,6 +10,7 @@ describe("activityLogger", () => {
     expect(Activity.create).toHaveBeenCalledWith({
       username: "admin",
       activityName: "login_success",
+      meta: {},
     });
   });
 });

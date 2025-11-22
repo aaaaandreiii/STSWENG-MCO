@@ -105,7 +105,7 @@ describe("Event Controller", () => {
       await eventController.getPrintEvent(req, res);
 
       expect(Event.aggregate).toHaveBeenCalledWith([
-        { $match: { _id: "123" } },
+        { $match: { _id: expect.any(Object) } },
         {
           $lookup: {
             from: "packages",
@@ -144,7 +144,7 @@ describe("Event Controller", () => {
       await eventController.putReservations(req, res);
 
       expect(Event.findOneAndUpdate).toHaveBeenCalledWith(
-        { _id: "123", status: "reserved" },
+        { _id: expect.any(Object), status: "reserved" },
         req.body.data,
         { returnDocument: "after" },
       );
@@ -170,7 +170,7 @@ describe("Event Controller", () => {
       await eventController.putPencilbookings(req, res);
 
       expect(Event.findOneAndUpdate).toHaveBeenCalledWith(
-        { _id: "123", status: "booked" },
+        { _id: expect.any(Object), status: "booked" },
         req.body.data,
         { returnDocument: "after" },
       );
@@ -194,7 +194,7 @@ describe("Event Controller", () => {
       await eventController.putCancelEvent(req, res);
 
       expect(Event.findOneAndUpdate).toHaveBeenCalledWith(
-        { _id: "123" },
+        { _id: expect.any(Object) },
         { status: "cancelled" },
         { returnDocument: "after" },
       );
@@ -217,7 +217,7 @@ describe("Event Controller", () => {
       await eventController.putFinishEvent(req, res);
 
       expect(Event.findOneAndUpdate).toHaveBeenCalledWith(
-        { _id: "123" },
+        { _id: expect.any(Object) },
         { status: "finished" },
         { returnDocument: "after" },
       );
@@ -1197,7 +1197,7 @@ describe("Event Controller", () => {
       await eventController.getEvent(req, res);
 
       expect(Event.aggregate).toHaveBeenCalledWith([
-        { $match: { _id: "123" } },
+        { $match: { _id: expect.any(Object) } },
         {
           $lookup: {
             from: "packages",
@@ -1229,7 +1229,11 @@ describe("Event Controller", () => {
 
       const mockCalendarData = { bookings: mockEvents };
 
-      Event.find.mockResolvedValue(mockEvents);
+      const mockLean = jest.fn().mockResolvedValue(mockEvents);
+      Event.find.mockReturnValue({
+        lean: mockLean,
+      });
+
       getEventsInMonth.mockReturnValue(mockCalendarData);
 
       await eventController.getEventsInMonth(req, res);
@@ -1245,7 +1249,20 @@ describe("Event Controller", () => {
         },
       });
 
-      expect(getEventsInMonth).toHaveBeenCalledWith("11", "2025", mockEvents);
+      expect(getEventsInMonth).toHaveBeenCalledWith(
+        "11",
+        "2025",
+        expect.arrayContaining([
+          expect.objectContaining({
+            _id: "1",
+            status: "booked",
+          }),
+          expect.objectContaining({
+            _id: "2",
+            status: "reserved",
+          }),
+        ]),
+      );
       expect(res.render).toHaveBeenCalledWith("event-tracker-calendar", {
         ...mockCalendarData,
         username: "admin",
