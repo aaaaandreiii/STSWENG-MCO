@@ -36,7 +36,9 @@ describe("newPasswordValidator", () => {
       const result = await isValidPassword(password, username);
 
       expect(result.success).toBe(false);
-      expect(result.message).toBe("New password must differ from the old password");
+      expect(result.message).toBe(
+        "New password must differ from the old password",
+      );
     });
 
     it("returns success when password meets all requirements", async () => {

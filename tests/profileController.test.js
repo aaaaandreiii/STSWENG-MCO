@@ -242,14 +242,8 @@ describe("Profile Controller", () => {
 
       await profileController.updateProfile(req, res, next);
 
-      expect(bcrypt.compare).toHaveBeenCalledWith(
-        "oldPassword123",
-        "oldHash",
-      );
-      expect(isValidPassword).toHaveBeenCalledWith(
-        "NewPassword123",
-        "jdoe",
-      );
+      expect(bcrypt.compare).toHaveBeenCalledWith("oldPassword123", "oldHash");
+      expect(isValidPassword).toHaveBeenCalledWith("NewPassword123", "jdoe");
       expect(bcrypt.hash).toHaveBeenCalledWith("NewPassword123", 10);
 
       expect(Employee.updateOne).toHaveBeenCalledWith(
