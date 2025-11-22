@@ -1037,7 +1037,6 @@ if (USE_MOCK) {
       req.path === "/authenticate"
     ) {
       next();
-      next();
     } else {
       res.redirect("/login");
     }
@@ -1045,7 +1044,6 @@ if (USE_MOCK) {
 
   app.use("/admin", (req, res, next) => {
     if (req.session.isAdmin) {
-      next();
       next();
     } else {
       res.redirect("/event-tracker/home");
@@ -1064,6 +1062,24 @@ if (USE_MOCK) {
 app.use((req, res) => {
   console.error(`Route not found: ${req.originalUrl}`);
   res.status(404).send(`Page not found: ${req.originalUrl}`);
+});
+
+//Added Global Error Handler
+app.use((err, req, res, next) => {
+  console.error("[GLOBAL][ERROR]", err && err.stack ? err.stack : err);
+
+  if (res.headersSent) {
+    return next(err);
+  }
+
+  try {
+    return res
+      .status(500)
+      .render("error", { message: "Something went wrong. Please try again." });
+  } catch (e) {
+    // fallback if error view is not available
+    return res.status(500).send("Something went wrong. Please try again.");
+  }
 });
 
 // 7) Start server

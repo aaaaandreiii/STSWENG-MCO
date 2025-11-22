@@ -85,7 +85,7 @@ const eventController = {
   },
 
   getPrintEvent: async function (req, res) {
-    const _id = mongoose.Types.ObjectId(req.params.id);
+    const _id = new mongoose.Types.ObjectId(req.params.id);
     const event = await Event.aggregate([
       { $match: { _id } },
       {
@@ -116,7 +116,7 @@ const eventController = {
 
   putReservations: async function (req, res) {
     const { id, data, modified } = req.body;
-    const _id = mongoose.Types.ObjectId(id);
+    const _id = new mongoose.Types.ObjectId(id);
 
     const doc = await Event.findOneAndUpdate(
       { _id, status: "reserved" },
@@ -134,7 +134,7 @@ const eventController = {
 
   putPencilbookings: async function (req, res) {
     const { id, data, modified } = req.body;
-    const _id = mongoose.Types.ObjectId(id);
+    const _id = new mongoose.Types.ObjectId(id);
 
     const doc = await Event.findOneAndUpdate({ _id, status: "booked" }, data, {
       returnDocument: "after",
@@ -150,7 +150,7 @@ const eventController = {
 
   putCancelEvent: async function (req, res) {
     const { id } = req.body;
-    const _id = mongoose.Types.ObjectId(id);
+    const _id = new mongoose.Types.ObjectId(id);
 
     const doc = await Event.findOneAndUpdate(
       { _id },
@@ -167,7 +167,7 @@ const eventController = {
 
   putFinishEvent: async function (req, res) {
     const { id } = req.body;
-    const _id = mongoose.Types.ObjectId(id);
+    const _id = new mongoose.Types.ObjectId(id);
 
     const doc = await Event.findOneAndUpdate(
       { _id },
@@ -725,7 +725,7 @@ const eventController = {
 
   getEvent: async function (req, res) {
     const event = await Event.aggregate([
-      { $match: { _id: mongoose.Types.ObjectId(req.query.id) } },
+      { $match: { _id: new mongoose.Types.ObjectId(req.query.id) } },
       {
         $lookup: {
           from: "packages",
@@ -749,21 +749,40 @@ const eventController = {
   getEventsInMonth: async function (req, res) {
     const { year, month } = req.params;
 
-    const events = await Event.find({
+    const rawEvents = await Event.find({
+      //fetch plain JS objects (not full Mongoose docs)
       $expr: {
         $and: [
           { $ne: ["$status", "cancelled"] },
           { $ne: ["$status", "finished"] },
           { $eq: [Number(year), { $year: "$eventDate" }] },
-          {
-            $eq: [Number(month), { $month: "$eventDate" }],
-          },
+          { $eq: [Number(month), { $month: "$eventDate" }] },
         ],
       },
+    }).lean();
+
+    //normalize shape to match what calendar expects
+    const events = rawEvents.map((e) => {
+      // convert "HH:MM" into "Afternoon"/"Evening"
+      let timeLabel = e.eventTime;
+      if (typeof timeLabel === "string" && /^\d{2}:\d{2}$/.test(timeLabel)) {
+        const hour = parseInt(timeLabel.slice(0, 2), 10);
+        timeLabel = hour < 16 ? "Afternoon" : "Evening"; // example rule
+      }
+
+      return {
+        ...e,
+        eventTime: timeLabel,
+        eventVenues: Array.isArray(e.eventVenues)
+          ? e.eventVenues
+          : e.location
+            ? [e.location]
+            : [],
+      };
     });
 
+    //build eventArray + month info via helper
     const data = getEventsInMonth(month, year, events);
-
     data.username = req.session.user.username;
     data.isAdmin = req.session.isAdmin;
 

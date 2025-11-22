@@ -6,113 +6,65 @@ var EventSchema = new mongoose.Schema({
     enum: ["booked", "reserved", "finished", "cancelled"],
   },
 
-  clientName: {
-    type: String,
-  },
+  clientName: { type: String },
+  clientMobileNumber: { type: String },
 
-  clientMobileNumber: {
-    type: String,
-  },
+  repName: { type: String },
+  repMobileNumber: { type: String },
 
-  repName: {
-    type: String,
-  },
+  // eventType: {type: String},
+  eventType: { type: [String] }, //mock variable has String array, so we use String array in db as well
+  eventDate: { type: Date },
+  eventTime: { type: String },
 
-  repMobileNumber: {
-    type: String,
-  },
+  numOfPax: { type: Number },
 
-  eventType: {
-    type: String,
-  },
+  eventNotes: { type: String },
+  eventVenues: { type: [String] },
+  eventPackages: { type: [mongoose.ObjectId] },
 
-  eventDate: {
-    type: Date,
-  },
+  packageAdditionalPax: { type: Boolean },
 
-  eventTime: {
-    type: String,
-  },
-
-  numOfPax: {
-    type: Number,
-  },
-
-  eventNotes: {
-    type: String,
-  },
-
-  eventVenues: {
-    type: [String],
-  },
-
-  eventPackages: {
-    type: [mongoose.ObjectId],
-  },
-
-  packageAdditionalPax: {
-    type: Boolean,
-  },
+  //additional variables from mock data
+  name: { type: String },
+  location: { type: String },
+  tags: { type: [String] },
+  guests: { type: [String] },
+  formatArray: { type: [String] },
+  categories: { type: [String] },
+  attendees: { type: [String] },
+  reasons: { type: [String] },
+  skills: { type: [String] },
+  items: { type: [String] },
+  services: { type: [String] },
+  keywords: { type: [String] },
+  participants: { type: [String] },
 
   menuPackage: {
     type: {
-      saladName: {
-        type: String,
-      },
-      saladQuantity: {
-        type: Number,
-      },
-      pastaName: {
-        type: String,
-      },
-      pastaQuantity: {
-        type: Number,
-      },
-      beefName: {
-        type: String,
-      },
-      beefQuantity: {
-        type: Number,
-      },
-      porkName: {
-        type: String,
-      },
-      porkQuantity: {
-        type: Number,
-      },
-      chickenName: {
-        type: String,
-      },
-      chickenQuantity: {
-        type: Number,
-      },
-      fishName: {
-        type: String,
-      },
-      fishQuantity: {
-        type: Number,
-      },
-      icedTeaQuantity: {
-        type: Number,
-      },
-      riceQuantity: {
-        type: Number,
-      },
+      saladName: { type: String },
+      saladQuantity: { type: Number },
+      pastaName: { type: String },
+      pastaQuantity: { type: Number },
+      beefName: { type: String },
+      beefQuantity: { type: Number },
+      porkName: { type: String },
+      porkQuantity: { type: Number },
+      chickenName: { type: String },
+      chickenQuantity: { type: Number },
+      fishName: { type: String },
+      fishQuantity: { type: Number },
+      icedTeaQuantity: { type: Number },
+      riceQuantity: { type: Number },
     },
   },
 
   menuAdditional: {
     type: [
       {
-        foodItem: {
-          type: mongoose.ObjectId,
-        },
-        foodQuantity: {
-          type: Number,
-        },
-        foodCost: {
-          type: Number,
-        },
+        foodItem: { type: mongoose.ObjectId },
+        foodQuantity: { type: Number },
+        foodCost: { type: Number },
       },
     ],
   },
@@ -120,15 +72,9 @@ var EventSchema = new mongoose.Schema({
   transactionCharges: {
     type: [
       {
-        chargeName: {
-          type: String,
-        },
-        chargeQuantity: {
-          type: Number,
-        },
-        chargePrice: {
-          type: Number,
-        },
+        chargeName: { type: String },
+        chargeQuantity: { type: Number },
+        chargePrice: { type: Number },
       },
     ],
   },
@@ -136,63 +82,31 @@ var EventSchema = new mongoose.Schema({
   transactionDiscounts: {
     type: [
       {
-        discountName: {
-          type: String,
-        },
-        discountPrice: {
-          type: Number,
-        },
+        discountName: { type: String },
+        discountPrice: { type: Number },
       },
     ],
   },
 
   totalPrices: {
     type: {
-      packages: {
-        type: Number,
-      },
-      food: {
-        type: Number,
-      },
-      charges: {
-        type: Number,
-      },
-      discounts: {
-        type: Number,
-      },
-      all: {
-        type: Number,
-      },
+      packages: { type: Number },
+      food: { type: Number },
+      charges: { type: Number },
+      discounts: { type: Number },
+      all: { type: Number },
     },
   },
 
-  downpaymentDate: {
-    type: Date,
-  },
+  downpaymentDate: { type: Date },
+  downpaymentMode: { type: String },
+  downpaymentAmount: { type: Number },
 
-  downpaymentMode: {
-    type: String,
-  },
+  finalPaymentDate: { type: Date },
+  finalPaymentMode: { type: String },
+  finalPaymentAmount: { type: Number },
 
-  downpaymentAmount: {
-    type: Number,
-  },
-
-  finalPaymentDate: {
-    type: Date,
-  },
-
-  finalPaymentMode: {
-    type: String,
-  },
-
-  finalPaymentAmount: {
-    type: Number,
-  },
-
-  cancelReason: {
-    type: String,
-  },
+  cancelReason: { type: String },
 });
 
 module.exports = mongoose.model("Event", EventSchema);

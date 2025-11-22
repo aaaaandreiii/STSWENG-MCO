@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/event-tracker.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone" rel="stylesheet">
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="d-flex flex-column">
+    {{>navbar}}
+
+    <div class="d-flex flex-row justify-content-center flex-fill">
+        <div class="col-11 d-flex flex-column py-5">
+
+            <div class="d-flex flex-row mb-3">
+                <div class="shadow-sm bg-light rounded-lg py-3 px-4 me-auto align-content-center">
+                    <h1 class="mb-0 mt-1">
+                        <span class="material-icons-two-tone mb-1 md-36">insights</span>
+                        Analytics Dashboard
+                    </h1>
+                </div>
+            </div>
+
+            <div class="row g-4">
+
+                {{!-- Upcoming events by month --}}
+                <div class="col-md-6">
+                    <div class="container-fluid shadow-sm bg-light rounded-sm p-4">
+                        <h4 class="fw-bolder text-black-50">Upcoming Events (by month)</h4>
+                        <hr>
+                        {{#if upcomingEventsByMonth}}
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Month</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each upcomingEventsByMonth}}
+                                <tr>
+                                    <td>{{_id.year}}</td>
+                                    <td>{{_id.month}}</td>
+                                    <td>{{count}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        {{else}}
+                        <p class="text-muted mb-0">No upcoming events.</p>
+                        {{/if}}
+                    </div>
+                </div>
+
+                {{!-- Cancelled events by month --}}
+                <div class="col-md-6">
+                    <div class="container-fluid shadow-sm bg-light rounded-sm p-4">
+                        <h4 class="fw-bolder text-black-50">Cancelled Events (by month)</h4>
+                        <hr>
+                        {{#if cancelledEventsByMonth}}
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Month</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each cancelledEventsByMonth}}
+                                <tr>
+                                    <td>{{_id.year}}</td>
+                                    <td>{{_id.month}}</td>
+                                    <td>{{count}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        {{else}}
+                        <p class="text-muted mb-0">No cancelled events.</p>
+                        {{/if}}
+                    </div>
+                </div>
+
+                {{!-- Revenue summary --}}
+                <div class="col-md-6">
+                    <div class="container-fluid shadow-sm bg-light rounded-sm p-4">
+                        <h4 class="fw-bolder text-black-50">Revenue Summary</h4>
+                        <hr>
+                        <p><strong>Total Revenue (totalCost):</strong> {{revenueSummary.totalRevenue}}</p>
+                        <p><strong>Total Customer Payments:</strong> {{revenueSummary.totalPayments}}</p>
+                        <p><strong>Number of Transactions:</strong> {{revenueSummary.transactionCount}}</p>
+                    </div>
+                </div>
+
+                {{!-- Events per venue --}}
+                <div class="col-md-6">
+                    <div class="container-fluid shadow-sm bg-light rounded-sm p-4">
+                        <h4 class="fw-bolder text-black-50">Events per Venue</h4>
+                        <hr>
+                        {{#if venueCounts}}
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Venue</th>
+                                    <th>Events</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each venueCounts}}
+                                <tr>
+                                    <td>{{_id}}</td>
+                                    <td>{{count}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        {{else}}
+                        <p class="text-muted mb-0">No venue data.</p>
+                        {{/if}}
+                    </div>
+                </div>
+
+                {{!-- Events per time of day --}}
+                <div class="col-md-6">
+                    <div class="container-fluid shadow-sm bg-light rounded-sm p-4">
+                        <h4 class="fw-bolder text-black-50">Events per Time of Day</h4>
+                        <hr>
+                        {{#if timeOfDayCounts}}
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Events</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each timeOfDayCounts}}
+                                <tr>
+                                    <td>{{_id}}</td>
+                                    <td>{{count}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        {{else}}
+                        <p class="text-muted mb-0">No time-of-day data.</p>
+                        {{/if}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

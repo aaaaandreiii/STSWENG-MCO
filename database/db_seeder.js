@@ -1,6 +1,4 @@
-// seed.js — generates 50+ valid, interconnected MongoDB Extended JSON docs per model.
-// No external deps. Prints eight JSON arrays: Activity, Charge, Discount, Employee, Food, Package, Event, Transaction.
-// Usage: node seed.js
+// Usage: node db_seeder.js
 
 "use strict";
 
@@ -16,18 +14,19 @@ function oid(seed) {
   }
   return s;
 }
+
 function d(year, month1to12, day, hour = 0) {
-  // month1to12 = 1..12
   const dt = new Date(Date.UTC(year, month1to12 - 1, day, hour, 0, 0));
-  return { $date: dt.toISOString().replace(".000Z", ".000Z") };
+  return { $date: dt.toISOString() };
 }
+
 function range(n) {
   return Array.from({ length: n }, (_, i) => i + 1);
 }
 
 // -------- settings --------
 const N = 50;
-const venues = ["Hall A", "Hall B", "Garden", "Beachfront", "Ballroom"];
+const venues = ["Garden", "Sunroom", "Terrace"];
 const eventTypes = [
   "Wedding",
   "Birthday",
@@ -111,6 +110,7 @@ const Activities = range(N).map((i) => {
 // -------- Event (50) referencing Packages, Foods, Charges, Discounts, Employees --------
 const Events = range(N).map((i) => {
   const status = statuses[(i - 1) % statuses.length];
+
   const clientName = `Client ${String(i).padStart(3, "0")}`;
   const clientMobile = `0918${String(3000000 + i).padStart(7, "0")}`.slice(-11);
   const rep = Employees[(i - 1) % Employees.length];
@@ -130,19 +130,32 @@ const Events = range(N).map((i) => {
   const discountAmount = Number((gross * disc.rate).toFixed(2));
   const totalAll = Number((gross - discountAmount).toFixed(2));
 
+  const eventType = eventTypes[i % eventTypes.length];
+  const venue = venues[i % venues.length];
+  const eventTimeLabel = i % 2 === 0 ? "Afternoon" : "Evening";
+
   const ev = {
     status,
     clientName,
     clientMobileNumber: clientMobile,
+
     repName: rep.name,
     repMobileNumber: rep.contactNum,
-    eventType: eventTypes[i % eventTypes.length],
-    eventDate: d(2025, 2, Math.min(28, i)),
-    eventTime: `${String(10 + (i % 10)).padStart(2, "0")}:00`,
+
+    eventType: [eventType],
+
+    eventDate: d(2025, 11, 1 + (i % 30)), // November 1–30, 2025
+
+    // eventTime: `${String(10 + (i % 10)).padStart(2, '0')}:00`,
+    eventTime: eventTimeLabel,
+
     numOfPax: 50 + (i % 150),
-    eventVenues: [venues[i % venues.length]],
+
+    eventVenues: [venue],
     eventPackages: [pkg._id],
+
     packageAdditionalPax: false,
+
     menuAdditional: [
       {
         foodItem: food._id,
@@ -150,6 +163,7 @@ const Events = range(N).map((i) => {
         foodCost,
       },
     ],
+
     transactionCharges: [
       {
         chargeName: chg.name,
@@ -157,18 +171,55 @@ const Events = range(N).map((i) => {
         chargePrice: chg.price,
       },
     ],
+
     transactionDiscounts: [
       {
         discountName: disc.description,
         discountPrice: discountAmount,
       },
     ],
+
     totalPrices: {
       packages: pkgPrice,
       food: foodCost,
       charges: chargesTotal,
       discounts: discountAmount,
       all: totalAll,
+    },
+
+    //additional variables from mock data
+    name: `Sample Event ${i}`,
+    location: venue,
+    tags: [eventType, "Networking"],
+    guests: [clientName, rep.name],
+    formatArray: [eventType, "Networking"],
+    categories: ["Business"],
+    attendees: [clientName, rep.name],
+    reasons: [],
+    skills: [],
+    items: [],
+
+    eventTypeArray: [eventType],
+
+    services: ["Catering", "AV Setup"],
+    keywords: ["Networking", "Business"],
+    participants: [clientName, rep.name],
+
+    menuPackage: {
+      saladName: "Caesar Salad",
+      saladQuantity: 10,
+      pastaName: "Spaghetti",
+      pastaQuantity: 10,
+      beefName: "Roast Beef",
+      beefQuantity: 10,
+      porkName: "Pork BBQ",
+      porkQuantity: 10,
+      chickenName: "Fried Chicken",
+      chickenQuantity: 10,
+      fishName: "Fish Fillet",
+      fishQuantity: 10,
+      icedTeaQuantity: 50,
+      riceQuantity: 50,
     },
   };
   if (status === "cancelled") {
