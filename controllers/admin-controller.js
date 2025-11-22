@@ -21,33 +21,6 @@ const controller = {
       sevenDaysAgo.setHours(0, 0, 0, 0);
       sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
-    const employees = await Employee.aggregate([
-      { $match: { role: "employee" } },
-      {
-        $lookup: {
-          from: "activities",
-          localField: "username",
-          foreignField: "username",
-          as: "activities",
-        },
-      },
-    ]);
-    const formattedEmployees = employees.map((employee) => ({
-      ...employee,
-      dateRegistered: employee.dateRegistered.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }),
-      activities: employee.activities.filter(
-        (activity) =>
-          new Date(activity.timestamp).setHours(0, 0, 0, 0) - sevenDaysAgo >= 0,
-      ),
-    }));
-
-    const activities = await Activity.find({
-      timestamp: { $gte: sevenDaysAgo },
-    });
       const [employees, activities] = await Promise.all([
         Employee.find().sort({ dateRegistered: -1 }).lean(),
         Activity.find({ timestamp: { $gte: sevenDaysAgo } })
@@ -55,12 +28,6 @@ const controller = {
           .lean(),
       ]);
 
-    const data = {
-      employees: formattedEmployees,
-      activities: activities,
-      username: req.session.user.username,
-      isAdmin: req.session.isAdmin,
-    };
       const data = {
         username: req.session.user.username,
         employees,
@@ -98,8 +65,6 @@ const controller = {
         emergencyContactNum,
       } = req.body;
 
-    const hash = await bcrypt.hash(password, saltRounds);
-    const isExistingEmployee = await Employee.findOne({ username });
       const cleanUsername = sanitizeString(username);
       const cleanName = sanitizeString(name || "");
       const cleanContact = sanitizeString(contactNum || "");
@@ -179,17 +144,6 @@ const controller = {
    * @param {express.request} req
    * @param {express.response} res
    */
-  getAllEmployees: async function (req, res) {
-    const employees = await Employee.find({ role: "employee" });
-    res.json(employees);
-  },
-  /**
-   * Returns all employees registered in the database
-   * Only includes 'employee' role
-   * @name get/admin/employee
-   * @param {express.request} req
-   * @param {express.response} res
-   */
   getAllEmployees: async function (req, res, next) {
     try {
       const employees = await Employee.find().lean();
@@ -222,20 +176,6 @@ const controller = {
    * @param {express.request} req
    * @param {express.response} res
    */
-  getAllFormerEmployees: async function (req, res) {
-    const employees = await Employee.find({
-      role: "employee",
-      hasAccess: false,
-    });
-    res.json(employees);
-  },
-  /**
-   * Returns all former employees registered in the database
-   * Only includes 'employee' role
-   * @name get/admin/employee/former
-   * @param {express.request} req
-   * @param {express.response} res
-   */
   getAllCurrentEmployees: async function (req, res, next) {
     try {
       const employees = await Employee.find({ hasAccess: true }).lean();
@@ -256,29 +196,6 @@ const controller = {
     }
   },
 
-  /**
-   * Returns the information of the employee
-   * associated with the id in the url
-   * @name get/admin/employee/:username
-   * @param {express.request} req request object, must have id in its params
-   * @param {express.response} res response object
-   */
-  getEmployee: async function (req, res) {
-    const { username } = req.params;
-    const employee = await Employee.findOne({ username });
-    const status = employee ? 200 : 404;
-    res.status(status).json(employee);
-  },
-
-  putEmployeeInfo: async function (req, res) {
-    const { username } = req.params;
-    const {
-      contactNum,
-      emergencyContactName,
-      emergencyContactNum,
-      newPassword,
-      reenteredPassword,
-    } = req.body;
   /**
    * Returns the information of the employee
    * associated with the id in the url
@@ -315,49 +232,6 @@ const controller = {
         role,
       } = req.body;
 
-    if (newPassword != "") {
-      var isValidNewPassword = await isValidPassword(newPassword, username);
-
-      if (!isValidNewPassword) {
-        res.status(406).json({
-          message: "New password is not valid",
-        });
-        return;
-      }
-
-      if (reenteredPassword != newPassword) {
-        res.status(406).json({
-          message: "New password and re-entered password do not match",
-        });
-        return;
-      }
-
-      var hash = await bcrypt.hash(newPassword, saltRounds);
-    }
-
-    const result = await Employee.findOneAndUpdate(
-      { username },
-      {
-        contactNum,
-        emergencyContactName,
-        emergencyContactNum,
-        password: hash,
-      },
-      { new: true },
-    );
-    res.json(result);
-  },
-
-  getEmployeeActivity: async function (req, res) {
-    const { username } = req.params;
-    const activity = await Activity.find({ username });
-    res.json(activity);
-  },
-
-  getRecentActivity: async function (req, res) {
-    const sevenDaysAgo = new Date();
-    sevenDaysAgo.setHours(0, 0, 0, 0); //set to midnight
-    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
       const adminUsername = req.session?.user?.username || "unknown";
 
       const employee = await Employee.findOne({ username });
@@ -464,40 +338,6 @@ const controller = {
       sevenDaysAgo.setHours(0, 0, 0, 0);
       sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
-    const activity = await Activity.find({
-      timestamp: { $gte: sevenDaysAgo },
-    });
-    res.json(activity);
-  },
-
-  putGiveEmployeeAccess: async function (req, res) {
-    const username = req.body.username;
-    console.log(username);
-    const doc = await Employee.findOneAndUpdate(
-      { username: username },
-      { hasAccess: true },
-      { returnDocument: "after" },
-    );
-
-    res.json(doc);
-  },
-
-  putRemoveEmployeeAccess: async function (req, res) {
-    const username = req.body.username;
-    console.log(username);
-    const doc = await Employee.findOneAndUpdate(
-      { username: username },
-      { hasAccess: false },
-      { returnDocument: "after" },
-    );
-
-    res.json(doc);
-  },
-
-  getDiscounts: async function (req, res) {
-    const discounts = await Discount.find();
-    res.json(discounts);
-  },
       const activities = await Activity.find({
         timestamp: { $gte: sevenDaysAgo },
       })
