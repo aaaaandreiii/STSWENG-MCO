@@ -181,14 +181,28 @@ const controller = {
         }
 
         const passwordResult = await isValidPassword(newPassword, username);
-        if (!passwordResult.success) {
+        //debug: need to support both boolean and { success, message }
+        const isValid =
+          typeof passwordResult === "boolean"
+            ? passwordResult
+            : passwordResult && passwordResult.success;
+
+        if (!isValid) {
           await activityLogger(
             username,
             "Failed profile update (weak or reused password)",
           );
+
+          const errorMessage =
+            passwordResult &&
+            typeof passwordResult === "object" &&
+            passwordResult.message
+              ? passwordResult.message
+              : "Could not update profile";
+
           return res.status(400).render("profile", {
             employee: viewModel,
-            error: passwordResult.message || "Could not update profile",
+            error: errorMessage,
           });
         }
 
