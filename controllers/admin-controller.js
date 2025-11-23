@@ -314,8 +314,9 @@ const controller = {
 
       const adminUsername = req.session?.user?.username || "unknown";
 
-      const employee = await Employee.findOne({ username })
-        .select("-password -failedLoginAttempts -lockUntil -__v");
+      const employee = await Employee.findOne({ username }).select(
+        "-password -failedLoginAttempts -lockUntil -__v",
+      );
       if (!employee) {
         return res.status(404).json({ message: "Employee not found" });
       }
@@ -438,8 +439,9 @@ const controller = {
       const { username } = req.body;
       const adminUsername = req.session?.user?.username || "unknown";
 
-      const employee = await Employee.findOne({ username })
-        .select("-password -failedLoginAttempts -lockUntil -__v");
+      const employee = await Employee.findOne({ username }).select(
+        "-password -failedLoginAttempts -lockUntil -__v",
+      );
       if (!employee) {
         return res.status(404).json({ message: "Employee not found" });
       }
@@ -465,8 +467,9 @@ const controller = {
       const { username } = req.body;
       const adminUsername = req.session?.user?.username || "unknown";
 
-      const employee = await Employee.findOne({ username })
-        .select("-password -failedLoginAttempts -lockUntil -__v");
+      const employee = await Employee.findOne({ username }).select(
+        "-password -failedLoginAttempts -lockUntil -__v",
+      );
       if (!employee) {
         return res.status(404).json({ message: "Employee not found" });
       }
