@@ -89,6 +89,10 @@ const sessionConfig = {
   },
 };
 
+if (!process.env.DB_URL && process.env.NODE_ENV === "production") {
+  throw new Error("DB_URL must be set in production (mock mode not allowed)");
+}
+
 if (!USE_MOCK) {
   // explicitly only use Mongo store when we actually have a DB
   sessionConfig.store = MongoStore.create({
