@@ -3,7 +3,7 @@
 # frontend
 
 1. npm install
-   npm install hbs dotenv bcrypt calendar
+   npm install hbs dotenv bcrypt calendar csurf express-rate-limit
 2. node index.js
    redirect -> http://localhost:3000
 3. navigate to different pages manually
