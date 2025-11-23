@@ -70,7 +70,7 @@ const controller = {
    * @param {express.request} req request object, must have username and password in its body
    * @param {express.response} res response object
    */
-  authenticate: async function (req, res) {
+  authenticate: async function (req, res, next) {
     const { username, password } = req.body || {};
     const meta = {
       at: new Date().toISOString(),
@@ -155,27 +155,46 @@ const controller = {
         );
       }
 
-      // Optional hardening: consider req.session.regenerate() here to prevent session fixation
-      req.session.loggedIn = true;
-      req.session.isAdmin = user.role === "admin";
-      req.session.user = {
-        _id: user._id,
-        username: user.username,
-        role: user.role,
-        hasAccess: user.hasAccess,
-      };
+      // --- Session fixation hardening ---
+      // IMPORTANT: regenerate BEFORE setting any auth/session data
+      req.session.regenerate((err) => {
+        if (err) {
+          console.error("[AUTH][SESSION_REGENERATE][ERROR]", {
+            ...meta,
+            err: err.message,
+          });
+          // you can also do `return next(err);` if you prefer centralized error handling
+          return res.status(500).render("login", { error: "Server error" });
+        }
 
-      console.info("[AUTH][OK] login", {
-        ...meta,
-        isAdmin: req.session.isAdmin,
+        // Now we’re on a fresh session with a new session ID:
+        req.session.loggedIn = true;
+        req.session.isAdmin = user.role === "admin";
+        req.session.user = {
+          _id: user._id,
+          username: user.username,
+          role: user.role,
+          hasAccess: user.hasAccess,
+        };
+
+        console.info("[AUTH][OK] login", {
+          ...meta,
+          isAdmin: req.session.isAdmin,
+        });
+
+        // Fire-and-forget, same style as your logout
+        activityLogger(user.username, "login_success", {
+          ...meta,
+          isAdmin: req.session.isAdmin,
+        }).catch((logErr) => {
+          console.error("[AUTH][LOGIN_SUCCESS_LOG_ERROR]", {
+            ...meta,
+            err: logErr.message,
+          });
+        });
+
+        return res.redirect("/event-tracker/home");
       });
-
-      await activityLogger(user.username, "login_success", {
-        ...meta,
-        isAdmin: req.session.isAdmin,
-      });
-
-      return res.redirect("/event-tracker/home");
     } catch (err) {
       console.error("[AUTH][ERROR]", { ...meta, err: err.message });
       return res.status(500).render("login", { error: "Server error" });
