@@ -2226,8 +2226,20 @@ function submitForm() {
       };
 
       // makes a POST request using AJAX to add the event to the database
-      $.post("/event-tracker/submit", json, function (result) {
-        window.location.href = getRoute();
+      $.ajax({
+        type: "POST",
+        url: "/event-tracker/submit",
+        data: json, // server expects req.body.data as a JSON string
+        headers: {
+          "X-CSRF-Token": window.CSRF_TOKEN_FROM_TEMPLATE,
+        },
+        success: function (result) {
+          window.location.href = getRoute();
+        },
+        error: function (xhr, status, err) {
+          console.error("Failed to submit event:", status, err);
+          alert("Could not submit event. Please try again.");
+        },
       });
     }
   });

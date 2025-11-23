@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Security Error</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/material-icons.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone" rel="stylesheet" />
+  </head>
+
+  <body class="d-flex flex-column">
+    {{>navbar}}
+
+    <div class="d-flex flex-row justify-content-center flex-fill">
+      <div class="col-11 d-flex flex-column py-5">
+        <div class="shadow-sm bg-light rounded-lg p-5 text-center">
+          <span class="material-icons-two-tone md-48 text-danger mb-3">
+            warning
+          </span>
+          <h1 class="mb-3">Invalid or Missing CSRF Token</h1>
+          <p class="lead mb-4">
+            For your security, this request was blocked because it did not
+            include a valid anti-CSRF token.
+          </p>
+          <p class="mb-4">
+            Please refresh the page and try again. If the problem persists,
+            log out and log back in.
+          </p>
+
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn btn-secondary me-2" onclick="window.history.back()">
+              Go Back
+            </button>
+            <a href="/event-tracker/home" class="btn btn-primary">
+              Go to Home
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

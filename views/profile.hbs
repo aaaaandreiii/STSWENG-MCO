@@ -45,7 +45,8 @@ FORM TO UPDATE:
 
                 {{#if employee}}
                 <form method="POST" action="/profile">
-                    <div class="row">
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                    <div class="row">                            
                         <div class="col-md-6">
                             <h5>Account</h5>
                             <hr>

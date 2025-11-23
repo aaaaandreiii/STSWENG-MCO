@@ -636,9 +636,9 @@ if (USE_MOCK) {
     res.redirect("/login");
   });
 
-  app.post("/authenticate", (req, res) => {
-    loginLimiter,
-    console.log("Handling /authenticate");
+  app.post("/authenticate", (req, res) => {(
+    loginLimiter, 
+    console.log("Handling /authenticate"));
     res.redirect("/event-tracker/home");
   });
 
@@ -1104,34 +1104,32 @@ if (USE_MOCK) {
 }
 
 // ---- 6. 404 fallback ----
-app.use((req, res) => {
-  console.error(`Route not found: ${req.originalUrl}`);
-  res.status(404).send(`Page not found: ${req.originalUrl}`);
-});
+// app.use((req, res) => {
+//   console.error(`Route not found: ${req.originalUrl}`);
+//   res.status(404).send(`Page not found: ${req.originalUrl}`);
+// });
 
 // ---- 7. Global error handler ----
-app.use((err, req, res, next) => {
-  console.error("[GLOBAL][ERROR]", err && err.stack ? err.stack : err);
+  app.use((err, req, res, next) => {
+    if (err.code === "EBADCSRFTOKEN") {
+      console.error("[CSRF ERROR]", {
+        method: req.method,
+        url: req.originalUrl,
+        bodyToken: req.body && req.body._csrf,
+        headerToken: req.headers["x-csrf-token"],
+        cookies: req.headers.cookie,
+      });
 
-  if (err.code === "EBADCSRFTOKEN") {
-    return res
-      .status(403)
-      .send("Invalid or missing CSRF token. Please refresh and try again."); //TODO: Add UI and button to go back to HOME
-  }
+      return res.status(403).render("csrf-error", {
+        message: "Invalid or missing CSRF token. Please refresh and try again.",
+      });
+    }
 
-  if (res.headersSent) {
-    return next(err);
-  }
-
-  try {
-    return res
-      .status(500)
-      .render("error", { message: "Something went wrong. Please try again." });
-  } catch (e) {
-    // fallback if error view is not available
-    return res.status(500).send("Something went wrong. Please try again.");
-  }
-});
+    console.error("[GLOBAL][ERROR]", err && err.stack ? err.stack : err);
+    res.status(500).render("error", {
+      message: "Something went wrong. Please try again.",
+    });
+  });
 
 // ---- 8. Start server ----
 //bind the server to a port and a host

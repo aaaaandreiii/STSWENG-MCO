@@ -372,14 +372,21 @@ function submitForm() {
     };
 
     // makes a POST request using AJAX to add the employee to the database
-    $.post("/admin/register", data)
-      .done(function () {
+    $.ajax({
+      type: "POST",
+      url: "/admin/register",
+      data: data,
+      headers: {
+        "X-CSRF-Token": window.CSRF_TOKEN_FROM_TEMPLATE,
+      },
+      success: function () {
         window.location.href = "/admin";
-      })
-      .fail(function () {
+      },
+      error: function () {
         // generic error message – we don't expose server details
         alert("Could not create account. Please check the form and try again.");
-      });
+      },
+    });
   });
 }
 
