@@ -22,6 +22,17 @@ const employeeSchema = new Schema({
   emergencyContactName: String,
   emergencyContactNum: String,
   dateRegistered: Date,
+
+  failedLoginAttempts: {
+    type: Number,
+    default: 0,
+  },
+  lastFailedLoginAt: {
+    type: Date,
+  },
+  lockUntil: {
+    type: Date,
+  },
 });
 
 module.exports = mongoose.model("employee", employeeSchema);
