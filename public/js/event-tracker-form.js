@@ -2211,6 +2211,9 @@ function submitForm() {
       $.ajax({
         type: "PUT",
         url: url,
+        headers: {
+          "X-CSRF-Token": window.CSRF_TOKEN_FROM_TEMPLATE,
+        },
         data: json,
         contentType: "application/json",
         success: function (result) {

@@ -22,6 +22,9 @@ function giveAccess(username) {
   $.ajax({
     type: "PUT",
     url: "/admin/give",
+    headers: {
+      "X-CSRF-Token": window.CSRF_TOKEN_FROM_TEMPLATE,
+    },
     data: json,
     contentType: "application/json",
     success: function (result) {
@@ -37,6 +40,9 @@ function removeAccess(username) {
   $.ajax({
     type: "PUT",
     url: "/admin/remove",
+    headers: {
+      "X-CSRF-Token": window.CSRF_TOKEN_FROM_TEMPLATE,
+    },
     data: json,
     contentType: "application/json",
     success: function (result) {

@@ -404,6 +404,9 @@ function submitEditForm() {
     $.ajax({
       type: "PUT",
       url: "/admin/employee/" + username,
+      headers: {
+        "X-CSRF-Token": window.CSRF_TOKEN_FROM_TEMPLATE,
+      },
       data: JSON.stringify(data),
       contentType: "application/json",
       success: function () {
