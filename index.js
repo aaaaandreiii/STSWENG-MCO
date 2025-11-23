@@ -43,6 +43,10 @@ app.set("view engine", "hbs");
 // set the file path containing the hbs files
 app.set("views", path.join(__dirname, "views"));
 
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+}
+
 try {
   require("./views/hbs-helper.js");
   console.log("Helpers loaded successfully");
@@ -71,21 +75,19 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // ---- 3. Session middleware ----
 // sessions and cookies - CSSECDV
+const isProduction = process.env.NODE_ENV === "production";
+
 const sessionConfig = {
-  secret: SESSION_SECRET || "dev-only-secret", // dev only fallback
+  secret: SESSION_SECRET || "dev-only-secret",
   resave: false,
   saveUninitialized: false,
-  // store: !USE_MOCK
-  //       ? MongoStore.create({
-  //           mongoUrl: process.env.DB_URL,
-  //           collectionName: "sessions",
-  //         })
-  //       : undefined,
+  proxy: isProduction,        // only needed in prod
   cookie: {
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production", // requires HTTPS
-    maxAge: 1000 * 60 * 60 * 2, // 2 hours
+    // best option on Vercel/Heroku-style envs:
+    secure: isProduction ? "auto" : false,
+    maxAge: 1000 * 60 * 60 * 2,
   },
 };
 
