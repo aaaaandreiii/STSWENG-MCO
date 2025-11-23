@@ -4,6 +4,7 @@ const authController = require("../controllers/auth-controller.js");
 const adminController = require("../controllers/admin-controller.js");
 const eventController = require("../controllers/event-controller.js");
 
+const { loginLimiter } = require("../middleware/rate-limiters.js");
 const { ensureAuthenticated } = require("../middleware/auth.js");
 const { requireRoles } = require("../middleware/rbac.js");
 
@@ -21,7 +22,11 @@ app.get("/login", authController.getLogin);
 app.get("/logout", authController.getLogout);
 
 // authenticate user
-app.post("/authenticate", authController.authenticate);
+app.post(
+  "/authenticate", 
+  loginLimiter, 
+  authController.authenticate
+);
 
 // admin
 app.get(

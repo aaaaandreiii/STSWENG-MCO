@@ -633,6 +633,7 @@ if (USE_MOCK) {
   });
 
   app.post("/authenticate", (req, res) => {
+    loginLimiter,
     console.log("Handling /authenticate");
     res.redirect("/event-tracker/home");
   });
@@ -1111,7 +1112,7 @@ app.use((err, req, res, next) => {
   if (err.code === "EBADCSRFTOKEN") {
     return res
       .status(403)
-      .send("Invalid or missing CSRF token. Please refresh and try again.");
+      .send("Invalid or missing CSRF token. Please refresh and try again."); //TODO: Add UI and button to go back to HOME
   }
 
   if (res.headersSent) {
