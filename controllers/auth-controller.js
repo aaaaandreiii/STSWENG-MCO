@@ -201,16 +201,14 @@ const controller = {
               ...meta,
               err: err.message,
             });
-            return res
-              .status(500)
-              .render("login", { error: "Server error" });
+            return res.status(500).render("login", { error: "Server error" });
           }
 
           finalizeLogin();
-          });
-        } else {
-          finalizeLogin();
-        }
+        });
+      } else {
+        finalizeLogin();
+      }
     } catch (err) {
       console.error("[AUTH][ERROR]", { ...meta, err: err.message });
       return res.status(500).render("login", { error: "Server error" });

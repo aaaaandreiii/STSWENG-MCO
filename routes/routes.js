@@ -22,11 +22,7 @@ app.get("/login", authController.getLogin);
 app.get("/logout", authController.getLogout);
 
 // authenticate user
-app.post(
-  "/authenticate", 
-  loginLimiter, 
-  authController.authenticate
-);
+app.post("/authenticate", loginLimiter, authController.authenticate);
 
 // admin
 app.get(

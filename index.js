@@ -636,9 +636,8 @@ if (USE_MOCK) {
     res.redirect("/login");
   });
 
-  app.post("/authenticate", (req, res) => {(
-    loginLimiter, 
-    console.log("Handling /authenticate"));
+  app.post("/authenticate", (req, res) => {
+    (loginLimiter, console.log("Handling /authenticate"));
     res.redirect("/event-tracker/home");
   });
 
@@ -1110,26 +1109,26 @@ if (USE_MOCK) {
 // });
 
 // ---- 7. Global error handler ----
-  app.use((err, req, res, next) => {
-    if (err.code === "EBADCSRFTOKEN") {
-      console.error("[CSRF ERROR]", {
-        method: req.method,
-        url: req.originalUrl,
-        bodyToken: req.body && req.body._csrf,
-        headerToken: req.headers["x-csrf-token"],
-        cookies: req.headers.cookie,
-      });
-
-      return res.status(403).render("csrf-error", {
-        message: "Invalid or missing CSRF token. Please refresh and try again.",
-      });
-    }
-
-    console.error("[GLOBAL][ERROR]", err && err.stack ? err.stack : err);
-    res.status(500).render("error", {
-      message: "Something went wrong. Please try again.",
+app.use((err, req, res, next) => {
+  if (err.code === "EBADCSRFTOKEN") {
+    console.error("[CSRF ERROR]", {
+      method: req.method,
+      url: req.originalUrl,
+      bodyToken: req.body && req.body._csrf,
+      headerToken: req.headers["x-csrf-token"],
+      cookies: req.headers.cookie,
     });
+
+    return res.status(403).render("csrf-error", {
+      message: "Invalid or missing CSRF token. Please refresh and try again.",
+    });
+  }
+
+  console.error("[GLOBAL][ERROR]", err && err.stack ? err.stack : err);
+  res.status(500).render("error", {
+    message: "Something went wrong. Please try again.",
   });
+});
 
 // ---- 8. Start server ----
 //bind the server to a port and a host
