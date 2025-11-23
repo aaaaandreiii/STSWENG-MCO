@@ -10,21 +10,40 @@ const hbs = require("hbs");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const app = express();
+const csrf = require("csurf");
+const rateLimit = require("express-rate-limit");
 
 const db = require("./models/db.js");
 const routes = require("./routes/routes.js");
+const csrfProtection = csrf();
 
+// ---- 0. Feature flags / config ----
 // Toggle: mock routes vs real routes
 const USE_MOCK = process.env.MOCK === "true" || !process.env.DB_URL; // fall back to mock when no DB_URL
+const SESSION_SECRET = process.env.SESSION_SECRET;
 
-// 2) View engine & helpers/partials
+if (!SESSION_SECRET && process.env.NODE_ENV !== "test") {
+  console.warn(
+    "[SESSION] SESSION_SECRET is not set. Set a strong secret in production!",
+  );
+}
+
+// to address brute force attacks
+// complements account lockout by slowing down attackers who rotate usernames
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 50, // 50 login attempts per IP per 15 minutes
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// ---- 1. View engine ----
 // set hbs as the view engine
 app.set("view engine", "hbs");
 // set the file path containing the hbs files
 app.set("views", path.join(__dirname, "views"));
 
 try {
-  // Load your helpers (same behavior as both files)
   require("./views/hbs-helper.js");
   console.log("Helpers loaded successfully");
 } catch (err) {
@@ -40,40 +59,67 @@ hbs.registerPartials(path.join(__dirname, "views/partials"), (err) => {
   }
 });
 
-// 3) Core middleware
-// Parse incoming requests with urlencoded payloads
+// ---- 2. Core middleware ----
+// parse incoming requests with urlencoded payloads
 app.use(express.urlencoded({ extended: false }));
-// Parse incoming json payload
-// Parse incoming json payload
+// parse incoming json payload
 app.use(express.json());
 
-// Set the file path containing the static assets
-//   Serve static assets early (safe for both modes)
+// set the file path containing the static assets
+//   serve static assets early (safe for both modes)
 app.use(express.static(path.join(__dirname, "public")));
 
-// 4) Set the session middleware
-if (USE_MOCK) {
-  // Lightweight session for mock/dev mode
-  app.use(
-    session({
-      secret: process.env.SESSION_SECRET || "dev-only",
-      resave: false,
-      saveUninitialized: true,
-    }),
-  );
-} else {
-  // Production-style session w/ Mongo store
-  app.use(
-    session({
-      secret: process.env.SESSION_SECRET || "Six Seven",
-      resave: false,
-      saveUninitialized: true,
-      store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
-    }),
-  );
+// ---- 3. Session middleware ----
+// sessions and cookies - CSSECDV
+const sessionConfig = {
+  secret: SESSION_SECRET || "dev-only-secret", // dev only fallback
+  resave: false,
+  saveUninitialized: false,
+  // store: !USE_MOCK
+  //       ? MongoStore.create({
+  //           mongoUrl: process.env.DB_URL,
+  //           collectionName: "sessions",
+  //         })
+  //       : undefined,
+  cookie: {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production", // requires HTTPS
+    maxAge: 1000 * 60 * 60 * 2, // 2 hours
+  },
+};
+
+if (!process.env.DB_URL && process.env.NODE_ENV === "production") {
+  throw new Error("DB_URL must be set in production (mock mode not allowed)");
 }
 
-// 5) Route wiring
+if (!USE_MOCK) {
+  // explicitly only use Mongo store when we actually have a DB
+  sessionConfig.store = MongoStore.create({
+    mongoUrl: process.env.DB_URL,
+    collectionName: "sessions",
+  });
+}
+
+//otherwise, USE_MOCK
+app.use(session(sessionConfig));
+
+// ---- 4. CSRF protection ----
+app.use(csrfProtection);
+
+// make token available to templates
+app.use((req, res, next) => {
+  try {
+    res.locals.csrfToken = req.csrfToken();
+  } catch (e) {
+    // in rare cases this can throw; fail closed - CSSECDV
+    console.error("[CSRF][TOKEN][ERROR]", e.message);
+    res.locals.csrfToken = "";
+  }
+  next();
+});
+
+// ---- 5. Route Wiring: MOCK vs FULL ----
 if (USE_MOCK) {
   console.log("Starting in MOCK mode — using in-file mock routes.");
 
@@ -591,7 +637,7 @@ if (USE_MOCK) {
   });
 
   app.post("/authenticate", (req, res) => {
-    console.log("Handling /authenticate");
+    (loginLimiter, console.log("Handling /authenticate"));
     res.redirect("/event-tracker/home");
   });
 
@@ -1028,7 +1074,7 @@ if (USE_MOCK) {
 } else {
   console.log("Starting in FULL mode — using real DB + routes.");
 
-  // Auth gates (as in index.js)
+  // Auth gates
   // check if current user has logged in
   app.use("/", (req, res, next) => {
     if (
@@ -1036,21 +1082,19 @@ if (USE_MOCK) {
       req.path === "/login" ||
       req.path === "/authenticate"
     ) {
-      next();
-    } else {
-      res.redirect("/login");
+      return next();
     }
+    return res.redirect("/login");
   });
 
   app.use("/admin", (req, res, next) => {
     if (req.session.isAdmin) {
-      next();
-    } else {
-      res.redirect("/event-tracker/home");
+      return next();
     }
+    return res.redirect("/event-tracker/home");
   });
 
-  //mount your existing routes module and connect DB
+  //mount existing routes module and connect DB
   //connect to the database
   db.connect();
 
@@ -1058,31 +1102,35 @@ if (USE_MOCK) {
   app.use("/", routes);
 }
 
-// 6) 404 fallback (last)
-app.use((req, res) => {
-  console.error(`Route not found: ${req.originalUrl}`);
-  res.status(404).send(`Page not found: ${req.originalUrl}`);
-});
+// ---- 6. 404 fallback ----
+// app.use((req, res) => {
+//   console.error(`Route not found: ${req.originalUrl}`);
+//   res.status(404).send(`Page not found: ${req.originalUrl}`);
+// });
 
-//Added Global Error Handler
+// ---- 7. Global error handler ----
 app.use((err, req, res, next) => {
+  if (err.code === "EBADCSRFTOKEN") {
+    console.error("[CSRF ERROR]", {
+      method: req.method,
+      url: req.originalUrl,
+      bodyToken: req.body && req.body._csrf,
+      headerToken: req.headers["x-csrf-token"],
+      cookies: req.headers.cookie,
+    });
+
+    return res.status(403).render("csrf-error", {
+      message: "Invalid or missing CSRF token. Please refresh and try again.",
+    });
+  }
+
   console.error("[GLOBAL][ERROR]", err && err.stack ? err.stack : err);
-
-  if (res.headersSent) {
-    return next(err);
-  }
-
-  try {
-    return res
-      .status(500)
-      .render("error", { message: "Something went wrong. Please try again." });
-  } catch (e) {
-    // fallback if error view is not available
-    return res.status(500).send("Something went wrong. Please try again.");
-  }
+  res.status(500).render("error", {
+    message: "Something went wrong. Please try again.",
+  });
 });
 
-// 7) Start server
+// ---- 8. Start server ----
 //bind the server to a port and a host
 app.listen(port, () => {
   console.log(

@@ -1,0 +1,950 @@
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982947"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 01",
+			"amount": 400
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 01",
+			"amount": 6
+		}
+	],
+	"totalCost": 2404,
+	"customerPayment": 2404
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982948"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 02",
+			"amount": 300
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 02",
+			"amount": 6
+		}
+	],
+	"totalCost": 2314,
+	"customerPayment": 2314
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982949"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 03",
+			"amount": 800
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 03",
+			"amount": 20
+		}
+	],
+	"totalCost": 2810,
+	"customerPayment": 2810
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698294a"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 04",
+			"amount": 500
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 04",
+			"amount": 15
+		}
+	],
+	"totalCost": 2525,
+	"customerPayment": 2525
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698294b"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 05",
+			"amount": 1200
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 05",
+			"amount": 42
+		}
+	],
+	"totalCost": 3208,
+	"customerPayment": 3208
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698294c"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 06",
+			"amount": 700
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 06",
+			"amount": 28
+		}
+	],
+	"totalCost": 2732,
+	"customerPayment": 2732
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698294d"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 07",
+			"amount": 1600
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 07",
+			"amount": 72
+		}
+	],
+	"totalCost": 3598,
+	"customerPayment": 3598
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698294e"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 08",
+			"amount": 900
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 08",
+			"amount": 45
+		}
+	],
+	"totalCost": 2935,
+	"customerPayment": 2935
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698294f"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 09",
+			"amount": 2000
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 09",
+			"amount": 110
+		}
+	],
+	"totalCost": 3980,
+	"customerPayment": 3980
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982950"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 10",
+			"amount": 1100
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 10",
+			"amount": 66
+		}
+	],
+	"totalCost": 3134,
+	"customerPayment": 3134
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982951"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 11",
+			"amount": 2400
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 11",
+			"amount": 156
+		}
+	],
+	"totalCost": 4354,
+	"customerPayment": 4354
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982952"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 12",
+			"amount": 1300
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 12",
+			"amount": 91
+		}
+	],
+	"totalCost": 3329,
+	"customerPayment": 3329
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982953"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 13",
+			"amount": 2800
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 13",
+			"amount": 210
+		}
+	],
+	"totalCost": 4720,
+	"customerPayment": 4720
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982954"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 14",
+			"amount": 1500
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 14",
+			"amount": 120
+		}
+	],
+	"totalCost": 3520,
+	"customerPayment": 3520
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982955"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 15",
+			"amount": 200
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 15",
+			"amount": 2
+		}
+	],
+	"totalCost": 2348,
+	"customerPayment": 2348
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982956"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 16",
+			"amount": 200
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 16",
+			"amount": 3
+		}
+	],
+	"totalCost": 2357,
+	"customerPayment": 2357
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982957"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 17",
+			"amount": 600
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 17",
+			"amount": 12
+		}
+	],
+	"totalCost": 2758,
+	"customerPayment": 2758
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982958"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 18",
+			"amount": 400
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 18",
+			"amount": 10
+		}
+	],
+	"totalCost": 2570,
+	"customerPayment": 2570
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982959"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 19",
+			"amount": 1000
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 19",
+			"amount": 30
+		}
+	],
+	"totalCost": 3160,
+	"customerPayment": 3160
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698295a"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 20",
+			"amount": 600
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 20",
+			"amount": 21
+		}
+	],
+	"totalCost": 2779,
+	"customerPayment": 2779
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698295b"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 21",
+			"amount": 1400
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 21",
+			"amount": 56
+		}
+	],
+	"totalCost": 3554,
+	"customerPayment": 3554
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698295c"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 22",
+			"amount": 800
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 22",
+			"amount": 36
+		}
+	],
+	"totalCost": 2984,
+	"customerPayment": 2984
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698295d"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 23",
+			"amount": 1800
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 23",
+			"amount": 90
+		}
+	],
+	"totalCost": 3940,
+	"customerPayment": 3940
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698295e"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 24",
+			"amount": 1000
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 24",
+			"amount": 55
+		}
+	],
+	"totalCost": 3185,
+	"customerPayment": 3185
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698295f"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 25",
+			"amount": 2200
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 25",
+			"amount": 132
+		}
+	],
+	"totalCost": 4318,
+	"customerPayment": 4318
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982960"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 26",
+			"amount": 1200
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 26",
+			"amount": 78
+		}
+	],
+	"totalCost": 3382,
+	"customerPayment": 3382
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982961"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 27",
+			"amount": 2600
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 27",
+			"amount": 182
+		}
+	],
+	"totalCost": 4688,
+	"customerPayment": 4688
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982962"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 28",
+			"amount": 1400
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 28",
+			"amount": 105
+		}
+	],
+	"totalCost": 3575,
+	"customerPayment": 3575
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982963"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 29",
+			"amount": 3000
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 29",
+			"amount": 240
+		}
+	],
+	"totalCost": 5050,
+	"customerPayment": 5050
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982964"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 30",
+			"amount": 100
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 30",
+			"amount": 1
+		}
+	],
+	"totalCost": 2399,
+	"customerPayment": 2399
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982965"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 31",
+			"amount": 400
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 31",
+			"amount": 6
+		}
+	],
+	"totalCost": 2704,
+	"customerPayment": 2704
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982966"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 32",
+			"amount": 300
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 32",
+			"amount": 6
+		}
+	],
+	"totalCost": 2614,
+	"customerPayment": 2614
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982967"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 33",
+			"amount": 800
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 33",
+			"amount": 20
+		}
+	],
+	"totalCost": 3110,
+	"customerPayment": 3110
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982968"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 34",
+			"amount": 500
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 34",
+			"amount": 15
+		}
+	],
+	"totalCost": 2825,
+	"customerPayment": 2825
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982969"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 35",
+			"amount": 1200
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 35",
+			"amount": 42
+		}
+	],
+	"totalCost": 3508,
+	"customerPayment": 3508
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698296a"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 36",
+			"amount": 700
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 36",
+			"amount": 28
+		}
+	],
+	"totalCost": 3032,
+	"customerPayment": 3032
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698296b"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 37",
+			"amount": 1600
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 37",
+			"amount": 72
+		}
+	],
+	"totalCost": 3898,
+	"customerPayment": 3898
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698296c"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 38",
+			"amount": 900
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 38",
+			"amount": 45
+		}
+	],
+	"totalCost": 3235,
+	"customerPayment": 3235
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698296d"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 39",
+			"amount": 2000
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 39",
+			"amount": 110
+		}
+	],
+	"totalCost": 4280,
+	"customerPayment": 4280
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698296e"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 40",
+			"amount": 1100
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 40",
+			"amount": 66
+		}
+	],
+	"totalCost": 3434,
+	"customerPayment": 3434
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb698296f"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 41",
+			"amount": 2400
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 41",
+			"amount": 156
+		}
+	],
+	"totalCost": 4654,
+	"customerPayment": 4654
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982970"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 42",
+			"amount": 1300
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 42",
+			"amount": 91
+		}
+	],
+	"totalCost": 3629,
+	"customerPayment": 3629
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982971"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 43",
+			"amount": 2800
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 43",
+			"amount": 210
+		}
+	],
+	"totalCost": 5020,
+	"customerPayment": 5020
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982972"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 44",
+			"amount": 1500
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 44",
+			"amount": 120
+		}
+	],
+	"totalCost": 3820,
+	"customerPayment": 3820
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982973"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 45",
+			"amount": 200
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 45",
+			"amount": 2
+		}
+	],
+	"totalCost": 2648,
+	"customerPayment": 2648
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982974"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 46",
+			"amount": 200
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 46",
+			"amount": 3
+		}
+	],
+	"totalCost": 2657,
+	"customerPayment": 2657
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982975"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 47",
+			"amount": 600
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 47",
+			"amount": 12
+		}
+	],
+	"totalCost": 3058,
+	"customerPayment": 3058
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982976"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 48",
+			"amount": 400
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 48",
+			"amount": 10
+		}
+	],
+	"totalCost": 2870,
+	"customerPayment": 2870
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982977"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 49",
+			"amount": 1000
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 49",
+			"amount": 30
+		}
+	],
+	"totalCost": 3460,
+	"customerPayment": 3460
+}
+{
+	"_id": {
+		"$oid": "690cca96f6d7fb5eb6982978"
+	},
+	"chargesList": [
+		{
+			"reason": "Charge 50",
+			"amount": 600
+		}
+	],
+	"discountsList": [
+		{
+			"reason": "Discount 50",
+			"amount": 21
+		}
+	],
+	"totalCost": 3079,
+	"customerPayment": 3079
+}

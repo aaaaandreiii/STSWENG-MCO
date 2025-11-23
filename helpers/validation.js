@@ -13,7 +13,7 @@ function sanitizeString(str) {
 function isValidUsername(username) {
   if (typeof username !== "string") return false;
   const u = username.trim();
-  if (u.length < 4 || u.length > 32) return false;
+  if (u.length < 3 || u.length > 32) return false;
   return /^[A-Za-z0-9_.-]+$/.test(u);
 }
 

@@ -1,0 +1,5727 @@
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac3d"
+	},
+	"status": "booked",
+	"clientName": "Client 001",
+	"clientMobileNumber": "09183000001",
+	"repName": "Employee 001",
+	"repMobileNumber": "09171000001",
+	"eventType": [
+		"Birthday"
+	],
+	"eventDate": {
+		"$date": "2025-11-02T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 51,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "9b750a8a0a5b5aac1609b49b"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "30ba036e7b56560a26c10ab0"
+			},
+			"foodQuantity": 3,
+			"foodCost": 300
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 01",
+			"chargeQuantity": 2,
+			"chargePrice": 200
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 01",
+			"discountPrice": 178.5
+		}
+	],
+	"totalPrices": {
+		"packages": 5250,
+		"food": 300,
+		"charges": 400,
+		"discounts": 178.5,
+		"all": 5771.5
+	},
+	"name": "Sample Event 1",
+	"location": "Sunroom",
+	"tags": [
+		"Birthday",
+		"Networking"
+	],
+	"guests": [
+		"Client 001",
+		"Employee 001"
+	],
+	"formatArray": [
+		"Birthday",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 001",
+		"Employee 001"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Birthday"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 001",
+		"Employee 001"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac3e"
+	},
+	"status": "reserved",
+	"clientName": "Client 002",
+	"clientMobileNumber": "09183000002",
+	"repName": "Employee 002",
+	"repMobileNumber": "09171000002",
+	"eventType": [
+		"Corporate"
+	],
+	"eventDate": {
+		"$date": "2025-11-03T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 52,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "dc6eada03e568b44885d2cdf"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "dc552b6cb2618d32da1162bf"
+			},
+			"foodQuantity": 4,
+			"foodCost": 600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 02",
+			"chargeQuantity": 3,
+			"chargePrice": 300
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 02",
+			"discountPrice": 280
+		}
+	],
+	"totalPrices": {
+		"packages": 5500,
+		"food": 600,
+		"charges": 900,
+		"discounts": 280,
+		"all": 6720
+	},
+	"name": "Sample Event 2",
+	"location": "Terrace",
+	"tags": [
+		"Corporate",
+		"Networking"
+	],
+	"guests": [
+		"Client 002",
+		"Employee 002"
+	],
+	"formatArray": [
+		"Corporate",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 002",
+		"Employee 002"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Corporate"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 002",
+		"Employee 002"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac3f"
+	},
+	"status": "finished",
+	"clientName": "Client 003",
+	"clientMobileNumber": "09183000003",
+	"repName": "Employee 003",
+	"repMobileNumber": "09171000003",
+	"eventType": [
+		"Reunion"
+	],
+	"eventDate": {
+		"$date": "2025-11-04T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 53,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "a23eb976c19e8f618510c766"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "2a2af046a6d82ca837515046"
+			},
+			"foodQuantity": 5,
+			"foodCost": 1000
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 03",
+			"chargeQuantity": 1,
+			"chargePrice": 400
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 03",
+			"discountPrice": 357.5
+		}
+	],
+	"totalPrices": {
+		"packages": 5750,
+		"food": 1000,
+		"charges": 400,
+		"discounts": 357.5,
+		"all": 6792.5
+	},
+	"name": "Sample Event 3",
+	"location": "Garden",
+	"tags": [
+		"Reunion",
+		"Networking"
+	],
+	"guests": [
+		"Client 003",
+		"Employee 003"
+	],
+	"formatArray": [
+		"Reunion",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 003",
+		"Employee 003"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Reunion"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 003",
+		"Employee 003"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac40"
+	},
+	"status": "cancelled",
+	"clientName": "Client 004",
+	"clientMobileNumber": "09183000004",
+	"repName": "Employee 004",
+	"repMobileNumber": "09171000004",
+	"eventType": [
+		"Christening"
+	],
+	"eventDate": {
+		"$date": "2025-11-05T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 54,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "513f04b3cdd1f3265e191eaf"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "aba77f064585194202e684af"
+			},
+			"foodQuantity": 6,
+			"foodCost": 1500
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 04",
+			"chargeQuantity": 2,
+			"chargePrice": 500
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 04",
+			"discountPrice": 510
+		}
+	],
+	"totalPrices": {
+		"packages": 6000,
+		"food": 1500,
+		"charges": 1000,
+		"discounts": 510,
+		"all": 7990
+	},
+	"name": "Sample Event 4",
+	"location": "Sunroom",
+	"tags": [
+		"Christening",
+		"Networking"
+	],
+	"guests": [
+		"Client 004",
+		"Employee 004"
+	],
+	"formatArray": [
+		"Christening",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 004",
+		"Employee 004"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Christening"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 004",
+		"Employee 004"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	},
+	"cancelReason": "Client requested cancellation #4"
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac41"
+	},
+	"status": "booked",
+	"clientName": "Client 005",
+	"clientMobileNumber": "09183000005",
+	"repName": "Employee 005",
+	"repMobileNumber": "09171000005",
+	"eventType": [
+		"Wedding"
+	],
+	"eventDate": {
+		"$date": "2025-11-06T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 55,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "d55a2577c33e4497d24073fa"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "5f5f15a49567cec910e6fa5b"
+			},
+			"foodQuantity": 2,
+			"foodCost": 600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 05",
+			"chargeQuantity": 3,
+			"chargePrice": 600
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 05",
+			"discountPrice": 605.5
+		}
+	],
+	"totalPrices": {
+		"packages": 6250,
+		"food": 600,
+		"charges": 1800,
+		"discounts": 605.5,
+		"all": 8044.5
+	},
+	"name": "Sample Event 5",
+	"location": "Terrace",
+	"tags": [
+		"Wedding",
+		"Networking"
+	],
+	"guests": [
+		"Client 005",
+		"Employee 005"
+	],
+	"formatArray": [
+		"Wedding",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 005",
+		"Employee 005"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Wedding"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 005",
+		"Employee 005"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac42"
+	},
+	"status": "reserved",
+	"clientName": "Client 006",
+	"clientMobileNumber": "09183000006",
+	"repName": "Employee 006",
+	"repMobileNumber": "09171000006",
+	"eventType": [
+		"Birthday"
+	],
+	"eventDate": {
+		"$date": "2025-11-07T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 56,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "bb8979d4f1eadcae657727a4"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "3bd929b2df46ba32183f77dc"
+			},
+			"foodQuantity": 3,
+			"foodCost": 1050
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 06",
+			"chargeQuantity": 1,
+			"chargePrice": 700
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 06",
+			"discountPrice": 660
+		}
+	],
+	"totalPrices": {
+		"packages": 6500,
+		"food": 1050,
+		"charges": 700,
+		"discounts": 660,
+		"all": 7590
+	},
+	"name": "Sample Event 6",
+	"location": "Garden",
+	"tags": [
+		"Birthday",
+		"Networking"
+	],
+	"guests": [
+		"Client 006",
+		"Employee 006"
+	],
+	"formatArray": [
+		"Birthday",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 006",
+		"Employee 006"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Birthday"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 006",
+		"Employee 006"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac43"
+	},
+	"status": "finished",
+	"clientName": "Client 007",
+	"clientMobileNumber": "09183000007",
+	"repName": "Employee 007",
+	"repMobileNumber": "09171000007",
+	"eventType": [
+		"Corporate"
+	],
+	"eventDate": {
+		"$date": "2025-11-08T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 57,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "cf35f58cde8595677b7b5877"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "65c99b6cd34abb9e7ca0c994"
+			},
+			"foodQuantity": 4,
+			"foodCost": 1600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 07",
+			"chargeQuantity": 2,
+			"chargePrice": 800
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 07",
+			"discountPrice": 895.5
+		}
+	],
+	"totalPrices": {
+		"packages": 6750,
+		"food": 1600,
+		"charges": 1600,
+		"discounts": 895.5,
+		"all": 9054.5
+	},
+	"name": "Sample Event 7",
+	"location": "Sunroom",
+	"tags": [
+		"Corporate",
+		"Networking"
+	],
+	"guests": [
+		"Client 007",
+		"Employee 007"
+	],
+	"formatArray": [
+		"Corporate",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 007",
+		"Employee 007"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Corporate"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 007",
+		"Employee 007"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac44"
+	},
+	"status": "cancelled",
+	"clientName": "Client 008",
+	"clientMobileNumber": "09183000008",
+	"repName": "Employee 008",
+	"repMobileNumber": "09171000008",
+	"eventType": [
+		"Reunion"
+	],
+	"eventDate": {
+		"$date": "2025-11-09T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 58,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "f8f10169d99d7ced40343a40"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "48a0bf87cd4bd691d28e1ffd"
+			},
+			"foodQuantity": 5,
+			"foodCost": 2250
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 08",
+			"chargeQuantity": 3,
+			"chargePrice": 900
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 08",
+			"discountPrice": 1195
+		}
+	],
+	"totalPrices": {
+		"packages": 7000,
+		"food": 2250,
+		"charges": 2700,
+		"discounts": 1195,
+		"all": 10755
+	},
+	"name": "Sample Event 8",
+	"location": "Terrace",
+	"tags": [
+		"Reunion",
+		"Networking"
+	],
+	"guests": [
+		"Client 008",
+		"Employee 008"
+	],
+	"formatArray": [
+		"Reunion",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 008",
+		"Employee 008"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Reunion"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 008",
+		"Employee 008"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	},
+	"cancelReason": "Client requested cancellation #8"
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac45"
+	},
+	"status": "booked",
+	"clientName": "Client 009",
+	"clientMobileNumber": "09183000009",
+	"repName": "Employee 009",
+	"repMobileNumber": "09171000009",
+	"eventType": [
+		"Christening"
+	],
+	"eventDate": {
+		"$date": "2025-11-10T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 59,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "267f8c06c076ff0bff2986f2"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "1b237266f47d0e3b8ea48295"
+			},
+			"foodQuantity": 6,
+			"foodCost": 3000
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 09",
+			"chargeQuantity": 1,
+			"chargePrice": 1000
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 09",
+			"discountPrice": 1237.5
+		}
+	],
+	"totalPrices": {
+		"packages": 7250,
+		"food": 3000,
+		"charges": 1000,
+		"discounts": 1237.5,
+		"all": 10012.5
+	},
+	"name": "Sample Event 9",
+	"location": "Garden",
+	"tags": [
+		"Christening",
+		"Networking"
+	],
+	"guests": [
+		"Client 009",
+		"Employee 009"
+	],
+	"formatArray": [
+		"Christening",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 009",
+		"Employee 009"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Christening"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 009",
+		"Employee 009"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac46"
+	},
+	"status": "reserved",
+	"clientName": "Client 010",
+	"clientMobileNumber": "09183000010",
+	"repName": "Employee 010",
+	"repMobileNumber": "09171000010",
+	"eventType": [
+		"Wedding"
+	],
+	"eventDate": {
+		"$date": "2025-11-11T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 60,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "b478c62351fe235af418b873"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "6767ef361e690af645a13eeb"
+			},
+			"foodQuantity": 2,
+			"foodCost": 1100
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 10",
+			"chargeQuantity": 2,
+			"chargePrice": 1100
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 10",
+			"discountPrice": 1296
+		}
+	],
+	"totalPrices": {
+		"packages": 7500,
+		"food": 1100,
+		"charges": 2200,
+		"discounts": 1296,
+		"all": 9504
+	},
+	"name": "Sample Event 10",
+	"location": "Sunroom",
+	"tags": [
+		"Wedding",
+		"Networking"
+	],
+	"guests": [
+		"Client 010",
+		"Employee 010"
+	],
+	"formatArray": [
+		"Wedding",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 010",
+		"Employee 010"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Wedding"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 010",
+		"Employee 010"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac47"
+	},
+	"status": "finished",
+	"clientName": "Client 011",
+	"clientMobileNumber": "09183000011",
+	"repName": "Employee 011",
+	"repMobileNumber": "09171000011",
+	"eventType": [
+		"Birthday"
+	],
+	"eventDate": {
+		"$date": "2025-11-12T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 61,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "c7e02cf8eb41733702a72e20"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "73b7e302094c91ebdeb19762"
+			},
+			"foodQuantity": 3,
+			"foodCost": 1800
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 11",
+			"chargeQuantity": 3,
+			"chargePrice": 1200
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 11",
+			"discountPrice": 1709.5
+		}
+	],
+	"totalPrices": {
+		"packages": 7750,
+		"food": 1800,
+		"charges": 3600,
+		"discounts": 1709.5,
+		"all": 11440.5
+	},
+	"name": "Sample Event 11",
+	"location": "Terrace",
+	"tags": [
+		"Birthday",
+		"Networking"
+	],
+	"guests": [
+		"Client 011",
+		"Employee 011"
+	],
+	"formatArray": [
+		"Birthday",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 011",
+		"Employee 011"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Birthday"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 011",
+		"Employee 011"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac48"
+	},
+	"status": "cancelled",
+	"clientName": "Client 012",
+	"clientMobileNumber": "09183000012",
+	"repName": "Employee 012",
+	"repMobileNumber": "09171000012",
+	"eventType": [
+		"Corporate"
+	],
+	"eventDate": {
+		"$date": "2025-11-13T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 62,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "3c416145fa30626b00390cea"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "05d182a86c6541025c7ffaa2"
+			},
+			"foodQuantity": 4,
+			"foodCost": 2600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 12",
+			"chargeQuantity": 1,
+			"chargePrice": 1300
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 12",
+			"discountPrice": 1666
+		}
+	],
+	"totalPrices": {
+		"packages": 8000,
+		"food": 2600,
+		"charges": 1300,
+		"discounts": 1666,
+		"all": 10234
+	},
+	"name": "Sample Event 12",
+	"location": "Garden",
+	"tags": [
+		"Corporate",
+		"Networking"
+	],
+	"guests": [
+		"Client 012",
+		"Employee 012"
+	],
+	"formatArray": [
+		"Corporate",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 012",
+		"Employee 012"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Corporate"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 012",
+		"Employee 012"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	},
+	"cancelReason": "Client requested cancellation #12"
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac49"
+	},
+	"status": "booked",
+	"clientName": "Client 013",
+	"clientMobileNumber": "09183000013",
+	"repName": "Employee 013",
+	"repMobileNumber": "09171000013",
+	"eventType": [
+		"Reunion"
+	],
+	"eventDate": {
+		"$date": "2025-11-14T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 63,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "5a2e2c15eeb87ff37b03c562"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "08570b1dd96756e96ad880ae"
+			},
+			"foodQuantity": 5,
+			"foodCost": 3500
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 13",
+			"chargeQuantity": 2,
+			"chargePrice": 1400
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 13",
+			"discountPrice": 2182.5
+		}
+	],
+	"totalPrices": {
+		"packages": 8250,
+		"food": 3500,
+		"charges": 2800,
+		"discounts": 2182.5,
+		"all": 12367.5
+	},
+	"name": "Sample Event 13",
+	"location": "Sunroom",
+	"tags": [
+		"Reunion",
+		"Networking"
+	],
+	"guests": [
+		"Client 013",
+		"Employee 013"
+	],
+	"formatArray": [
+		"Reunion",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 013",
+		"Employee 013"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Reunion"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 013",
+		"Employee 013"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac4a"
+	},
+	"status": "reserved",
+	"clientName": "Client 014",
+	"clientMobileNumber": "09183000014",
+	"repName": "Employee 014",
+	"repMobileNumber": "09171000014",
+	"eventType": [
+		"Christening"
+	],
+	"eventDate": {
+		"$date": "2025-11-15T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 64,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "39c77800413e304278e25e4c"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "64afbb3c3132f4b0bdfae2d2"
+			},
+			"foodQuantity": 6,
+			"foodCost": 4500
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 14",
+			"chargeQuantity": 3,
+			"chargePrice": 1500
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 14",
+			"discountPrice": 2800
+		}
+	],
+	"totalPrices": {
+		"packages": 8500,
+		"food": 4500,
+		"charges": 4500,
+		"discounts": 2800,
+		"all": 14700
+	},
+	"name": "Sample Event 14",
+	"location": "Terrace",
+	"tags": [
+		"Christening",
+		"Networking"
+	],
+	"guests": [
+		"Client 014",
+		"Employee 014"
+	],
+	"formatArray": [
+		"Christening",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 014",
+		"Employee 014"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Christening"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 014",
+		"Employee 014"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac4b"
+	},
+	"status": "finished",
+	"clientName": "Client 015",
+	"clientMobileNumber": "09183000015",
+	"repName": "Employee 015",
+	"repMobileNumber": "09171000015",
+	"eventType": [
+		"Wedding"
+	],
+	"eventDate": {
+		"$date": "2025-11-16T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 65,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "4137fe6d55baf13886da5197"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "6e57eab46aabd9f553b04b58"
+			},
+			"foodQuantity": 2,
+			"foodCost": 1600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 15",
+			"chargeQuantity": 1,
+			"chargePrice": 100
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 15",
+			"discountPrice": 209
+		}
+	],
+	"totalPrices": {
+		"packages": 8750,
+		"food": 1600,
+		"charges": 100,
+		"discounts": 209,
+		"all": 10241
+	},
+	"name": "Sample Event 15",
+	"location": "Garden",
+	"tags": [
+		"Wedding",
+		"Networking"
+	],
+	"guests": [
+		"Client 015",
+		"Employee 015"
+	],
+	"formatArray": [
+		"Wedding",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 015",
+		"Employee 015"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Wedding"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 015",
+		"Employee 015"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac4c"
+	},
+	"status": "cancelled",
+	"clientName": "Client 016",
+	"clientMobileNumber": "09183000016",
+	"repName": "Employee 016",
+	"repMobileNumber": "09171000016",
+	"eventType": [
+		"Birthday"
+	],
+	"eventDate": {
+		"$date": "2025-11-17T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 66,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "1e85599a2c6f4292861f3e19"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "d1fb9f59e812558d035062f6"
+			},
+			"foodQuantity": 3,
+			"foodCost": 2550
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 16",
+			"chargeQuantity": 2,
+			"chargePrice": 200
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 16",
+			"discountPrice": 358.5
+		}
+	],
+	"totalPrices": {
+		"packages": 9000,
+		"food": 2550,
+		"charges": 400,
+		"discounts": 358.5,
+		"all": 11591.5
+	},
+	"name": "Sample Event 16",
+	"location": "Sunroom",
+	"tags": [
+		"Birthday",
+		"Networking"
+	],
+	"guests": [
+		"Client 016",
+		"Employee 016"
+	],
+	"formatArray": [
+		"Birthday",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 016",
+		"Employee 016"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Birthday"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 016",
+		"Employee 016"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	},
+	"cancelReason": "Client requested cancellation #16"
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac4d"
+	},
+	"status": "booked",
+	"clientName": "Client 017",
+	"clientMobileNumber": "09183000017",
+	"repName": "Employee 017",
+	"repMobileNumber": "09171000017",
+	"eventType": [
+		"Corporate"
+	],
+	"eventDate": {
+		"$date": "2025-11-18T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 67,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "21891b6274e63182407e9957"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "e55f7c893aa441c1d0fe7eca"
+			},
+			"foodQuantity": 4,
+			"foodCost": 3600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 17",
+			"chargeQuantity": 3,
+			"chargePrice": 300
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 17",
+			"discountPrice": 550
+		}
+	],
+	"totalPrices": {
+		"packages": 9250,
+		"food": 3600,
+		"charges": 900,
+		"discounts": 550,
+		"all": 13200
+	},
+	"name": "Sample Event 17",
+	"location": "Terrace",
+	"tags": [
+		"Corporate",
+		"Networking"
+	],
+	"guests": [
+		"Client 017",
+		"Employee 017"
+	],
+	"formatArray": [
+		"Corporate",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 017",
+		"Employee 017"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Corporate"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 017",
+		"Employee 017"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac4e"
+	},
+	"status": "reserved",
+	"clientName": "Client 018",
+	"clientMobileNumber": "09183000018",
+	"repName": "Employee 018",
+	"repMobileNumber": "09171000018",
+	"eventType": [
+		"Reunion"
+	],
+	"eventDate": {
+		"$date": "2025-11-19T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 68,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "68951e6481db7fa51edbf198"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "131888570547a39b346abee0"
+			},
+			"foodQuantity": 5,
+			"foodCost": 4750
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 18",
+			"chargeQuantity": 1,
+			"chargePrice": 400
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 18",
+			"discountPrice": 732.5
+		}
+	],
+	"totalPrices": {
+		"packages": 9500,
+		"food": 4750,
+		"charges": 400,
+		"discounts": 732.5,
+		"all": 13917.5
+	},
+	"name": "Sample Event 18",
+	"location": "Garden",
+	"tags": [
+		"Reunion",
+		"Networking"
+	],
+	"guests": [
+		"Client 018",
+		"Employee 018"
+	],
+	"formatArray": [
+		"Reunion",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 018",
+		"Employee 018"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Reunion"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 018",
+		"Employee 018"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac4f"
+	},
+	"status": "finished",
+	"clientName": "Client 019",
+	"clientMobileNumber": "09183000019",
+	"repName": "Employee 019",
+	"repMobileNumber": "09171000019",
+	"eventType": [
+		"Christening"
+	],
+	"eventDate": {
+		"$date": "2025-11-20T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 69,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "17eeeb1fb3d6ce70dababbbb"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "e9b0bbc46202eb3520be9d1d"
+			},
+			"foodQuantity": 6,
+			"foodCost": 6000
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 19",
+			"chargeQuantity": 2,
+			"chargePrice": 500
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 19",
+			"discountPrice": 1005
+		}
+	],
+	"totalPrices": {
+		"packages": 9750,
+		"food": 6000,
+		"charges": 1000,
+		"discounts": 1005,
+		"all": 15745
+	},
+	"name": "Sample Event 19",
+	"location": "Sunroom",
+	"tags": [
+		"Christening",
+		"Networking"
+	],
+	"guests": [
+		"Client 019",
+		"Employee 019"
+	],
+	"formatArray": [
+		"Christening",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 019",
+		"Employee 019"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Christening"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 019",
+		"Employee 019"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac50"
+	},
+	"status": "cancelled",
+	"clientName": "Client 020",
+	"clientMobileNumber": "09183000020",
+	"repName": "Employee 020",
+	"repMobileNumber": "09171000020",
+	"eventType": [
+		"Wedding"
+	],
+	"eventDate": {
+		"$date": "2025-11-21T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 70,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "17d0465da3b14a519a1a6e6d"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "f5d72e2d6b106908bab21d2d"
+			},
+			"foodQuantity": 2,
+			"foodCost": 100
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 20",
+			"chargeQuantity": 3,
+			"chargePrice": 600
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 20",
+			"discountPrice": 833
+		}
+	],
+	"totalPrices": {
+		"packages": 10000,
+		"food": 100,
+		"charges": 1800,
+		"discounts": 833,
+		"all": 11067
+	},
+	"name": "Sample Event 20",
+	"location": "Terrace",
+	"tags": [
+		"Wedding",
+		"Networking"
+	],
+	"guests": [
+		"Client 020",
+		"Employee 020"
+	],
+	"formatArray": [
+		"Wedding",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 020",
+		"Employee 020"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Wedding"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 020",
+		"Employee 020"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	},
+	"cancelReason": "Client requested cancellation #20"
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac51"
+	},
+	"status": "booked",
+	"clientName": "Client 021",
+	"clientMobileNumber": "09183000021",
+	"repName": "Employee 021",
+	"repMobileNumber": "09171000021",
+	"eventType": [
+		"Birthday"
+	],
+	"eventDate": {
+		"$date": "2025-11-22T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 71,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "1451104cec0bd0f178097df5"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "9bcce39af7f5952a1ab5438b"
+			},
+			"foodQuantity": 3,
+			"foodCost": 300
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 21",
+			"chargeQuantity": 1,
+			"chargePrice": 700
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 21",
+			"discountPrice": 900
+		}
+	],
+	"totalPrices": {
+		"packages": 10250,
+		"food": 300,
+		"charges": 700,
+		"discounts": 900,
+		"all": 10350
+	},
+	"name": "Sample Event 21",
+	"location": "Garden",
+	"tags": [
+		"Birthday",
+		"Networking"
+	],
+	"guests": [
+		"Client 021",
+		"Employee 021"
+	],
+	"formatArray": [
+		"Birthday",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 021",
+		"Employee 021"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Birthday"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 021",
+		"Employee 021"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac52"
+	},
+	"status": "reserved",
+	"clientName": "Client 022",
+	"clientMobileNumber": "09183000022",
+	"repName": "Employee 022",
+	"repMobileNumber": "09171000022",
+	"eventType": [
+		"Corporate"
+	],
+	"eventDate": {
+		"$date": "2025-11-23T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 72,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "11803ec6f8e46e5b0c6c0fc7"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "6250979ea1e479935b36366d"
+			},
+			"foodQuantity": 4,
+			"foodCost": 600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 22",
+			"chargeQuantity": 2,
+			"chargePrice": 800
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 22",
+			"discountPrice": 1143
+		}
+	],
+	"totalPrices": {
+		"packages": 10500,
+		"food": 600,
+		"charges": 1600,
+		"discounts": 1143,
+		"all": 11557
+	},
+	"name": "Sample Event 22",
+	"location": "Sunroom",
+	"tags": [
+		"Corporate",
+		"Networking"
+	],
+	"guests": [
+		"Client 022",
+		"Employee 022"
+	],
+	"formatArray": [
+		"Corporate",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 022",
+		"Employee 022"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Corporate"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 022",
+		"Employee 022"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac53"
+	},
+	"status": "finished",
+	"clientName": "Client 023",
+	"clientMobileNumber": "09183000023",
+	"repName": "Employee 023",
+	"repMobileNumber": "09171000023",
+	"eventType": [
+		"Reunion"
+	],
+	"eventDate": {
+		"$date": "2025-11-24T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 73,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "4b95b3bed66723eac9d3dbe4"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "424b5c31ce718c6668a6e796"
+			},
+			"foodQuantity": 5,
+			"foodCost": 1000
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 23",
+			"chargeQuantity": 3,
+			"chargePrice": 900
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 23",
+			"discountPrice": 1445
+		}
+	],
+	"totalPrices": {
+		"packages": 10750,
+		"food": 1000,
+		"charges": 2700,
+		"discounts": 1445,
+		"all": 13005
+	},
+	"name": "Sample Event 23",
+	"location": "Terrace",
+	"tags": [
+		"Reunion",
+		"Networking"
+	],
+	"guests": [
+		"Client 023",
+		"Employee 023"
+	],
+	"formatArray": [
+		"Reunion",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 023",
+		"Employee 023"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Reunion"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 023",
+		"Employee 023"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac54"
+	},
+	"status": "cancelled",
+	"clientName": "Client 024",
+	"clientMobileNumber": "09183000024",
+	"repName": "Employee 024",
+	"repMobileNumber": "09171000024",
+	"eventType": [
+		"Christening"
+	],
+	"eventDate": {
+		"$date": "2025-11-25T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 74,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "688839a870595ae59d7563c3"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "4009bc4181b1ffbadcc5d032"
+			},
+			"foodQuantity": 6,
+			"foodCost": 1500
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 24",
+			"chargeQuantity": 1,
+			"chargePrice": 1000
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 24",
+			"discountPrice": 1485
+		}
+	],
+	"totalPrices": {
+		"packages": 11000,
+		"food": 1500,
+		"charges": 1000,
+		"discounts": 1485,
+		"all": 12015
+	},
+	"name": "Sample Event 24",
+	"location": "Garden",
+	"tags": [
+		"Christening",
+		"Networking"
+	],
+	"guests": [
+		"Client 024",
+		"Employee 024"
+	],
+	"formatArray": [
+		"Christening",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 024",
+		"Employee 024"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Christening"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 024",
+		"Employee 024"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	},
+	"cancelReason": "Client requested cancellation #24"
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac55"
+	},
+	"status": "booked",
+	"clientName": "Client 025",
+	"clientMobileNumber": "09183000025",
+	"repName": "Employee 025",
+	"repMobileNumber": "09171000025",
+	"eventType": [
+		"Wedding"
+	],
+	"eventDate": {
+		"$date": "2025-11-26T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 75,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "8031c1fd98f079b891399966"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "26d1e6600cb60731115dea67"
+			},
+			"foodQuantity": 2,
+			"foodCost": 600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 25",
+			"chargeQuantity": 2,
+			"chargePrice": 1100
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 25",
+			"discountPrice": 1686
+		}
+	],
+	"totalPrices": {
+		"packages": 11250,
+		"food": 600,
+		"charges": 2200,
+		"discounts": 1686,
+		"all": 12364
+	},
+	"name": "Sample Event 25",
+	"location": "Sunroom",
+	"tags": [
+		"Wedding",
+		"Networking"
+	],
+	"guests": [
+		"Client 025",
+		"Employee 025"
+	],
+	"formatArray": [
+		"Wedding",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 025",
+		"Employee 025"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Wedding"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 025",
+		"Employee 025"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac56"
+	},
+	"status": "reserved",
+	"clientName": "Client 026",
+	"clientMobileNumber": "09183000026",
+	"repName": "Employee 026",
+	"repMobileNumber": "09171000026",
+	"eventType": [
+		"Birthday"
+	],
+	"eventDate": {
+		"$date": "2025-11-27T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 76,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "e696c969abb7c5a651139a64"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "b981cb66068d70da01e500bf"
+			},
+			"foodQuantity": 3,
+			"foodCost": 1050
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 26",
+			"chargeQuantity": 3,
+			"chargePrice": 1200
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 26",
+			"discountPrice": 2099.5
+		}
+	],
+	"totalPrices": {
+		"packages": 11500,
+		"food": 1050,
+		"charges": 3600,
+		"discounts": 2099.5,
+		"all": 14050.5
+	},
+	"name": "Sample Event 26",
+	"location": "Terrace",
+	"tags": [
+		"Birthday",
+		"Networking"
+	],
+	"guests": [
+		"Client 026",
+		"Employee 026"
+	],
+	"formatArray": [
+		"Birthday",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 026",
+		"Employee 026"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Birthday"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 026",
+		"Employee 026"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac57"
+	},
+	"status": "finished",
+	"clientName": "Client 027",
+	"clientMobileNumber": "09183000027",
+	"repName": "Employee 027",
+	"repMobileNumber": "09171000027",
+	"eventType": [
+		"Corporate"
+	],
+	"eventDate": {
+		"$date": "2025-11-28T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 77,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "1039f7e457d2915bf9ed72e4"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "f43da9c114afa47e0cb6cc0d"
+			},
+			"foodQuantity": 4,
+			"foodCost": 1600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 27",
+			"chargeQuantity": 1,
+			"chargePrice": 1300
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 27",
+			"discountPrice": 2051
+		}
+	],
+	"totalPrices": {
+		"packages": 11750,
+		"food": 1600,
+		"charges": 1300,
+		"discounts": 2051,
+		"all": 12599
+	},
+	"name": "Sample Event 27",
+	"location": "Garden",
+	"tags": [
+		"Corporate",
+		"Networking"
+	],
+	"guests": [
+		"Client 027",
+		"Employee 027"
+	],
+	"formatArray": [
+		"Corporate",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 027",
+		"Employee 027"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Corporate"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 027",
+		"Employee 027"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac58"
+	},
+	"status": "cancelled",
+	"clientName": "Client 028",
+	"clientMobileNumber": "09183000028",
+	"repName": "Employee 028",
+	"repMobileNumber": "09171000028",
+	"eventType": [
+		"Reunion"
+	],
+	"eventDate": {
+		"$date": "2025-11-29T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 78,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "67b02b9dfe16607019418b89"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "d7595889e1cc37e46e6bcbb9"
+			},
+			"foodQuantity": 5,
+			"foodCost": 2250
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 28",
+			"chargeQuantity": 2,
+			"chargePrice": 1400
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 28",
+			"discountPrice": 2557.5
+		}
+	],
+	"totalPrices": {
+		"packages": 12000,
+		"food": 2250,
+		"charges": 2800,
+		"discounts": 2557.5,
+		"all": 14492.5
+	},
+	"name": "Sample Event 28",
+	"location": "Sunroom",
+	"tags": [
+		"Reunion",
+		"Networking"
+	],
+	"guests": [
+		"Client 028",
+		"Employee 028"
+	],
+	"formatArray": [
+		"Reunion",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 028",
+		"Employee 028"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Reunion"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 028",
+		"Employee 028"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	},
+	"cancelReason": "Client requested cancellation #28"
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac59"
+	},
+	"status": "booked",
+	"clientName": "Client 029",
+	"clientMobileNumber": "09183000029",
+	"repName": "Employee 029",
+	"repMobileNumber": "09171000029",
+	"eventType": [
+		"Christening"
+	],
+	"eventDate": {
+		"$date": "2025-11-30T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 79,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "1042b6af5240e89d3276a7b1"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "6ea2ab8901cdbce995be642a"
+			},
+			"foodQuantity": 6,
+			"foodCost": 3000
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 29",
+			"chargeQuantity": 3,
+			"chargePrice": 1500
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 29",
+			"discountPrice": 3160
+		}
+	],
+	"totalPrices": {
+		"packages": 12250,
+		"food": 3000,
+		"charges": 4500,
+		"discounts": 3160,
+		"all": 16590
+	},
+	"name": "Sample Event 29",
+	"location": "Terrace",
+	"tags": [
+		"Christening",
+		"Networking"
+	],
+	"guests": [
+		"Client 029",
+		"Employee 029"
+	],
+	"formatArray": [
+		"Christening",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 029",
+		"Employee 029"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Christening"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 029",
+		"Employee 029"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac5a"
+	},
+	"status": "reserved",
+	"clientName": "Client 030",
+	"clientMobileNumber": "09183000030",
+	"repName": "Employee 030",
+	"repMobileNumber": "09171000030",
+	"eventType": [
+		"Wedding"
+	],
+	"eventDate": {
+		"$date": "2025-11-01T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 80,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "d4db7b8f157393dc5448d77a"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "91bc8aa569ea7eaa92f0be01"
+			},
+			"foodQuantity": 2,
+			"foodCost": 1100
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 30",
+			"chargeQuantity": 1,
+			"chargePrice": 100
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 30",
+			"discountPrice": 274
+		}
+	],
+	"totalPrices": {
+		"packages": 12500,
+		"food": 1100,
+		"charges": 100,
+		"discounts": 274,
+		"all": 13426
+	},
+	"name": "Sample Event 30",
+	"location": "Garden",
+	"tags": [
+		"Wedding",
+		"Networking"
+	],
+	"guests": [
+		"Client 030",
+		"Employee 030"
+	],
+	"formatArray": [
+		"Wedding",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 030",
+		"Employee 030"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Wedding"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 030",
+		"Employee 030"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac5b"
+	},
+	"status": "finished",
+	"clientName": "Client 031",
+	"clientMobileNumber": "09183000031",
+	"repName": "Employee 031",
+	"repMobileNumber": "09171000031",
+	"eventType": [
+		"Birthday"
+	],
+	"eventDate": {
+		"$date": "2025-11-02T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 81,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "300fee3bd1e2a4a29e3fd7a5"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "12f74ee6ffeeca1e9c0e0a17"
+			},
+			"foodQuantity": 3,
+			"foodCost": 1800
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 31",
+			"chargeQuantity": 2,
+			"chargePrice": 200
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 31",
+			"discountPrice": 448.5
+		}
+	],
+	"totalPrices": {
+		"packages": 12750,
+		"food": 1800,
+		"charges": 400,
+		"discounts": 448.5,
+		"all": 14501.5
+	},
+	"name": "Sample Event 31",
+	"location": "Sunroom",
+	"tags": [
+		"Birthday",
+		"Networking"
+	],
+	"guests": [
+		"Client 031",
+		"Employee 031"
+	],
+	"formatArray": [
+		"Birthday",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 031",
+		"Employee 031"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Birthday"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 031",
+		"Employee 031"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac5c"
+	},
+	"status": "cancelled",
+	"clientName": "Client 032",
+	"clientMobileNumber": "09183000032",
+	"repName": "Employee 032",
+	"repMobileNumber": "09171000032",
+	"eventType": [
+		"Corporate"
+	],
+	"eventDate": {
+		"$date": "2025-11-03T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 82,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "59e49636d609ed57e94ff6a9"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "0dafe72846706dabbb683415"
+			},
+			"foodQuantity": 4,
+			"foodCost": 2600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 32",
+			"chargeQuantity": 3,
+			"chargePrice": 300
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 32",
+			"discountPrice": 660
+		}
+	],
+	"totalPrices": {
+		"packages": 13000,
+		"food": 2600,
+		"charges": 900,
+		"discounts": 660,
+		"all": 15840
+	},
+	"name": "Sample Event 32",
+	"location": "Terrace",
+	"tags": [
+		"Corporate",
+		"Networking"
+	],
+	"guests": [
+		"Client 032",
+		"Employee 032"
+	],
+	"formatArray": [
+		"Corporate",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 032",
+		"Employee 032"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Corporate"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 032",
+		"Employee 032"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	},
+	"cancelReason": "Client requested cancellation #32"
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac5d"
+	},
+	"status": "booked",
+	"clientName": "Client 033",
+	"clientMobileNumber": "09183000033",
+	"repName": "Employee 033",
+	"repMobileNumber": "09171000033",
+	"eventType": [
+		"Reunion"
+	],
+	"eventDate": {
+		"$date": "2025-11-04T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 83,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "e379f17e9069aca91d0135dc"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "53f7b075a5441056b6d64267"
+			},
+			"foodQuantity": 5,
+			"foodCost": 3500
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 33",
+			"chargeQuantity": 1,
+			"chargePrice": 400
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 33",
+			"discountPrice": 857.5
+		}
+	],
+	"totalPrices": {
+		"packages": 13250,
+		"food": 3500,
+		"charges": 400,
+		"discounts": 857.5,
+		"all": 16292.5
+	},
+	"name": "Sample Event 33",
+	"location": "Garden",
+	"tags": [
+		"Reunion",
+		"Networking"
+	],
+	"guests": [
+		"Client 033",
+		"Employee 033"
+	],
+	"formatArray": [
+		"Reunion",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 033",
+		"Employee 033"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Reunion"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 033",
+		"Employee 033"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac5e"
+	},
+	"status": "reserved",
+	"clientName": "Client 034",
+	"clientMobileNumber": "09183000034",
+	"repName": "Employee 034",
+	"repMobileNumber": "09171000034",
+	"eventType": [
+		"Christening"
+	],
+	"eventDate": {
+		"$date": "2025-11-05T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 84,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "9cbe1b5d93e2c844a2e5ff02"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "c6d5964cb287127ced5f4bc3"
+			},
+			"foodQuantity": 6,
+			"foodCost": 4500
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 34",
+			"chargeQuantity": 2,
+			"chargePrice": 500
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 34",
+			"discountPrice": 1140
+		}
+	],
+	"totalPrices": {
+		"packages": 13500,
+		"food": 4500,
+		"charges": 1000,
+		"discounts": 1140,
+		"all": 17860
+	},
+	"name": "Sample Event 34",
+	"location": "Sunroom",
+	"tags": [
+		"Christening",
+		"Networking"
+	],
+	"guests": [
+		"Client 034",
+		"Employee 034"
+	],
+	"formatArray": [
+		"Christening",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 034",
+		"Employee 034"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Christening"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 034",
+		"Employee 034"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac5f"
+	},
+	"status": "finished",
+	"clientName": "Client 035",
+	"clientMobileNumber": "09183000035",
+	"repName": "Employee 035",
+	"repMobileNumber": "09171000035",
+	"eventType": [
+		"Wedding"
+	],
+	"eventDate": {
+		"$date": "2025-11-06T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 85,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "63005d8934f92b2b1e2f07bf"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "b68abbd3dc89610e8c56817c"
+			},
+			"foodQuantity": 2,
+			"foodCost": 1600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 35",
+			"chargeQuantity": 3,
+			"chargePrice": 600
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 35",
+			"discountPrice": 1200.5
+		}
+	],
+	"totalPrices": {
+		"packages": 13750,
+		"food": 1600,
+		"charges": 1800,
+		"discounts": 1200.5,
+		"all": 15949.5
+	},
+	"name": "Sample Event 35",
+	"location": "Terrace",
+	"tags": [
+		"Wedding",
+		"Networking"
+	],
+	"guests": [
+		"Client 035",
+		"Employee 035"
+	],
+	"formatArray": [
+		"Wedding",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 035",
+		"Employee 035"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Wedding"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 035",
+		"Employee 035"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac60"
+	},
+	"status": "cancelled",
+	"clientName": "Client 036",
+	"clientMobileNumber": "09183000036",
+	"repName": "Employee 036",
+	"repMobileNumber": "09171000036",
+	"eventType": [
+		"Birthday"
+	],
+	"eventDate": {
+		"$date": "2025-11-07T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 86,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "2e25336cb3a2ad1b16ecfd2b"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "d0efeb63579be41757561f9b"
+			},
+			"foodQuantity": 3,
+			"foodCost": 2550
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 36",
+			"chargeQuantity": 1,
+			"chargePrice": 700
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 36",
+			"discountPrice": 1380
+		}
+	],
+	"totalPrices": {
+		"packages": 14000,
+		"food": 2550,
+		"charges": 700,
+		"discounts": 1380,
+		"all": 15870
+	},
+	"name": "Sample Event 36",
+	"location": "Garden",
+	"tags": [
+		"Birthday",
+		"Networking"
+	],
+	"guests": [
+		"Client 036",
+		"Employee 036"
+	],
+	"formatArray": [
+		"Birthday",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 036",
+		"Employee 036"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Birthday"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 036",
+		"Employee 036"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	},
+	"cancelReason": "Client requested cancellation #36"
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac61"
+	},
+	"status": "booked",
+	"clientName": "Client 037",
+	"clientMobileNumber": "09183000037",
+	"repName": "Employee 037",
+	"repMobileNumber": "09171000037",
+	"eventType": [
+		"Corporate"
+	],
+	"eventDate": {
+		"$date": "2025-11-08T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 87,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "9fc057af0800cb4d2b3f3575"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "91cd43e222943f3afb02db39"
+			},
+			"foodQuantity": 4,
+			"foodCost": 3600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 37",
+			"chargeQuantity": 2,
+			"chargePrice": 800
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 37",
+			"discountPrice": 1750.5
+		}
+	],
+	"totalPrices": {
+		"packages": 14250,
+		"food": 3600,
+		"charges": 1600,
+		"discounts": 1750.5,
+		"all": 17699.5
+	},
+	"name": "Sample Event 37",
+	"location": "Sunroom",
+	"tags": [
+		"Corporate",
+		"Networking"
+	],
+	"guests": [
+		"Client 037",
+		"Employee 037"
+	],
+	"formatArray": [
+		"Corporate",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 037",
+		"Employee 037"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Corporate"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 037",
+		"Employee 037"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac62"
+	},
+	"status": "reserved",
+	"clientName": "Client 038",
+	"clientMobileNumber": "09183000038",
+	"repName": "Employee 038",
+	"repMobileNumber": "09171000038",
+	"eventType": [
+		"Reunion"
+	],
+	"eventDate": {
+		"$date": "2025-11-09T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 88,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "392eaabd6aa5001c806bb78e"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "830d5fad54f37a23ee0aec11"
+			},
+			"foodQuantity": 5,
+			"foodCost": 4750
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 38",
+			"chargeQuantity": 3,
+			"chargePrice": 900
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 38",
+			"discountPrice": 2195
+		}
+	],
+	"totalPrices": {
+		"packages": 14500,
+		"food": 4750,
+		"charges": 2700,
+		"discounts": 2195,
+		"all": 19755
+	},
+	"name": "Sample Event 38",
+	"location": "Terrace",
+	"tags": [
+		"Reunion",
+		"Networking"
+	],
+	"guests": [
+		"Client 038",
+		"Employee 038"
+	],
+	"formatArray": [
+		"Reunion",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 038",
+		"Employee 038"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Reunion"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 038",
+		"Employee 038"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac63"
+	},
+	"status": "finished",
+	"clientName": "Client 039",
+	"clientMobileNumber": "09183000039",
+	"repName": "Employee 039",
+	"repMobileNumber": "09171000039",
+	"eventType": [
+		"Christening"
+	],
+	"eventDate": {
+		"$date": "2025-11-10T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 89,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "182bc55a98b23600d5506407"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "8baa101aba18b864d3784435"
+			},
+			"foodQuantity": 6,
+			"foodCost": 6000
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 39",
+			"chargeQuantity": 1,
+			"chargePrice": 1000
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 39",
+			"discountPrice": 2392.5
+		}
+	],
+	"totalPrices": {
+		"packages": 14750,
+		"food": 6000,
+		"charges": 1000,
+		"discounts": 2392.5,
+		"all": 19357.5
+	},
+	"name": "Sample Event 39",
+	"location": "Garden",
+	"tags": [
+		"Christening",
+		"Networking"
+	],
+	"guests": [
+		"Client 039",
+		"Employee 039"
+	],
+	"formatArray": [
+		"Christening",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 039",
+		"Employee 039"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Christening"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 039",
+		"Employee 039"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac64"
+	},
+	"status": "cancelled",
+	"clientName": "Client 040",
+	"clientMobileNumber": "09183000040",
+	"repName": "Employee 040",
+	"repMobileNumber": "09171000040",
+	"eventType": [
+		"Wedding"
+	],
+	"eventDate": {
+		"$date": "2025-11-11T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 90,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "9f501c6b0617d6657a6b2333"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "3a14e7a5936b689eac46a986"
+			},
+			"foodQuantity": 2,
+			"foodCost": 100
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 40",
+			"chargeQuantity": 2,
+			"chargePrice": 1100
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 40",
+			"discountPrice": 2076
+		}
+	],
+	"totalPrices": {
+		"packages": 15000,
+		"food": 100,
+		"charges": 2200,
+		"discounts": 2076,
+		"all": 15224
+	},
+	"name": "Sample Event 40",
+	"location": "Sunroom",
+	"tags": [
+		"Wedding",
+		"Networking"
+	],
+	"guests": [
+		"Client 040",
+		"Employee 040"
+	],
+	"formatArray": [
+		"Wedding",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 040",
+		"Employee 040"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Wedding"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 040",
+		"Employee 040"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	},
+	"cancelReason": "Client requested cancellation #40"
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac65"
+	},
+	"status": "booked",
+	"clientName": "Client 041",
+	"clientMobileNumber": "09183000041",
+	"repName": "Employee 041",
+	"repMobileNumber": "09171000041",
+	"eventType": [
+		"Birthday"
+	],
+	"eventDate": {
+		"$date": "2025-11-12T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 91,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "afae2e5e1b62a55c9883f8a6"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "5255ce6aa0cf41a6c4cad80a"
+			},
+			"foodQuantity": 3,
+			"foodCost": 300
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 41",
+			"chargeQuantity": 3,
+			"chargePrice": 1200
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 41",
+			"discountPrice": 2489.5
+		}
+	],
+	"totalPrices": {
+		"packages": 15250,
+		"food": 300,
+		"charges": 3600,
+		"discounts": 2489.5,
+		"all": 16660.5
+	},
+	"name": "Sample Event 41",
+	"location": "Terrace",
+	"tags": [
+		"Birthday",
+		"Networking"
+	],
+	"guests": [
+		"Client 041",
+		"Employee 041"
+	],
+	"formatArray": [
+		"Birthday",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 041",
+		"Employee 041"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Birthday"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 041",
+		"Employee 041"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac66"
+	},
+	"status": "reserved",
+	"clientName": "Client 042",
+	"clientMobileNumber": "09183000042",
+	"repName": "Employee 042",
+	"repMobileNumber": "09171000042",
+	"eventType": [
+		"Corporate"
+	],
+	"eventDate": {
+		"$date": "2025-11-13T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 92,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "8c04d49258cda3cfd5316142"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "9cd605019c933933ea209268"
+			},
+			"foodQuantity": 4,
+			"foodCost": 600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 42",
+			"chargeQuantity": 1,
+			"chargePrice": 1300
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 42",
+			"discountPrice": 2436
+		}
+	],
+	"totalPrices": {
+		"packages": 15500,
+		"food": 600,
+		"charges": 1300,
+		"discounts": 2436,
+		"all": 14964
+	},
+	"name": "Sample Event 42",
+	"location": "Garden",
+	"tags": [
+		"Corporate",
+		"Networking"
+	],
+	"guests": [
+		"Client 042",
+		"Employee 042"
+	],
+	"formatArray": [
+		"Corporate",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 042",
+		"Employee 042"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Corporate"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 042",
+		"Employee 042"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac67"
+	},
+	"status": "finished",
+	"clientName": "Client 043",
+	"clientMobileNumber": "09183000043",
+	"repName": "Employee 043",
+	"repMobileNumber": "09171000043",
+	"eventType": [
+		"Reunion"
+	],
+	"eventDate": {
+		"$date": "2025-11-14T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 93,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "f733c7c0e874f946ba63f5c2"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "bba0ff386c2181283b4c55ed"
+			},
+			"foodQuantity": 5,
+			"foodCost": 1000
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 43",
+			"chargeQuantity": 2,
+			"chargePrice": 1400
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 43",
+			"discountPrice": 2932.5
+		}
+	],
+	"totalPrices": {
+		"packages": 15750,
+		"food": 1000,
+		"charges": 2800,
+		"discounts": 2932.5,
+		"all": 16617.5
+	},
+	"name": "Sample Event 43",
+	"location": "Sunroom",
+	"tags": [
+		"Reunion",
+		"Networking"
+	],
+	"guests": [
+		"Client 043",
+		"Employee 043"
+	],
+	"formatArray": [
+		"Reunion",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 043",
+		"Employee 043"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Reunion"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 043",
+		"Employee 043"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac68"
+	},
+	"status": "cancelled",
+	"clientName": "Client 044",
+	"clientMobileNumber": "09183000044",
+	"repName": "Employee 044",
+	"repMobileNumber": "09171000044",
+	"eventType": [
+		"Christening"
+	],
+	"eventDate": {
+		"$date": "2025-11-15T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 94,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "2079d3207960529ba7d51325"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "52f6232555708d934b4ec5b1"
+			},
+			"foodQuantity": 6,
+			"foodCost": 1500
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 44",
+			"chargeQuantity": 3,
+			"chargePrice": 1500
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 44",
+			"discountPrice": 3520
+		}
+	],
+	"totalPrices": {
+		"packages": 16000,
+		"food": 1500,
+		"charges": 4500,
+		"discounts": 3520,
+		"all": 18480
+	},
+	"name": "Sample Event 44",
+	"location": "Terrace",
+	"tags": [
+		"Christening",
+		"Networking"
+	],
+	"guests": [
+		"Client 044",
+		"Employee 044"
+	],
+	"formatArray": [
+		"Christening",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 044",
+		"Employee 044"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Christening"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 044",
+		"Employee 044"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	},
+	"cancelReason": "Client requested cancellation #44"
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac69"
+	},
+	"status": "booked",
+	"clientName": "Client 045",
+	"clientMobileNumber": "09183000045",
+	"repName": "Employee 045",
+	"repMobileNumber": "09171000045",
+	"eventType": [
+		"Wedding"
+	],
+	"eventDate": {
+		"$date": "2025-11-16T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 95,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "e573a19938f79eda3f4b650d"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "637d3351d96497ca3de851d4"
+			},
+			"foodQuantity": 2,
+			"foodCost": 600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 45",
+			"chargeQuantity": 1,
+			"chargePrice": 100
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 45",
+			"discountPrice": 339
+		}
+	],
+	"totalPrices": {
+		"packages": 16250,
+		"food": 600,
+		"charges": 100,
+		"discounts": 339,
+		"all": 16611
+	},
+	"name": "Sample Event 45",
+	"location": "Garden",
+	"tags": [
+		"Wedding",
+		"Networking"
+	],
+	"guests": [
+		"Client 045",
+		"Employee 045"
+	],
+	"formatArray": [
+		"Wedding",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 045",
+		"Employee 045"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Wedding"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 045",
+		"Employee 045"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac6a"
+	},
+	"status": "reserved",
+	"clientName": "Client 046",
+	"clientMobileNumber": "09183000046",
+	"repName": "Employee 046",
+	"repMobileNumber": "09171000046",
+	"eventType": [
+		"Birthday"
+	],
+	"eventDate": {
+		"$date": "2025-11-17T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 96,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "115fd9a148fb648608aa0bfe"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "d41a9edf99079164909a1802"
+			},
+			"foodQuantity": 3,
+			"foodCost": 1050
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 46",
+			"chargeQuantity": 2,
+			"chargePrice": 200
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 46",
+			"discountPrice": 538.5
+		}
+	],
+	"totalPrices": {
+		"packages": 16500,
+		"food": 1050,
+		"charges": 400,
+		"discounts": 538.5,
+		"all": 17411.5
+	},
+	"name": "Sample Event 46",
+	"location": "Sunroom",
+	"tags": [
+		"Birthday",
+		"Networking"
+	],
+	"guests": [
+		"Client 046",
+		"Employee 046"
+	],
+	"formatArray": [
+		"Birthday",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 046",
+		"Employee 046"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Birthday"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 046",
+		"Employee 046"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac6b"
+	},
+	"status": "finished",
+	"clientName": "Client 047",
+	"clientMobileNumber": "09183000047",
+	"repName": "Employee 047",
+	"repMobileNumber": "09171000047",
+	"eventType": [
+		"Corporate"
+	],
+	"eventDate": {
+		"$date": "2025-11-18T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 97,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "8e320faa1e07b94409013e38"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "ff37670ba7f1d0cca2eb383f"
+			},
+			"foodQuantity": 4,
+			"foodCost": 1600
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 47",
+			"chargeQuantity": 3,
+			"chargePrice": 300
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 47",
+			"discountPrice": 770
+		}
+	],
+	"totalPrices": {
+		"packages": 16750,
+		"food": 1600,
+		"charges": 900,
+		"discounts": 770,
+		"all": 18480
+	},
+	"name": "Sample Event 47",
+	"location": "Terrace",
+	"tags": [
+		"Corporate",
+		"Networking"
+	],
+	"guests": [
+		"Client 047",
+		"Employee 047"
+	],
+	"formatArray": [
+		"Corporate",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 047",
+		"Employee 047"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Corporate"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 047",
+		"Employee 047"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac6c"
+	},
+	"status": "cancelled",
+	"clientName": "Client 048",
+	"clientMobileNumber": "09183000048",
+	"repName": "Employee 048",
+	"repMobileNumber": "09171000048",
+	"eventType": [
+		"Reunion"
+	],
+	"eventDate": {
+		"$date": "2025-11-19T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 98,
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "b1029132f4fd2742dee9eb3a"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "59d508279b34e27a43d52489"
+			},
+			"foodQuantity": 5,
+			"foodCost": 2250
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 48",
+			"chargeQuantity": 1,
+			"chargePrice": 400
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 48",
+			"discountPrice": 982.5
+		}
+	],
+	"totalPrices": {
+		"packages": 17000,
+		"food": 2250,
+		"charges": 400,
+		"discounts": 982.5,
+		"all": 18667.5
+	},
+	"name": "Sample Event 48",
+	"location": "Garden",
+	"tags": [
+		"Reunion",
+		"Networking"
+	],
+	"guests": [
+		"Client 048",
+		"Employee 048"
+	],
+	"formatArray": [
+		"Reunion",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 048",
+		"Employee 048"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Reunion"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 048",
+		"Employee 048"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	},
+	"cancelReason": "Client requested cancellation #48"
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac6d"
+	},
+	"status": "booked",
+	"clientName": "Client 049",
+	"clientMobileNumber": "09183000049",
+	"repName": "Employee 049",
+	"repMobileNumber": "09171000049",
+	"eventType": [
+		"Christening"
+	],
+	"eventDate": {
+		"$date": "2025-11-20T00:00:00Z"
+	},
+	"eventTime": "Evening",
+	"numOfPax": 99,
+	"eventVenues": [
+		"Sunroom"
+	],
+	"eventPackages": [
+		{
+			"$oid": "f52f3796c8c34609f17abeaf"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "760570943d0a470734e81799"
+			},
+			"foodQuantity": 6,
+			"foodCost": 3000
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 49",
+			"chargeQuantity": 2,
+			"chargePrice": 500
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 49",
+			"discountPrice": 1275
+		}
+	],
+	"totalPrices": {
+		"packages": 17250,
+		"food": 3000,
+		"charges": 1000,
+		"discounts": 1275,
+		"all": 19975
+	},
+	"name": "Sample Event 49",
+	"location": "Sunroom",
+	"tags": [
+		"Christening",
+		"Networking"
+	],
+	"guests": [
+		"Client 049",
+		"Employee 049"
+	],
+	"formatArray": [
+		"Christening",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 049",
+		"Employee 049"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Christening"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 049",
+		"Employee 049"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c90f8cd4a7189d5e3ac6e"
+	},
+	"status": "reserved",
+	"clientName": "Client 050",
+	"clientMobileNumber": "09183000050",
+	"repName": "Employee 050",
+	"repMobileNumber": "09171000050",
+	"eventType": [
+		"Wedding"
+	],
+	"eventDate": {
+		"$date": "2025-11-21T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 100,
+	"eventVenues": [
+		"Terrace"
+	],
+	"eventPackages": [
+		{
+			"$oid": "e876f3465b6c708f7e99ba3f"
+		}
+	],
+	"packageAdditionalPax": false,
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "0a0044f30ca7f9fc15d189b6"
+			},
+			"foodQuantity": 2,
+			"foodCost": 1100
+		}
+	],
+	"transactionCharges": [
+		{
+			"chargeName": "Charge 50",
+			"chargeQuantity": 3,
+			"chargePrice": 600
+		}
+	],
+	"transactionDiscounts": [
+		{
+			"discountName": "Discount 50",
+			"discountPrice": 1428
+		}
+	],
+	"totalPrices": {
+		"packages": 17500,
+		"food": 1100,
+		"charges": 1800,
+		"discounts": 1428,
+		"all": 18972
+	},
+	"name": "Sample Event 50",
+	"location": "Terrace",
+	"tags": [
+		"Wedding",
+		"Networking"
+	],
+	"guests": [
+		"Client 050",
+		"Employee 050"
+	],
+	"formatArray": [
+		"Wedding",
+		"Networking"
+	],
+	"categories": [
+		"Business"
+	],
+	"attendees": [
+		"Client 050",
+		"Employee 050"
+	],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"eventTypeArray": [
+		"Wedding"
+	],
+	"services": [
+		"Catering",
+		"AV Setup"
+	],
+	"keywords": [
+		"Networking",
+		"Business"
+	],
+	"participants": [
+		"Client 050",
+		"Employee 050"
+	],
+	"menuPackage": {
+		"saladName": "Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Spaghetti",
+		"pastaQuantity": 10,
+		"beefName": "Roast Beef",
+		"beefQuantity": 10,
+		"porkName": "Pork BBQ",
+		"porkQuantity": 10,
+		"chickenName": "Fried Chicken",
+		"chickenQuantity": 10,
+		"fishName": "Fish Fillet",
+		"fishQuantity": 10,
+		"icedTeaQuantity": 50,
+		"riceQuantity": 50
+	}
+}
+{
+	"_id": {
+		"$oid": "691c973a37813bef8aa95445"
+	},
+	"status": "reserved",
+	"clientName": "Andrei",
+	"clientMobileNumber": "+639999999999",
+	"repName": "",
+	"repMobileNumber": "",
+	"eventType": [
+		"Birthday"
+	],
+	"eventDate": {
+		"$date": "2025-11-18T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 10,
+	"eventNotes": "",
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "dc40afd51d055a7d6eff16ea"
+		}
+	],
+	"packageAdditionalPax": false,
+	"tags": [],
+	"guests": [],
+	"formatArray": [],
+	"categories": [],
+	"attendees": [],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"services": [],
+	"keywords": [],
+	"participants": [],
+	"menuPackage": {
+		"saladName": "Chicken Caesar Salad",
+		"saladQuantity": 10,
+		"pastaName": "Shirmp and Squid Marinara",
+		"pastaQuantity": 20,
+		"beefName": "Kare Kare",
+		"beefQuantity": 30,
+		"fishName": "Parmesan Crusted Fish",
+		"fishQuantity": null,
+		"icedTeaQuantity": null,
+		"riceQuantity": null,
+		"_id": {
+			"$oid": "691c973a37813bef8aa95446"
+		}
+	},
+	"menuAdditional": [
+		{
+			"foodItem": {
+				"$oid": "a04d610518722e57003a9dda"
+			},
+			"foodQuantity": 10,
+			"foodCost": 1000,
+			"_id": {
+				"$oid": "691c973a37813bef8aa95447"
+			}
+		}
+	],
+	"transactionCharges": [],
+	"transactionDiscounts": [],
+	"totalPrices": {
+		"packages": 5500,
+		"food": 1000,
+		"charges": 0,
+		"discounts": 0,
+		"all": 6500,
+		"_id": {
+			"$oid": "691c973a37813bef8aa95448"
+		}
+	},
+	"downpaymentDate": {
+		"$date": "2025-11-18T00:00:00Z"
+	},
+	"downpaymentMode": "GCash",
+	"downpaymentAmount": 69,
+	"finalPaymentDate": null,
+	"finalPaymentMode": "",
+	"finalPaymentAmount": null,
+	"__v": 0
+}
+{
+	"_id": {
+		"$oid": "691d4cb5b817c6ddb62f4751"
+	},
+	"status": "reserved",
+	"clientName": "Devon Miguel",
+	"clientMobileNumber": "+639994206767",
+	"repName": "",
+	"repMobileNumber": "",
+	"eventType": [
+		"Wedding"
+	],
+	"eventDate": {
+		"$date": "2025-11-22T00:00:00Z"
+	},
+	"eventTime": "Afternoon",
+	"numOfPax": 2,
+	"eventNotes": "",
+	"eventVenues": [
+		"Garden"
+	],
+	"eventPackages": [
+		{
+			"$oid": "dc40afd51d055a7d6eff16ea"
+		}
+	],
+	"packageAdditionalPax": false,
+	"tags": [],
+	"guests": [],
+	"formatArray": [],
+	"categories": [],
+	"attendees": [],
+	"reasons": [],
+	"skills": [],
+	"items": [],
+	"services": [],
+	"keywords": [],
+	"participants": [],
+	"menuPackage": {
+		"saladName": "Chicken Caesar Salad",
+		"saladQuantity": 10,
+		"icedTeaQuantity": null,
+		"riceQuantity": null,
+		"_id": {
+			"$oid": "691d4cb5b817c6ddb62f4752"
+		}
+	},
+	"menuAdditional": [],
+	"transactionCharges": [],
+	"transactionDiscounts": [
+		{
+			"discountName": "67",
+			"discountPrice": 67,
+			"_id": {
+				"$oid": "691d4cb5b817c6ddb62f4753"
+			}
+		}
+	],
+	"totalPrices": {
+		"packages": 5500,
+		"food": 0,
+		"charges": 0,
+		"discounts": 67,
+		"all": 5433,
+		"_id": {
+			"$oid": "691d4cb5b817c6ddb62f4754"
+		}
+	},
+	"downpaymentDate": {
+		"$date": "2025-11-19T00:00:00Z"
+	},
+	"downpaymentMode": "Cash",
+	"downpaymentAmount": 676,
+	"finalPaymentDate": null,
+	"finalPaymentMode": "",
+	"finalPaymentAmount": null,
+	"__v": 0
+}

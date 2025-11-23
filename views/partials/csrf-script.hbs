@@ -1,0 +1,5 @@
+<script>
+  // expose CSRF token to frontend JS for AJAX calls 
+  //   by making the CSRF token from the backend available to all page JS
+  window.CSRF_TOKEN_FROM_TEMPLATE = "{{csrfToken}}";
+</script>

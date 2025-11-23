@@ -1,15 +1,63 @@
 const bcrypt = require("bcrypt");
 const Employee = require("../models/employee.js");
-const activityLogger = require("../helpers/activityLogger");
-
-// TODO: after testing and debugging, REMOVE
-// CSSECDV security risk for explicit logout logging
+const activityLogger = require("../helpers/activityLogger.js");
 
 console.log("[DB] using db:", require("mongoose").connection.name);
 console.log(
   "[DB] employee collection name:",
   Employee.collection.collectionName,
 );
+
+const MAX_FAILED_ATTEMPTS = 5; // 5 tries
+const FAILED_WINDOW_MINUTES = 15; // within 15 minutes
+const LOCK_TIME_MINUTES = 15; // lock account for 15 minutes
+
+function isAccountLocked(user) {
+  if (!user.lockUntil) return false;
+  return user.lockUntil > new Date();
+}
+
+async function recordFailedLogin(user, meta, reason) {
+  // If user is unknown (null), just log and bail
+  if (!user) {
+    await activityLogger(meta.username || "unknown", "login_failed", {
+      ...meta,
+      reason,
+    });
+    return;
+  }
+
+  const now = new Date();
+  let failedAttempts = user.failedLoginAttempts || 0;
+
+  // Reset counter if last failure was outside the window
+  if (
+    user.lastFailedLoginAt &&
+    now - user.lastFailedLoginAt > FAILED_WINDOW_MINUTES * 60 * 1000
+  ) {
+    failedAttempts = 1;
+  } else {
+    failedAttempts += 1;
+  }
+
+  const update = {
+    failedLoginAttempts: failedAttempts,
+    lastFailedLoginAt: now,
+  };
+
+  if (failedAttempts >= MAX_FAILED_ATTEMPTS) {
+    update.lockUntil = new Date(now.getTime() + LOCK_TIME_MINUTES * 60 * 1000);
+  }
+
+  await Employee.updateOne({ _id: user._id }, update);
+
+  await activityLogger(user.username, "login_failed", {
+    ...meta,
+    reason,
+    failedLoginAttempts: update.failedLoginAttempts,
+    lockUntil: update.lockUntil,
+  });
+}
 
 const controller = {
   /**
@@ -22,11 +70,10 @@ const controller = {
    * @param {express.request} req request object, must have username and password in its body
    * @param {express.response} res response object
    */
-  authenticate: async function (req, res) {
+  authenticate: async function (req, res, next) {
     const { username, password } = req.body || {};
     const meta = {
       at: new Date().toISOString(),
-      // username: req.session?.user?.username,
       ip: req.ip,
       ua: req.headers["user-agent"],
       username,
@@ -34,63 +81,134 @@ const controller = {
 
     try {
       const user = await Employee.findOne({ username });
+
+      // 1) Unknown username -> generic failure + log
       if (!user) {
         console.warn("[AUTH][FAIL] user not found", meta);
-        // activityLogger('login_fail', meta);
+        await recordFailedLogin(null, meta, "user_not_found");
         return res
           .status(401)
           .render("login", { error: "Invalid credentials" });
       }
 
-      // const result = await bcrypt.compare(password || '', user.password);
-      const result = user
-        ? await bcrypt.compare(password, user.password)
-        : false;
+      // 2) Account temporarily locked?
+      if (isAccountLocked(user)) {
+        console.warn("[AUTH][FAIL] account locked", {
+          ...meta,
+          lockUntil: user.lockUntil,
+        });
 
-      if (!result) {
+        await activityLogger(user.username, "login_failed_account_locked", {
+          ...meta,
+          lockUntil: user.lockUntil,
+        });
+
+        return res.status(429).render("login", {
+          error:
+            "Too many failed attempts. Your account is temporarily locked. Please try again later.",
+        });
+      }
+
+      // 3) Password check
+      const passwordMatches = await bcrypt.compare(
+        password || "",
+        user.password,
+      );
+
+      if (!passwordMatches) {
         console.warn("[AUTH][FAIL] bad password", meta);
-        // activityLogger('login_fail', meta);
+        await recordFailedLogin(user, meta, "bad_password");
+
         return res
           .status(401)
           .render("login", { error: "Invalid credentials" });
       }
 
+      // 4) Has no access (disabled account)
       if (!user.hasAccess) {
         console.warn("[AUTH][FAIL] no access", {
           ...meta,
           hasAccess: user.hasAccess,
         });
-        // activityLogger('login_fail', { ...meta, reason: 'no_access' });
+
+        await activityLogger(user.username, "login_failed_no_access", {
+          ...meta,
+          hasAccess: user.hasAccess,
+        });
+
         return res.status(403).render("login", { error: "Account disabled" });
       }
 
-      // req.session.user = user;
-      req.session.loggedIn = true;
-      req.session.isAdmin = user.role === "admin";
+      // 5) Successful login -> reset failed counters & lock
+      if (
+        user.failedLoginAttempts > 0 ||
+        user.lastFailedLoginAt ||
+        user.lockUntil
+      ) {
+        await Employee.updateOne(
+          { _id: user._id },
+          {
+            failedLoginAttempts: 0,
+            lastFailedLoginAt: null,
+            lockUntil: null,
+          },
+        );
+      }
 
-      //use instead bc we are now storing full user in session
-      req.session.user = {
-        _id: user._id,
-        username: user.username,
-        role: user.role,
-        hasAccess: user.hasAccess,
+      const finalizeLogin = () => {
+        req.session.loggedIn = true;
+        req.session.isAdmin = user.role === "admin";
+        req.session.user = {
+          _id: user._id,
+          username: user.username,
+          role: user.role,
+          hasAccess: user.hasAccess,
+        };
+
+        console.info("[AUTH][OK] login", {
+          ...meta,
+          isAdmin: req.session.isAdmin,
+        });
+
+        const logPromise = activityLogger(user.username, "login_success", {
+          ...meta,
+          isAdmin: req.session.isAdmin,
+        });
+
+        // in prod --> promise
+        // in tests the mock may just return undefined
+        if (logPromise && typeof logPromise.catch === "function") {
+          logPromise.catch((logErr) => {
+            console.error("[AUTH][LOGIN_SUCCESS_LOG_ERROR]", {
+              ...meta,
+              err: logErr.message,
+            });
+          });
+        }
+
+        return res.redirect("/event-tracker/home");
       };
 
-      // on login failure:
-      // if user not found / wrong password --> generic "Invalid credentials"
-      // if hasAccess === false --> "Account disabled"
-      // for all failures, log with activityLogger(username || 'unknown', 'Login failed: reason')
-      // never leak specifics in UI
-      // on logout:
-      // log "Logout" using activityLogger
-      // destroy session safely
+      // --- Session fixation hardening ---
+      const canRegenerate =
+        req.session && typeof req.session.regenerate === "function";
 
-      console.info("[AUTH][OK] login", {
-        ...meta,
-        isAdmin: req.session.isAdmin,
-      });
-      // activityLogger('login_success', { ...meta, isAdmin: req.session.isAdmin });
-      return res.redirect("/event-tracker/home");
+      if (canRegenerate) {
+        // Production path: use session.regenerate to avoid fixation
+        req.session.regenerate((err) => {
+          if (err) {
+            console.error("[AUTH][SESSION_REGENERATE][ERROR]", {
+              ...meta,
+              err: err.message,
+            });
+            return res.status(500).render("login", { error: "Server error" });
+          }
+
+          finalizeLogin();
+        });
+      } else {
+        finalizeLogin();
+      }
     } catch (err) {
       console.error("[AUTH][ERROR]", { ...meta, err: err.message });
       return res.status(500).render("login", { error: "Server error" });
@@ -109,26 +227,23 @@ const controller = {
     return res.render("login");
   },
 
-  // getLogout: function (req, res) {
-  //     req.session.destroy(function (err) {
-  //         if (err) throw err;
-  //         res.redirect('/');
-  //     });
-  // },
-  // TODO: after testing and debugging, REMOVE
-  // CSSECDV security risk for explicit logout logging
   getLogout: function (req, res) {
     const meta = {
       at: new Date().toISOString(),
       username: req.session?.user?.username,
       ip: req.ip,
     };
+
     req.session.destroy(function (err) {
       if (err) {
         console.error("[AUTH][LOGOUT][ERROR]", { ...meta, err: err.message });
         return res.status(500).redirect("/login");
       }
+
       console.info("[AUTH][LOGOUT][OK]", meta);
+      // fire-and-forget; activityLogger handles its own errors
+      activityLogger(meta.username || "unknown", "logout", meta);
+
       return res.redirect("/login");
     });
   },

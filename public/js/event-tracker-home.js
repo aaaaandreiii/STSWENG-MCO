@@ -26,6 +26,9 @@ function deleteReservation(id) {
   $.ajax({
     type: "PUT",
     url: "/event-tracker/cancel",
+    headers: {
+      "X-CSRF-Token": window.CSRF_TOKEN_FROM_TEMPLATE,
+    },
     data: json,
     contentType: "application/json",
     success: function (result) {

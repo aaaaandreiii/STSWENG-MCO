@@ -13,7 +13,7 @@ var EventSchema = new mongoose.Schema({
   repMobileNumber: { type: String },
 
   // eventType: {type: String},
-  eventType: { type: [String] }, //mock is array
+  eventType: { type: [String] }, //mock variable has String array, so we use String array in db as well
   eventDate: { type: Date },
   eventTime: { type: String },
 
