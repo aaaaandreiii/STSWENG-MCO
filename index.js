@@ -24,7 +24,7 @@ const SESSION_SECRET = process.env.SESSION_SECRET;
 
 if (!SESSION_SECRET && process.env.NODE_ENV !== "test") {
   console.warn(
-    "[SESSION] SESSION_SECRET is not set. Set a strong secret in production!"
+    "[SESSION] SESSION_SECRET is not set. Set a strong secret in production!",
   );
 }
 
@@ -69,7 +69,6 @@ app.use(express.json());
 //   serve static assets early (safe for both modes)
 app.use(express.static(path.join(__dirname, "public")));
 
-
 // ---- 3. Session middleware ----
 // sessions and cookies - CSSECDV
 const sessionConfig = {
@@ -98,7 +97,7 @@ if (!USE_MOCK) {
   });
 }
 
-  //otherwise, USE_MOCK
+//otherwise, USE_MOCK
 app.use(session(sessionConfig));
 
 // ---- 4. CSRF protection ----
@@ -1133,7 +1132,7 @@ app.use((err, req, res, next) => {
 //bind the server to a port and a host
 app.listen(port, () => {
   console.log(
-    `Server running at http://${hostname}:${port} (${USE_MOCK ? "MOCK" : "FULL"} mode)`
+    `Server running at http://${hostname}:${port} (${USE_MOCK ? "MOCK" : "FULL"} mode)`,
   );
 });
 

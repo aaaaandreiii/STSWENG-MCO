@@ -8,9 +8,9 @@ console.log(
   Employee.collection.collectionName,
 );
 
-const MAX_FAILED_ATTEMPTS = 5;       // 5 tries
-const FAILED_WINDOW_MINUTES = 15;    // within 15 minutes
-const LOCK_TIME_MINUTES = 15;        // lock account for 15 minutes
+const MAX_FAILED_ATTEMPTS = 5; // 5 tries
+const FAILED_WINDOW_MINUTES = 15; // within 15 minutes
+const LOCK_TIME_MINUTES = 15; // lock account for 15 minutes
 
 function isAccountLocked(user) {
   if (!user.lockUntil) return false;
@@ -181,7 +181,6 @@ const controller = {
       return res.status(500).render("login", { error: "Server error" });
     }
   },
-
 
   /**
    * Renders the appropriate login html file and
