@@ -29,8 +29,10 @@
     "bcrypt": "^6.0.0",
     "calendar": "^0.1.1",
     "connect-mongo": "^5.1.0",
+    "csurf": "^1.11.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
     "express-session": "^1.18.2",
     "hbs": "^4.2.0",
     "mongoose": "^8.18.1"
