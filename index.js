@@ -81,7 +81,7 @@ const sessionConfig = {
   secret: SESSION_SECRET || "dev-only-secret",
   resave: false,
   saveUninitialized: false,
-  proxy: isProduction,        // only needed in prod
+  proxy: isProduction, // only needed in prod
   cookie: {
     httpOnly: true,
     sameSite: "lax",
