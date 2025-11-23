@@ -233,7 +233,9 @@ const controller = {
    */
   getAllEmployees: async function (req, res, next) {
     try {
-      const employees = await Employee.find().lean();
+      const employees = await Employee.find()
+        .select("-password -failedLoginAttempts -lockUntil -__v")
+        .lean();
       res.json(employees);
     } catch (err) {
       console.error("[ADMIN][EMPLOYEES][ERROR]", err);
@@ -250,7 +252,9 @@ const controller = {
    */
   getAllCurrentEmployees: async function (req, res, next) {
     try {
-      const employees = await Employee.find({ hasAccess: true }).lean();
+      const employees = await Employee.find({ hasAccess: true })
+        .select("-password -failedLoginAttempts -lockUntil -__v")
+        .lean();
       res.json(employees);
     } catch (err) {
       console.error("[ADMIN][CURRENT][ERROR]", err);
@@ -260,7 +264,9 @@ const controller = {
 
   getAllFormerEmployees: async function (req, res, next) {
     try {
-      const employees = await Employee.find({ hasAccess: false }).lean();
+      const employees = await Employee.find({ hasAccess: false })
+        .select("-password -failedLoginAttempts -lockUntil -__v")
+        .lean();
       res.json(employees);
     } catch (err) {
       console.error("[ADMIN][FORMER][ERROR]", err);
@@ -278,7 +284,9 @@ const controller = {
   getEmployee: async function (req, res, next) {
     try {
       const { username } = req.params;
-      const employee = await Employee.findOne({ username }).lean();
+      const employee = await Employee.findOne({ username })
+        .select("-password -failedLoginAttempts -lockUntil -__v")
+        .lean();
       const status = employee ? 200 : 404;
       res.status(status).json(employee);
     } catch (err) {
@@ -306,7 +314,8 @@ const controller = {
 
       const adminUsername = req.session?.user?.username || "unknown";
 
-      const employee = await Employee.findOne({ username });
+      const employee = await Employee.findOne({ username })
+        .select("-password -failedLoginAttempts -lockUntil -__v");
       if (!employee) {
         return res.status(404).json({ message: "Employee not found" });
       }
@@ -429,7 +438,8 @@ const controller = {
       const { username } = req.body;
       const adminUsername = req.session?.user?.username || "unknown";
 
-      const employee = await Employee.findOne({ username });
+      const employee = await Employee.findOne({ username })
+        .select("-password -failedLoginAttempts -lockUntil -__v");
       if (!employee) {
         return res.status(404).json({ message: "Employee not found" });
       }
@@ -455,7 +465,8 @@ const controller = {
       const { username } = req.body;
       const adminUsername = req.session?.user?.username || "unknown";
 
-      const employee = await Employee.findOne({ username });
+      const employee = await Employee.findOne({ username })
+        .select("-password -failedLoginAttempts -lockUntil -__v");
       if (!employee) {
         return res.status(404).json({ message: "Employee not found" });
       }
