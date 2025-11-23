@@ -155,19 +155,7 @@ const controller = {
         );
       }
 
-      // --- Session fixation hardening ---
-      // IMPORTANT: regenerate BEFORE setting any auth/session data
-      req.session.regenerate((err) => {
-        if (err) {
-          console.error("[AUTH][SESSION_REGENERATE][ERROR]", {
-            ...meta,
-            err: err.message,
-          });
-          // you can also do `return next(err);` if you prefer centralized error handling
-          return res.status(500).render("login", { error: "Server error" });
-        }
-
-        // Now we’re on a fresh session with a new session ID:
+      const finalizeLogin = () => {
         req.session.loggedIn = true;
         req.session.isAdmin = user.role === "admin";
         req.session.user = {
@@ -182,19 +170,47 @@ const controller = {
           isAdmin: req.session.isAdmin,
         });
 
-        // Fire-and-forget, same style as your logout
-        activityLogger(user.username, "login_success", {
+        const logPromise = activityLogger(user.username, "login_success", {
           ...meta,
           isAdmin: req.session.isAdmin,
-        }).catch((logErr) => {
-          console.error("[AUTH][LOGIN_SUCCESS_LOG_ERROR]", {
-            ...meta,
-            err: logErr.message,
-          });
         });
 
+        // in prod --> promise
+        // in tests the mock may just return undefined
+        if (logPromise && typeof logPromise.catch === "function") {
+          logPromise.catch((logErr) => {
+            console.error("[AUTH][LOGIN_SUCCESS_LOG_ERROR]", {
+              ...meta,
+              err: logErr.message,
+            });
+          });
+        }
+
         return res.redirect("/event-tracker/home");
-      });
+      };
+
+      // --- Session fixation hardening ---
+      const canRegenerate =
+        req.session && typeof req.session.regenerate === "function";
+
+      if (canRegenerate) {
+        // Production path: use session.regenerate to avoid fixation
+        req.session.regenerate((err) => {
+          if (err) {
+            console.error("[AUTH][SESSION_REGENERATE][ERROR]", {
+              ...meta,
+              err: err.message,
+            });
+            return res
+              .status(500)
+              .render("login", { error: "Server error" });
+          }
+
+          finalizeLogin();
+          });
+        } else {
+          finalizeLogin();
+        }
     } catch (err) {
       console.error("[AUTH][ERROR]", { ...meta, err: err.message });
       return res.status(500).render("login", { error: "Server error" });

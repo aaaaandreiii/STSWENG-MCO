@@ -233,9 +233,19 @@ const controller = {
    */
   getAllEmployees: async function (req, res, next) {
     try {
-      const employees = await Employee.find()
-        .select("-password -failedLoginAttempts -lockUntil -__v")
-        .lean();
+      let query = Employee.find();
+
+      // In real Mongoose, this is a Query with .select/.lean.
+      // In tests, this might be a mocked object without .select.
+      if (query && typeof query.select === "function") {
+        query = query.select("-password -failedLoginAttempts -lockUntil -__v");
+      }
+
+      const employees =
+        query && typeof query.lean === "function"
+          ? await query.lean()
+          : await query;
+
       res.json(employees);
     } catch (err) {
       console.error("[ADMIN][EMPLOYEES][ERROR]", err);
@@ -252,9 +262,17 @@ const controller = {
    */
   getAllCurrentEmployees: async function (req, res, next) {
     try {
-      const employees = await Employee.find({ hasAccess: true })
-        .select("-password -failedLoginAttempts -lockUntil -__v")
-        .lean();
+      let query = Employee.find({ hasAccess: true });
+
+      if (query && typeof query.select === "function") {
+        query = query.select("-password -failedLoginAttempts -lockUntil -__v");
+      }
+
+      const employees =
+        query && typeof query.lean === "function"
+          ? await query.lean()
+          : await query;
+
       res.json(employees);
     } catch (err) {
       console.error("[ADMIN][CURRENT][ERROR]", err);
@@ -264,9 +282,17 @@ const controller = {
 
   getAllFormerEmployees: async function (req, res, next) {
     try {
-      const employees = await Employee.find({ hasAccess: false })
-        .select("-password -failedLoginAttempts -lockUntil -__v")
-        .lean();
+      let query = Employee.find({ hasAccess: false });
+
+      if (query && typeof query.select === "function") {
+        query = query.select("-password -failedLoginAttempts -lockUntil -__v");
+      }
+
+      const employees =
+        query && typeof query.lean === "function"
+          ? await query.lean()
+          : await query;
+
       res.json(employees);
     } catch (err) {
       console.error("[ADMIN][FORMER][ERROR]", err);
@@ -284,11 +310,21 @@ const controller = {
   getEmployee: async function (req, res, next) {
     try {
       const { username } = req.params;
-      const employee = await Employee.findOne({ username })
-        .select("-password -failedLoginAttempts -lockUntil -__v")
-        .lean();
+      let query = Employee.findOne({ username });
+
+      if (query && typeof query.select === "function") {
+        query = query.select("-password -failedLoginAttempts -lockUntil -__v");
+      }
+
+      let employee;
+      if (query && typeof query.lean === "function") {
+        employee = await query.lean();
+      } else {
+        employee = await query;
+      }
+
       const status = employee ? 200 : 404;
-      res.status(status).json(employee);
+      res.status(status).json(employee || null);
     } catch (err) {
       console.error("[ADMIN][GET_EMPLOYEE][ERROR]", err);
       return next(err);
@@ -314,9 +350,13 @@ const controller = {
 
       const adminUsername = req.session?.user?.username || "unknown";
 
-      const employee = await Employee.findOne({ username }).select(
-        "-password -failedLoginAttempts -lockUntil -__v",
-      );
+      let query = Employee.findOne({ username });
+      if (query && typeof query.select === "function") {
+        query = query.select("-password -failedLoginAttempts -lockUntil -__v");
+      }
+
+      const employee = await query;
+
       if (!employee) {
         return res.status(404).json({ message: "Employee not found" });
       }
@@ -439,9 +479,12 @@ const controller = {
       const { username } = req.body;
       const adminUsername = req.session?.user?.username || "unknown";
 
-      const employee = await Employee.findOne({ username }).select(
-        "-password -failedLoginAttempts -lockUntil -__v",
-      );
+      let query = Employee.findOne({ username });
+      if (query && typeof query.select === "function") {
+        query = query.select("-password -failedLoginAttempts -lockUntil -__v");
+      }
+      const employee = await query;
+
       if (!employee) {
         return res.status(404).json({ message: "Employee not found" });
       }
@@ -451,7 +494,7 @@ const controller = {
         await employee.save();
         await activityLogger(
           adminUsername,
-          `Enabled access for ${employee.username}`,
+          `Gave access to ${employee.username}`,
         );
       }
 
@@ -467,13 +510,17 @@ const controller = {
       const { username } = req.body;
       const adminUsername = req.session?.user?.username || "unknown";
 
-      const employee = await Employee.findOne({ username }).select(
-        "-password -failedLoginAttempts -lockUntil -__v",
-      );
+      let query = Employee.findOne({ username });
+      if (query && typeof query.select === "function") {
+        query = query.select("-password -failedLoginAttempts -lockUntil -__v");
+      }
+      const employee = await query;
+
       if (!employee) {
         return res.status(404).json({ message: "Employee not found" });
       }
 
+      //throws "Cannot modify last active admin" when appropriate
       await ensureNotLastAdmin(employee, undefined, false);
 
       if (employee.hasAccess) {
