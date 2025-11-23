@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Error</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+  </head>
+
+  <body class="d-flex flex-column">
+    {{> navbar}}
+
+    <div class="flex-fill bg-light p-4 d-flex flex-column justify-content-center align-items-center">
+      <div class="w-50 bg-light rounded-lg p-5 shadow-sm text-center">
+        <h2 class="mb-3">Oops, something went wrong.</h2>
+
+        {{#if message}}
+          <p class="lead mb-4">{{message}}</p>
+        {{else}}
+          <p class="lead mb-4">Please try again later.</p>
+        {{/if}}
+
+        <a href="/event-tracker/home" class="btn btn-dark mt-2">Back to Home</a>
+      </div>
+    </div>
+  </body>
+</html>
