@@ -88,7 +88,7 @@
                             <div class="form-group my-3">
                                 <label for="client-mobile-number">Client Mobile Number</label>
                                 <input type="tel" class="form-control" id="client-mobile-number"
-                                    name="client-mobile-number" value="{{event.clientMobileNumber}}" required>
+                                    name="client-mobile-number" value="{{event.clientMobileNumber}}" maxlength="20" required>
                                 <div id="client-mobile-number-help" class="form-text">Country code can be changed if
                                     needed.
                                 </div>
@@ -103,7 +103,7 @@
                             <div class="form-group my-3">
                                 <label for="representative-contact-number">Representative Mobile Number</label>
                                 <input type="tel" class="form-control" id="representative-mobile-number"
-                                    name="representative-mobile-number" value="{{event.repMobileNumber}}">
+                                    name="representative-mobile-number" value="{{event.repMobileNumber}}" maxlength="20">
                                 <div id="representative-mobile-number-help" class="form-text">Country code can be
                                     changed if needed. <span class="fw-bold">Optional.</span>
                                 </div>

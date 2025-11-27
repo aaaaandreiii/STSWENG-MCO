@@ -123,7 +123,27 @@ app.use((req, res, next) => {
 
 // ---- 5. Route Wiring: MOCK vs FULL ----
 if (USE_MOCK) {
-  console.log("Starting in MOCK mode — using in-file mock routes.");
+  console.log("Starting in MOCK mode with in-file templates & mock data");
+
+  // FOR E2E: always treat the user as a logged-in admin in mock mode
+  app.use((req, res, next) => {
+    if (!req.session) return next();
+
+    req.session.user = {
+      _id: "mock-admin-id",
+      username: "mock-admin",
+      role: "admin",
+      hasAccess: true,
+    };
+    req.session.loggedIn = true;
+    req.session.isAdmin = true;
+
+    // Make these available to all views (navbar, etc.)
+    res.locals.username = req.session.user.username;
+    res.locals.isAdmin = true;
+
+    next();
+  });
 
   // mock routes
   const mockData = {

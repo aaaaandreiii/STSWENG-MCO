@@ -304,6 +304,20 @@ function initializeTooltips() {
   $('[data-toggle="popover"]').popover();
 }
 
+function attachPhoneInputSanitizer($inputs) {
+  $inputs.on("input", function () {
+    let value = $(this).val() || "";
+
+    value = value.replace(/[^0-9+()\-\s]/g, "");
+
+    if (value.length > 20) {
+      value = value.slice(0, 20);
+    }
+
+    $(this).val(value);
+  });
+}
+
 function initializeEventFields() {
   //initialize event date
   $("#event-date").val(getDateToday());
@@ -316,6 +330,10 @@ function initializeEventFields() {
   };
   $("#client-mobile-number").intlTelInput(settings);
   $("#representative-mobile-number").intlTelInput(settings);
+
+  attachPhoneInputSanitizer(
+    $("#client-mobile-number, #representative-mobile-number"),
+  );
 
   // initialize event type autocomplete options
   let eventTypeTags = [

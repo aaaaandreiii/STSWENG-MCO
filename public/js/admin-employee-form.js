@@ -22,6 +22,21 @@ function initializeTooltips() {
   $('[data-toggle="popover"]').popover();
 }
 
+function attachPhoneInputSanitizer($inputs) {
+  $inputs.on("input", function () {
+    let value = $(this).val() || "";
+
+    // allow only digits, +, spaces, parentheses, and hyphens
+    value = value.replace(/[^0-9+()\-\s]/g, "");
+
+    if (value.length > 20) {
+      value = value.slice(0, 20);
+    }
+
+    $(this).val(value);
+  });
+}
+
 function initializeEmployeeFields() {
   // initialize contact number fields
   let settings = {
@@ -34,6 +49,13 @@ function initializeEmployeeFields() {
   $("#emergency-contact-mobile-number").intlTelInput(settings);
   $(".employee-mobile-number").intlTelInput(settings);
   $(".emergency-contact-mobile-number").intlTelInput(settings);
+
+  attachPhoneInputSanitizer(
+    $(
+      "#employee-mobile-number, #emergency-contact-mobile-number, " +
+        ".employee-mobile-number, .emergency-contact-mobile-number",
+    ),
+  );
 }
 
 function initializeAccountFields() {}
