@@ -376,9 +376,33 @@ function enableButton(button) {
   button.prop("disabled", false);
 }
 
+function validateCreateEmployeeForm() {
+  const employeeNameField = $("#employee-name");
+  const employeeName = employeeNameField.val().trim();
+  let valid = true;
+
+  if (employeeName.length === 0) {
+    displayError(
+      employeeNameField,
+      $("#employee-name-error"),
+      "Employee name must not be empty. ",
+    );
+    valid = false;
+  } else {
+    resetField(employeeNameField, $("#employee-name-error"));
+  }
+
+  return valid;
+}
+
 function submitForm() {
   $("#create").on("submit", function (event) {
     event.preventDefault();
+
+    // run validation pass, so untouched required fields still show errors
+    if (!validateCreateEmployeeForm()) {
+      return; // DO NOT send the AJAX request if validation fails
+    }
 
     // stores all information as an object
     let data = {
@@ -405,7 +429,6 @@ function submitForm() {
         window.location.href = "/admin";
       },
       error: function () {
-        // generic error message – we don't expose server details
         alert("Could not create account. Please check the form and try again.");
       },
     });

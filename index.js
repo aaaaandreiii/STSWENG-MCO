@@ -126,24 +126,24 @@ if (USE_MOCK) {
   console.log("Starting in MOCK mode with in-file templates & mock data");
 
   // FOR E2E: always treat the user as a logged-in admin in mock mode
-  app.use((req, res, next) => {
-    if (!req.session) return next();
+  // app.use((req, res, next) => {
+  //   if (!req.session) return next();
 
-    req.session.user = {
-      _id: "mock-admin-id",
-      username: "mock-admin",
-      role: "admin",
-      hasAccess: true,
-    };
-    req.session.loggedIn = true;
-    req.session.isAdmin = true;
+  //   req.session.user = {
+  //     _id: "mock-admin-id",
+  //     username: "mock-admin",
+  //     role: "admin",
+  //     hasAccess: true,
+  //   };
+  //   req.session.loggedIn = true;
+  //   req.session.isAdmin = true;
 
-    // Make these available to all views (navbar, etc.)
-    res.locals.username = req.session.user.username;
-    res.locals.isAdmin = true;
+  //   // Make these available to all views (navbar, etc.)
+  //   res.locals.username = req.session.user.username;
+  //   res.locals.isAdmin = true;
 
-    next();
-  });
+  //   next();
+  // });
 
   // mock routes
   const mockData = {
@@ -578,6 +578,61 @@ if (USE_MOCK) {
     },
   };
 
+  // --- MOCK profile data (for /profile) ---
+  const mockProfileEmployee = {
+    username: "mock-admin",
+    role: "admin",
+    name: "Mock Admin",
+    contactNum: "+63 912 345 6789",
+    emergencyContactName: "Mock Contact",
+    emergencyContactNum: "+63 923 456 7890",
+  };
+
+  // --- MOCK analytics data (for /analytics) ---
+  const mockAnalyticsData = {
+    upcomingEventsByMonth: [
+      { _id: { year: 2025, month: 10 }, count: 3 },
+      { _id: { year: 2025, month: 11 }, count: 5 },
+    ],
+    cancelledEventsByMonth: [
+      { _id: { year: 2025, month: 9 }, count: 1 },
+      { _id: { year: 2025, month: 10 }, count: 2 },
+    ],
+    revenueSummary: {
+      totalRevenue: 250000,
+      totalPayments: 200000,
+      transactionCount: 8,
+    },
+    venueCounts: [
+      { _id: "Grand Hall", count: 4 },
+      { _id: "Garden", count: 2 },
+      { _id: "Terrace", count: 1 },
+    ],
+    timeOfDayCounts: [
+      { _id: "Morning", count: 3 },
+      { _id: "Afternoon", count: 4 },
+      { _id: "Evening", count: 1 },
+    ],
+  };
+
+  function attachUserLocals(req, res) {
+    if (req.session && req.session.user) {
+      res.locals.username = req.session.user.username;
+      res.locals.isAdmin = req.session.user.role === "admin";
+    } else {
+      res.locals.username = null;
+      res.locals.isAdmin = false;
+    }
+  }
+
+  function ensureMockAuthenticated(req, res, next) {
+    if (!req.session || !req.session.user) {
+      return res.redirect("/login");
+    }
+    attachUserLocals(req, res);
+    next();
+  }
+
   function generateEventArray(year, month, events) {
     const startDate = new Date(year, month - 1, 1);
     const endDate = new Date(year, month, 0);
@@ -644,24 +699,80 @@ if (USE_MOCK) {
 
   app.get("/login", (req, res) => {
     console.log("Handling /login");
+
+    // if already logged in
+    //   then go straight to home
+    if (req.session && req.session.user) {
+      return res.redirect("/event-tracker/home");
+    }
+
     const template = "login";
     const templatePath = path.join(__dirname, "views", `${template}.hbs`);
     if (!fs.existsSync(templatePath)) {
       console.error(`Template file not found: ${templatePath}`);
       return res.status(404).send(`Template ${template}.hbs not found`);
     }
-    res.render(template, mockData[template]);
+
+    const ctx = { ...(mockData[template] || {}) };
+
+    // surface any login error stored in the session
+    if (req.session && req.session.loginError) {
+      ctx.error = req.session.loginError;
+      delete req.session.loginError;
+    }
+
+    res.render(template, ctx);
   });
 
   app.get("/logout", (req, res) => {
     console.log("Handling /logout");
-    res.redirect("/login");
+    if (req.session) {
+      req.session.destroy(() => {
+        res.redirect("/login");
+      });
+    } else {
+      res.redirect("/login");
+    }
   });
 
   app.post("/authenticate", (req, res) => {
-    (loginLimiter, console.log("Handling /authenticate"));
-    res.redirect("/event-tracker/home");
+    console.log("Handling /authenticate (MOCK)");
+    const { username, password } = req.body || {};
+
+    const validUsername = "admin";
+    const validPassword = "defaultPassword";
+
+    // if rong credentials
+    //   then back to /login with an error
+    if (username !== validUsername || password !== validPassword) {
+      if (req.session) {
+        req.session.loginError = "Invalid credentials";
+      }
+      return res.redirect("/login");
+    }
+
+    // if correct credentials
+    //   then create session user
+    req.session.user = {
+      _id: "mock-admin-id",
+      username: validUsername,
+      role: "admin",
+      hasAccess: true,
+    };
+    req.session.loggedIn = true;
+    req.session.isAdmin = true;
+
+    attachUserLocals(req, res);
+
+    return res.redirect("/event-tracker/home");
   });
+
+  // protect main application pages in mock mode
+  app.use("/admin", ensureMockAuthenticated);
+  app.use("/event-tracker", ensureMockAuthenticated);
+  app.use("/settings", ensureMockAuthenticated);
+  app.use("/profile", ensureMockAuthenticated);
+  app.use("/analytics", ensureMockAuthenticated);
 
   app.get("/admin", (req, res) => {
     console.log("Handling /admin");
@@ -676,7 +787,7 @@ if (USE_MOCK) {
 
   app.get("/admin/register", (req, res) => {
     console.log("Handling /admin/register");
-    const template = "admin-register";
+    const template = "admin-employee-form";
     const templatePath = path.join(__dirname, "views", `${template}.hbs`);
     if (!fs.existsSync(templatePath)) {
       console.error(`Template file not found: ${templatePath}`);
@@ -1093,6 +1204,92 @@ if (USE_MOCK) {
     }
     res.render(template, mockData[template]);
   });
+
+  // GET /profile (mock)
+  app.get("/profile", (req, res) => {
+    res.render("profile", {
+      employee: mockProfileEmployee,
+      // csrfToken is already set by the global middleware
+    });
+  });
+
+  // POST /profile (mock) –
+  //   so Robot tests can submit the form,
+  //   add just enough validation for the Robot tests
+  app.post("/profile", (req, res) => {
+    const {
+      name,
+      contactNum,
+      emergencyContactName,
+      emergencyContactNum,
+      oldPassword,
+      newPassword,
+      confirmPassword,
+    } = req.body;
+
+    // start from the existing mock data and overlay any submitted values
+    const employeeView = {
+      ...mockProfileEmployee,
+      name: name || mockProfileEmployee.name,
+      contactNum: contactNum || mockProfileEmployee.contactNum,
+      emergencyContactName:
+        emergencyContactName || mockProfileEmployee.emergencyContactName,
+      emergencyContactNum:
+        emergencyContactNum || mockProfileEmployee.emergencyContactNum,
+    };
+
+    const looksLikePhone = (value) => {
+      // if invalid phone number for contactNum
+      //   then fail
+      if (typeof value !== "string") return false;
+      const trimmed = value.trim();
+      return (
+        trimmed !== "" &&
+        trimmed.length >= 7 &&
+        trimmed.length <= 20 &&
+        /^[0-9+()\-\s]+$/.test(trimmed)
+      );
+    };
+
+    // if invalid phone number for emergencyContactNum
+    //   then fail
+    if (emergencyContactNum && !looksLikePhone(emergencyContactNum)) {
+      return res.status(400).render("profile", {
+        employee: employeeView,
+        error: "Could not update profile",
+      });
+    }
+
+    // if passwords filled but do not match
+    //   then fail
+    const wantsPasswordChange =
+      (oldPassword && oldPassword.trim() !== "") ||
+      (newPassword && newPassword.trim() !== "") ||
+      (confirmPassword && confirmPassword.trim() !== "");
+
+    if (wantsPasswordChange && newPassword !== confirmPassword) {
+      return res.status(400).render("profile", {
+        employee: employeeView,
+        error: "Could not update profile",
+      });
+    }
+
+    // else treat as success
+    return res.render("profile", {
+      employee: employeeView,
+      success: "Profile updated (mock).",
+    });
+  });
+
+  // GET /analytics (mock)
+  app.get("/analytics", (req, res) => {
+    const username = req.session?.user?.username || "mock-admin";
+
+    res.render("analytics", {
+      username,
+      ...mockAnalyticsData,
+    });
+  });
 } else {
   console.log("Starting in FULL mode — using real DB + routes.");
 
@@ -1125,10 +1322,13 @@ if (USE_MOCK) {
 }
 
 // ---- 6. 404 fallback ----
-// app.use((req, res) => {
-//   console.error(`Route not found: ${req.originalUrl}`);
-//   res.status(404).send(`Page not found: ${req.originalUrl}`);
-// });
+app.use((req, res) => {
+  console.warn(`[404] ${req.method} ${req.originalUrl}`);
+
+  res.status(404).render("error", {
+    message: "The page you are looking for does not exist.",
+  });
+});
 
 // ---- 7. Global error handler ----
 app.use((err, req, res, next) => {
