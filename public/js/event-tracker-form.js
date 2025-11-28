@@ -74,7 +74,7 @@ let menuPackageHTML =
   '<div class="form-group row my-3 ms-auto">' +
   '<label for="salad-quantity" class="col col-form-label">Quantity</label>' +
   '<div class="col-8">' +
-  '<input type="number" class="form-control w-75" id="salad-quantity" disabled>' +
+  '<input type="number" class="form-control w-75 menu-quantity-input" id="salad-quantity" min="0">' +
   "</div>" +
   "</div>" +
   "</div>" +
@@ -96,7 +96,7 @@ let menuPackageHTML =
   '<div class="form-group row my-3 ms-auto">' +
   '<label for="pasta-quantity" class="col col-form-label">Quantity</label>' +
   '<div class="col-8">' +
-  '<input type="number" class="form-control w-75" id="pasta-quantity" disabled>' +
+  '<input type="number" class="form-control w-75 menu-quantity-input" id="pasta-quantity" min="0">' +
   "</div>" +
   "</div>" +
   "</div>" +
@@ -118,7 +118,7 @@ let menuPackageHTML =
   '<div class="form-group row my-3 ms-auto">' +
   '<label for="beef-quantity" class="col col-form-label">Quantity</label>' +
   '<div class="col-8">' +
-  '<input type="number" class="form-control w-75" id="beef-quantity" disabled>' +
+  '<input type="number" class="form-control w-75 menu-quantity-input" id="beef-quantity" min="0">' +
   "</div>" +
   "</div>" +
   "</div>" +
@@ -135,7 +135,7 @@ let menuPackageHTML =
   '<div class="form-group row my-3 ms-auto">' +
   '<label for="pork-quantity" class="col col-form-label">Quantity</label>' +
   '<div class="col-8">' +
-  '<input type="number" class="form-control w-75" id="pork-quantity" disabled>' +
+  '<input type="number" class="form-control w-75 menu-quantity-input" id="pork-quantity" min="0">' +
   "</div>" +
   "</div>" +
   "</div>" +
@@ -157,7 +157,7 @@ let menuPackageHTML =
   '<div class="form-group row my-3 ms-auto">' +
   '<label for="chicken-quantity" class="col col-form-label">Quantity</label>' +
   '<div class="col-8">' +
-  '<input type="number" class="form-control w-75" id="chicken-quantity" disabled>' +
+  '<input type="number" class="form-control w-75 menu-quantity-input" id="chicken-quantity" min="0">' +
   "</div>" +
   "</div>" +
   "</div>" +
@@ -174,7 +174,7 @@ let menuPackageHTML =
   '<div class="form-group row my-3 ms-auto">' +
   '<label for="fish-quantity" class="col col-form-label">Quantity</label>' +
   '<div class="col-8">' +
-  '<input type="number" class="form-control w-75" id="fish-quantity" disabled>' +
+  '<input type="number" class="form-control w-75 menu-quantity-input" id="fish-quantity" min="0">' +
   "</div>" +
   "</div>" +
   "</div>" +
@@ -196,6 +196,8 @@ if (typeof window != "undefined") {
     initializeRealTimeValidation();
 
     submitForm();
+
+    updateSubmitButtonState();
   });
 }
 
@@ -215,9 +217,30 @@ function disableEnterKey() {
 
 function retrieveInfoFromDB() {
   $.get("/event-tracker/get/food", function (result) {
+    foodList = [];
+    foodNameList = [];
+
     for (let j = 0; j < result.length; j++) {
-      foodList.push(result[j]);
-      foodNameList.push(result[j].name);
+      foodList.push(result[j]); // { _id, name, price }
+      foodNameList.push(result[j].name); // still used by validators
+    }
+
+    // Populate the Additional Food dropdown
+    const $additionalSelect = $("#additional-name");
+    if ($additionalSelect.length) {
+      $additionalSelect.empty();
+      $additionalSelect.append(
+        $("<option>", { value: "", text: "Select food item" }),
+      );
+
+      foodList.forEach(function (food) {
+        $additionalSelect.append(
+          $("<option>", {
+            value: food.name,
+            text: food.name,
+          }),
+        );
+      });
     }
   });
 
@@ -286,10 +309,37 @@ function retrieveInfoFromDB() {
       );
     });
 
+    const add5Price = getPackagePrice("add5");
+    if (add5Price) {
+      $("#additional-pax-label-price").text(
+        "Php " + formatAsDecimal(add5Price),
+      );
+    }
+
     $.get("/settings/event/discount", function (result) {
+      discountList = [];
+      discountDescList = [];
+
       for (let j = 0; j < result.length; j++) {
-        discountList.push(result[j]);
+        discountList.push(result[j]); // { description, rate, minimumPax, ... }
         discountDescList.push(result[j].description);
+      }
+
+      const $discountSelect = $("#discount-name");
+      if ($discountSelect.length) {
+        $discountSelect.empty();
+        $discountSelect.append(
+          $("<option>", { value: "", text: "Select discount" }),
+        );
+
+        discountList.forEach(function (disc) {
+          $discountSelect.append(
+            $("<option>", {
+              value: disc.description,
+              text: disc.description,
+            }),
+          );
+        });
       }
     });
 
@@ -422,6 +472,17 @@ function initializeMenuFields() {
     }
   });
 
+  // when user manually changes menu quantities
+  //   keep values non-negative, and
+  //   update the breakdown/package total.
+  $(".menu-quantity-input").on("input change", function () {
+    let value = parseInt($(this).val(), 10);
+    if (isNaN(value) || value < 0) {
+      $(this).val(0);
+    }
+    updateBreakdownTable();
+  });
+
   $(".menu-item-autocomplete").autocomplete({
     minLength: 0,
     source: function (request, response) {
@@ -495,11 +556,48 @@ function initializeTransactionFields() {
     addDiscount();
   });
 
+  // when discount selected from dropdown
+  //    compute amount
+  $("#discount-name").on("change", function () {
+    const desc = $(this).val();
+
+    if (!desc) {
+      $("#discount-price").val("");
+      $("#discount-name, #discount-price").trigger("change");
+      return;
+    }
+
+    const disc = discountList.find((d) => d.description === desc);
+
+    if (!disc) {
+      $("#discount-price").val("");
+      $("#discount-name, #discount-price").trigger("change");
+      return;
+    }
+
+    // Amount is based on current (no-discount) total and discount rate
+    const rate = disc.rate || 0;
+    const discountAmount = calculateNoDiscountTotal() * (rate / 100);
+
+    $("#discount-price").val(discountAmount.toFixed(2));
+
+    // Re-run validation so the "Add Item" button enables correctly
+    $("#discount-name, #discount-price").trigger("change");
+  });
+
   $("#discounts-modal").on("hidden.bs.modal", function () {
     $("#discount-name, #discount-quantity, #discount-price").val("");
     resetField($("#discount-name"), $("#discount-error"));
     resetField($("#discount-quantity"), $("#discount-error"));
     resetField($("#discount-price"), $("#discount-error"));
+  });
+
+  $(".discount-autocomplete").autocomplete({
+    minLength: 0,
+    source: function (request, response) {
+      var results = $.ui.autocomplete.filter(discountDescList, request.term);
+      response(results.slice(0, 5)); // show top 5 matches
+    },
   });
 }
 
@@ -587,7 +685,8 @@ function downpaymentNotChecked() {
   $("#final-payment-amount").attr("placeholder", "");
 
   //Sets the status of the submit button
-  $("#submit").attr("disabled", checkIfFilledEventFields());
+  // $("#submit").attr("disabled", checkIfFilledEventFields());
+  updateSubmitButtonState();
 }
 
 /**
@@ -621,7 +720,8 @@ function finalPaymentNotChecked() {
   $("#final-payment-amount").attr("placeholder", $("#payment-balance").val());
 
   //Sets the status of the submit button
-  $("#submit").attr("disabled", checkIfFilledEventFields());
+  // $("#submit").attr("disabled", checkIfFilledEventFields());
+  updateSubmitButtonState();
 }
 
 /**
@@ -649,7 +749,8 @@ function downpaymentCheckFields() {
         );
     } else resetField($("#downpayment-date"), $("#downpayment-error"));
 
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   //Checks the current chosen downpayment mode option
@@ -662,7 +763,8 @@ function downpaymentCheckFields() {
         result[1],
       );
     else resetField($("#downpayment-mode"), $("#downpayment-mode-error"));
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   //Checks the downpayment amount value
@@ -679,12 +781,14 @@ function downpaymentCheckFields() {
     //Updates the total payment amount and the final payment amount
     $("#final-payment-amount").on("change", function () {
       updatePaymentAndBalance();
-      $("#submit").attr("disabled", checkIfFilledEventFields());
+      // $("#submit").attr("disabled", checkIfFilledEventFields());
+      updateSubmitButtonState();
     });
     updatePaymentAndBalance();
 
     //Disables/Enables the Submit button
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
 
     //Checks if the customer payment is greater than the needed payment (total amount)
     if (parseFloat($("#payment-balance").val()) < 0) {
@@ -726,7 +830,8 @@ function finalPaymentCheckFields() {
         );
     } else resetField($("#final-payment-date"), $("#final-payment-error"));
 
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   //Checks the current chosen final payment mode option
@@ -739,7 +844,7 @@ function finalPaymentCheckFields() {
         result[1],
       );
     else resetField($("#final-payment-mode"), $("#final-payment-mode-error"));
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
   });
 
   //Checks the final payment amount value
@@ -756,10 +861,12 @@ function finalPaymentCheckFields() {
 
     $("#downpayment-amount").on("change", function () {
       updatePaymentAndBalance();
-      $("#submit").attr("disabled", checkIfFilledEventFields());
+      // $("#submit").attr("disabled", checkIfFilledEventFields());
+      updateSubmitButtonState();
     });
     updatePaymentAndBalance();
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
 
     if (parseFloat($("#payment-balance").val()) < 0) {
       $("#payment-error").text(
@@ -1325,7 +1432,8 @@ function initializeRealTimeValidation() {
     if (!result[0])
       displayError($("#client-name"), $("#client-name-error"), result[1]);
     else resetField($("#client-name"), $("#client-name-error"));
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   $("#client-mobile-number").keyup(function () {
@@ -1347,7 +1455,8 @@ function initializeRealTimeValidation() {
           "Client Mobile Number is invalid.",
         );
     }
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   $("#event-type").keyup(function () {
@@ -1355,7 +1464,8 @@ function initializeRealTimeValidation() {
     var result = isValidEventType(eventtype);
     if (!result[0]) displayError($(this), $("#event-type-error"), result[1]);
     else resetField($(this), $("#event-type-error"));
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   $("#event-type").on("change", function () {
@@ -1363,7 +1473,8 @@ function initializeRealTimeValidation() {
     var result = isValidEventType(eventtype);
     if (!result[0]) displayError($(this), $("#event-type-error"), result[1]);
     else resetField($(this), $("#event-type-error"));
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   $("#event-type").on("autocompletechange", function () {
@@ -1371,7 +1482,8 @@ function initializeRealTimeValidation() {
     var result = isValidEventType(eventtype);
     if (!result[0]) displayError($(this), $("#event-type-error"), result[1]);
     else resetField($(this), $("#event-type-error"));
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   $("#event-date").on("change", function () {
@@ -1385,7 +1497,8 @@ function initializeRealTimeValidation() {
       } else displayError($("#event-date"), $("#event-date-error"), result[1]);
     } else resetField($("#event-date"), $("#event-date-error"));
     checkEventAvailability();
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   $("#event-time").change(function () {
@@ -1394,7 +1507,8 @@ function initializeRealTimeValidation() {
       displayError($("#event-time"), $("#event-time-error"), result[1]);
     else resetField($("#event-time"), $("#event-time-error"));
     checkEventAvailability();
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   $("#event-pax").on("change", function () {
@@ -1406,7 +1520,8 @@ function initializeRealTimeValidation() {
       resetField($("#event-pax"), $("#event-pax-error"));
       checkPaxDiscount($("#event-pax").val());
     }
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   $(".venue-checkbox").change(function () {
@@ -1419,7 +1534,8 @@ function initializeRealTimeValidation() {
       displayError($(".venue-checkbox"), $("#missing-error"), result[1]);
     } else resetField($(".venue-checkbox"), $("#missing-error"));
     checkEventAvailability();
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   $(".package").change(function () {
@@ -1431,7 +1547,8 @@ function initializeRealTimeValidation() {
       displayError($(".package:enabled"), $("#missing-error"), result[1]);
     } else resetField($(".package"), $("#missing-error"));
     checkEventAvailability();
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   $("#representative-name").keyup(function () {
@@ -1447,7 +1564,8 @@ function initializeRealTimeValidation() {
           result[1],
         );
     } else resetField($("#representative-name"), $("#rep-name-error"));
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   $("#representative-mobile-number").keyup(function () {
@@ -1460,7 +1578,8 @@ function initializeRealTimeValidation() {
         "Representative Mobile Number is invalid.",
       );
 
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 
   //menu details
@@ -1613,7 +1732,8 @@ function initializeRealTimeValidation() {
         downpaymentNotChecked();
       }
     }
-    $("#submit").attr("disabled", checkIfFilledEventFields());
+    // $("#submit").attr("disabled", checkIfFilledEventFields());
+    updateSubmitButtonState();
   });
 }
 
@@ -1774,6 +1894,21 @@ function checkIfFilledEventFields() {
   return false;
 }
 
+function updateSubmitButtonState() {
+  var disabled = checkIfFilledEventFields();
+  var $btn = $("#submit");
+
+  $btn.attr("disabled", disabled);
+
+  if (disabled) {
+    // Not ready – keep it light / neutral
+    $btn.removeClass("btn-success").addClass("btn-light");
+  } else {
+    // Ready to submit – turn green
+    $btn.removeClass("btn-light").addClass("btn-success");
+  }
+}
+
 function checkStringInput(input) {
   const blacklist = [
     "~",
@@ -1880,7 +2015,8 @@ function checkEventAvailability() {
       } else {
         resetField($("#event-date"), $("#event-time-error"));
         resetField($("#event-time"), $("#event-time-error"));
-        $("#submit").attr("disabled", checkIfFilledEventFields());
+        // $("#submit").attr("disabled", checkIfFilledEventFields());
+        updateSubmitButtonState();
       }
     });
   }
@@ -1896,36 +2032,73 @@ function formatAsNumber(value) {
   return parseFloat(value.replace(/,/g, ""));
 }
 
+function calculateBasePackageTotal() {
+  let total = 0;
+
+  $(".package").each(function () {
+    if ($(this).val()) {
+      total += getPackagePrice($(this).val());
+    }
+  });
+
+  if ($("#additional-pax").is(":checked")) {
+    total += getPackagePrice("add5");
+  }
+
+  return total;
+}
+
 function calculatePackageTotal() {
-  let gardenIndex = -1,
-    sunroomIndex = -1,
-    terraceIndex = -1;
+  // Base price based on packages selected (DB values)
+  const baseTotalPrice = calculateBasePackageTotal();
 
-  if ($("#garden-options").val() != "")
-    gardenIndex = getPackageIndex(
-      gardenPackageList,
-      $("#garden-options").val(),
-    );
-  if ($("#sunroom-options").val() != "")
-    sunroomIndex = getPackageIndex(
-      sunroomPackageList,
-      $("#sunroom-options").val(),
-    );
-  if ($("#terrace-options").val() != "")
-    terraceIndex = getPackageIndex(
-      terracePackageList,
-      $("#terrace-options").val(),
-    );
+  // Base quantities per package from DB (foodQuantities)
+  const baseQuantities = [
+    getFoodQuantity(0), // Salad
+    getFoodQuantity(1), // Pasta
+    getFoodQuantity(2), // Beef
+    getFoodQuantity(3), // Pork
+    getFoodQuantity(4), // Chicken
+    getFoodQuantity(5), // Fish
+    getFoodQuantity(6), // Rice
+    getFoodQuantity(7), // Iced Tea
+  ];
 
-  let add5paxIndex = getPackageIndex(additionalPackageList, "add5");
+  const baseTotalQty = baseQuantities.reduce(
+    (sum, q) => sum + (parseInt(q, 10) || 0),
+    0,
+  );
 
-  let sum = 0;
-  if (gardenIndex != -1) sum += gardenPackageList[gardenIndex].packagePrice;
-  if (sunroomIndex != -1) sum += sunroomPackageList[sunroomIndex].packagePrice;
-  if (terraceIndex != -1) sum += terracePackageList[terraceIndex].packagePrice;
-  if ($("#additional-pax").is(":checked"))
-    sum += additionalPackageList[add5paxIndex].packagePrice;
-  return sum;
+  // If no package or no defined quantities, treat as 0
+  if (!baseTotalPrice || !baseTotalQty) {
+    return 0;
+  }
+
+  // Actual quantities from the editable fields
+  const inputQuantities = [
+    parseInt($("#salad-quantity").val(), 10) || 0,
+    parseInt($("#pasta-quantity").val(), 10) || 0,
+    parseInt($("#beef-quantity").val(), 10) || 0,
+    parseInt($("#pork-quantity").val(), 10) || 0,
+    parseInt($("#chicken-quantity").val(), 10) || 0,
+    parseInt($("#fish-quantity").val(), 10) || 0,
+    parseInt($("#rice-quantity").val(), 10) || 0,
+    parseInt($("#icedtea-quantity").val(), 10) || 0,
+  ];
+
+  const inputTotalQty = inputQuantities.reduce(
+    (sum, q) => sum + (parseInt(q, 10) || 0),
+    0,
+  );
+
+  // If the user zeroes everything, packages are effectively free
+  if (!inputTotalQty) {
+    return 0;
+  }
+
+  const ratio = inputTotalQty / baseTotalQty;
+
+  return baseTotalPrice * ratio;
 }
 
 function calculateItemTotal(field) {
@@ -1978,7 +2151,8 @@ function updatePaymentAndBalance() {
   var balance = "" + calculateBalance();
   $("#payment-balance").val(balance);
   $("#final-payment-amount").attr("placeholder", $("#payment-balance").val());
-  $("#submit").attr("disabled", checkIfFilledEventFields());
+  // $("#submit").attr("disabled", checkIfFilledEventFields());
+  updateSubmitButtonState();
 }
 
 function getPackageIndex(list, code) {
