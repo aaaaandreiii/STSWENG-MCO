@@ -49,7 +49,6 @@ if (process.env.NODE_ENV === "production") {
 
 try {
   require("./views/hbs-helper.js");
-  console.log("Helpers loaded successfully");
 } catch (err) {
   console.error("Error loading helpers:", err);
 }
@@ -58,8 +57,6 @@ try {
 hbs.registerPartials(path.join(__dirname, "views/partials"), (err) => {
   if (err) {
     console.error("Error registering partials:", err);
-  } else {
-    console.log("Partials registered successfully");
   }
 });
 

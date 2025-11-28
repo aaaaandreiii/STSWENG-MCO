@@ -3,10 +3,6 @@ const Employee = require("../models/employee.js");
 const activityLogger = require("../helpers/activityLogger.js");
 
 console.log("[DB] using db:", require("mongoose").connection.name);
-console.log(
-  "[DB] employee collection name:",
-  Employee.collection.collectionName,
-);
 
 const MAX_FAILED_ATTEMPTS = 5; // 5 tries
 const FAILED_WINDOW_MINUTES = 15; // within 15 minutes

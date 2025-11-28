@@ -13,8 +13,9 @@ function redact(u = "") {
 
 function wireConnectionEvents() {
   const c = mongoose.connection;
-  c.on("connecting", () => console.log("[DB] connecting…", redact(url)));
-  c.on("connected", () => console.log("[DB] connected:", c.host, c.name));
+  // c.on("connecting", () => console.log("[DB] connecting…", redact(url)));
+  // c.on("connected", () => console.log("[DB] connected:", c.host, c.name));
+  c.on("connected", () => console.log("[DB] connected:", redact(url)));
   c.on("reconnected", () => console.log("[DB] reconnected"));
   c.on("disconnected", () => console.warn("[DB] disconnected"));
   c.on("error", (err) => console.error("[DB] error:", err.message));
@@ -28,14 +29,8 @@ const database = {
     }
     wireConnectionEvents();
     const started = Date.now();
-    console.log("[DB] connect called with", redact(url));
     try {
       await mongoose.connect(url);
-
-      //remove depracated warnings: useUnifiedTopology, useNewUrlParser
-      // await mongoose.connect(url, options);
-
-      // console.log('Connected!');
       console.log(`[DB] ready in ${Date.now() - started}ms`);
     } catch (err) {
       console.error("[DB] failed to connect:", err.message);
