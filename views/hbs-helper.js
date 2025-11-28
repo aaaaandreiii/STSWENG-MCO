@@ -44,7 +44,7 @@ hbs.registerHelper("formatTimestamp", function (date) {
   const d = new Date(date);
 
   const formatter = new Intl.DateTimeFormat("en-PH", {
-    timeZone: "Asia/Manila",   // 👈 force GMT+8 / PH time
+    timeZone: "Asia/Manila", // 👈 force GMT+8 / PH time
     dateStyle: "short",
     timeStyle: "medium",
   });
