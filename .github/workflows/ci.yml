@@ -107,7 +107,7 @@ jobs:
       - name: Run Robot E2E tests
         run: |
           robot -d reports/robot tests/e2e/suites
-          
+
   audit:
     name: Security Audit
     runs-on: ubuntu-latest
