@@ -23,8 +23,8 @@ const eventController = {
       {
         $match: {
           status: {
-            // $ne: "cancelled",
-            $in: ["reserved", "booked", "finished"],
+            $ne: "cancelled",
+            // $in: ["reserved", "booked", "finished"],
           },
           eventDate: {
             $gte: today,

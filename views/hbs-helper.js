@@ -39,16 +39,17 @@ hbs.registerHelper("formatDateShort", function (date) {
 });
 
 hbs.registerHelper("formatTimestamp", function (date) {
-  if (date) {
-    date = new Date(date);
-    let timestamp = new Intl.DateTimeFormat("en", {
-      timeStyle: "medium",
-      dateStyle: "short",
-    });
-    return timestamp.format(date);
-  } else {
-    return "";
-  }
+  if (!date) return "";
+
+  const d = new Date(date);
+
+  const formatter = new Intl.DateTimeFormat("en-PH", {
+    timeZone: "Asia/Manila",   // 👈 force GMT+8 / PH time
+    dateStyle: "short",
+    timeStyle: "medium",
+  });
+
+  return formatter.format(d);
 });
 
 hbs.registerHelper("formatMoney", function (money) {

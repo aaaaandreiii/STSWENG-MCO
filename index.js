@@ -11,7 +11,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const app = express();
 const csrf = require("csurf");
-const rateLimit = require("express-rate-limit");
+// const rateLimit = require("express-rate-limit");   // already implemented in middleware/rate-limiters.js
 
 const db = require("./models/db.js");
 const routes = require("./routes/routes.js");
@@ -30,12 +30,13 @@ if (!SESSION_SECRET && process.env.NODE_ENV !== "test") {
 
 // to address brute force attacks
 // complements account lockout by slowing down attackers who rotate usernames
-const loginLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 50, // 50 login attempts per IP per 15 minutes
-  standardHeaders: true,
-  legacyHeaders: false,
-});
+// already implemented in middleware/rate-limiters.js
+// const loginLimiter = rateLimit({
+//   windowMs: 15 * 60 * 1000,
+//   max: 50, // 50 login attempts per IP per 15 minutes
+//   standardHeaders: true,
+//   legacyHeaders: false,
+// });
 
 // ---- 1. View engine ----
 // set hbs as the view engine
