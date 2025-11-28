@@ -5,3 +5,7 @@ public/js/bootstrap.bundle.js
 node_modules
 public/js/jquery-ui.js
 public/js/jquery-ui.min.js
+public/js/bootstrap.bundle.min.js
+public/js/intlTelInput-jquery.min.js
+public/js/jquery-3.4.1.min.js
+.github/workflows/ci.yml

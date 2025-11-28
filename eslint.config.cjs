@@ -16,6 +16,9 @@ module.exports = [
     files: ["**/*.js"],
     ignores: [
       "public/js/bootstrap.bundle.js", // ignore vendor library
+      "public/js/bootstrap.bundle.min.js",
+      "public/js/intlTelInput-jquery.min.js",
+      "public/js/jquery-3.4.1.min.js",
       "node_modules/**",
     ],
     languageOptions: {
