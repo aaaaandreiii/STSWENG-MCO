@@ -69,6 +69,20 @@
                             <button type="submit" class="btn button">Search</button>
                         </div>
                     </form>
+                    <form action="/event-tracker/reservations/search" method="get">
+                        <h5 class="fw-bold mt-4">SEARCH BY EMPLOYEE USERNAME (CREATED BY)</h5>
+                        <div class="form-group m-3">
+                            <input
+                                type="search"
+                                class="form-control autocomplete"
+                                id="employee"
+                                name="employee"
+                                value="{{employeeSearch}}">
+                        </div>
+                        <div class="m-3 d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn button">Search</button>
+                        </div>
+                    </form>
                     <form action="/event-tracker/reservations/filter" method="get">
                         <hr class="my-4">
                         <h5 class="fw-bold">FILTER</h5>
