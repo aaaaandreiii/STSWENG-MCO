@@ -7,7 +7,7 @@ describe("eventsInMonth", () => {
     //mock events data
     events = [
       {
-        eventDate: "2025-11-05",
+        eventDate: '2025-11-05',
         eventTime: "Afternoon",
         eventVenues: ["Garden", "Sunroom"],
       },
