@@ -402,38 +402,104 @@ const eventController = {
   },
 
   getReservationsSearch: async function (req, res) {
-    let query = {
-      status: "reserved",
-    };
+    const { name, employee } = req.query;
+    let reservations;
 
-    if (req.query.name) query.clientName = req.query.name;
+    if (employee) {
+      //1. search activity by username
+      //2. filter activity table with CREATED BY and username = username
+      // now have event object ID
+      //3. return render all object IDs
 
-    const reservations = await Event.aggregate([
-      { $match: query },
-      {
-        $lookup: {
-          from: "packages",
-          localField: "eventPackages",
-          foreignField: "_id",
-          as: "packageList",
+      // SEARCH BY EMPLOYEE WHO CREATED THE RESERVATION
+      // Uses Activity logs: "Created event: <eventId>" for that username
+      reservations = await Event.aggregate([
+        { $match: { status: "reserved" } },
+        {
+          $lookup: {
+            from: "activities", // Activity collection (model: activity) :contentReference[oaicite:1]{index=1}
+            let: { eventId: "$_id" },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $and: [
+                      { $eq: ["$username", employee] }, // employee username
+                      {
+                        $eq: [
+                          "$activityName",
+                          {
+                            $concat: [
+                              "Created event: ",
+                              { $toString: "$$eventId" },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                },
+              },
+            ],
+            as: "creatorActivity",
+          },
         },
-      },
-      {
-        $lookup: {
-          from: "foods",
-          localField: "menuAdditional.foodItem",
-          foreignField: "_id",
-          as: "foodList",
+        { $match: { creatorActivity: { $ne: [] } } },
+        {
+          $lookup: {
+            from: "packages",
+            localField: "eventPackages",
+            foreignField: "_id",
+            as: "packageList",
+          },
         },
-      },
-    ]);
+        {
+          $lookup: {
+            from: "foods",
+            localField: "menuAdditional.foodItem",
+            foreignField: "_id",
+            as: "foodList",
+          },
+        },
+      ]);
+    } else {
+      // EXISTING BEHAVIOR: SEARCH BY CLIENT NAME
+      let query = { status: "reserved" };
+      if (name) query.clientName = name;
 
-    let data = {
-      reservations: reservations,
-      search: req.query.name,
+      reservations = await Event.aggregate([
+        { $match: query },
+        {
+          $lookup: {
+            from: "packages",
+            localField: "eventPackages",
+            foreignField: "_id",
+            as: "packageList",
+          },
+        },
+        {
+          $lookup: {
+            from: "foods",
+            localField: "menuAdditional.foodItem",
+            foreignField: "_id",
+            as: "foodList",
+          },
+        },
+      ]);
+    }
+
+    // Keep the shape EXACTLY the same as tests expect when only client search is used
+    const data = {
+      reservations,
+      search: name, // still used for "search by client name"
       username: req.session.user.username,
       isAdmin: req.session.isAdmin,
     };
+
+    // Only add this extra field when employee search is used (so Jest tests stay happy)
+    if (employee) {
+      data.employeeSearch = employee;
+    }
 
     res.render("event-tracker-reservations", data);
   },

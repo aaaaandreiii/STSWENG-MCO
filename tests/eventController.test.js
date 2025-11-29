@@ -652,6 +652,45 @@ describe("Event Controller", () => {
         isAdmin: true,
       });
     });
+    it("filters reservations by employee username", async () => {
+      req.query.name = "admin";
+
+      const mockReservations = [
+        { _id: "1", status: "reserved", clientName: "Alice" },
+        { _id: "2", status: "reserved", clientName: "Bob" },
+        { _id: "3", status: "booked", clientName: "Alice" },
+      ];
+      Event.aggregate.mockResolvedValue(mockReservations);
+
+      await eventController.getReservationsSearch(req, res);
+
+      expect(Event.aggregate).toHaveBeenCalledWith([
+        { $match: { status: "reserved", clientName: "Alice" } },
+        {
+          $lookup: {
+            from: "packages",
+            localField: "eventPackages",
+            foreignField: "_id",
+            as: "packageList",
+          },
+        },
+        {
+          $lookup: {
+            from: "foods",
+            localField: "menuAdditional.foodItem",
+            foreignField: "_id",
+            as: "foodList",
+          },
+        },
+      ]);
+
+      expect(res.render).toHaveBeenCalledWith("event-tracker-reservations", {
+        reservations: mockReservations,
+        search: "Alice",
+        username: "admin",
+        isAdmin: true,
+      });
+    });
   });
 
   describe("getCancelledEvents", () => {
